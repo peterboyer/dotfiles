@@ -13,6 +13,13 @@ end
 -- leader space
 vim.g.mapleader = " "
 
+-- reference
+-- zc (close fold) zC (close ALL fold levels)
+-- zo (open fold) zO (open ALL fold levels)
+-- za (toggle fold) zA (toggle ALL fold levels)
+-- zr (reduce folding, OPEN over whole buffer), zR (reduce ALL folding, to top)
+-- zm (maximise folding, CLOSE over whole buffer), zM (maximise ALL folding, to top)
+
 -- cursor up/down 5 lines
 map("", "<C-j>", "5j")
 map("", "<C-k>", "5k")
