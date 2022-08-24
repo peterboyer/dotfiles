@@ -34,6 +34,7 @@ vim.o.autoread = true
 -- folding
 vim.o.foldenable = true
 vim.o.foldmethod = "syntax"
+vim.o.foldlevelstart = 99
 
 -- comfy vertical viewport
 vim.o.scrolloff = 7
