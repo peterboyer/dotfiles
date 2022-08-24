@@ -19,30 +19,33 @@ map("", "<C-k>", "5k")
 -- scroll up/down 5 lines
 map("n", "<A-j>", "5<C-e>", { recursive = true })
 map("n", "<A-k>", "5<C-y>", { recursive = true })
+-- [macOS]
+map("n", "∆", "<A-j>", { recursive = true })
+map("n", "˚", "<A-k>", { recursive = true })
 
 -- move line (insert)
-map("i", "<A-j>", "<Esc>:m .+1<cr>==gi")
-map("i", "<A-k>", "<Esc>:m .-2<cr>==gi")
+-- map("i", "<A-j>", "<Esc>:m .+1<cr>==gi")
+-- map("i", "<A-k>", "<Esc>:m .-2<cr>==gi")
 -- move lines (visual)
-map("v", "<A-j>", ":m '>+1<cr>gv=gv")
-map("v", "<A-k>", ":m '<-2<cr>gv=gv")
+-- map("v", "<A-j>", ":m '>+1<cr>gv=gv")
+-- map("v", "<A-k>", ":m '<-2<cr>gv=gv")
 
 -- switch buffer
 -- (g)o to alt buffer
-map("n", "<leader>g", "<C-6>", { recursive = true })
+-- map("n", "<leader>g", "<C-6>", { recursive = true })
 
 -- destroy buffer
 -- (q)uit | (Q)uit!
-map("n", "<leader>q", "<cmd>bd<cr>")
-map("n", "<leader>Q", "<cmd>bd!<cr>")
+-- map("n", "<leader>q", "<cmd>bd<cr>")
+-- map("n", "<leader>Q", "<cmd>bd!<cr>")
 
 -- select (a)ll
-map("n", "<C-a>", "gg<S-v>G")
+-- map("n", "<C-a>", "gg<S-v>G")
 
 -- (d)elete without yank
-map("n", "<leader>d", "\"_d")
-map("n", "<leader>s", "\"_s")
-map("n", "<leader>x", "\"_x")
+-- map("n", "<leader>d", "\"_d")
+-- map("n", "<leader>s", "\"_s")
+-- map("n", "<leader>x", "\"_x")
 
 -- lf
 -- (e)xplore
