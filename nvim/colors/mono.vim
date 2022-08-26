@@ -45,7 +45,7 @@ call s:HL('CursorColumn', s:Yellow, s:None, s:None)
 call s:HL('Visual',       s:Black, s:Yellow, s:None)
 
 " Gutter/Line Numbers
-call s:HL('LineNr',       s:Gray, s:None, s:None)
+call s:HL('LineNr',       s:Yellow, s:None, s:None)
 call s:HL('CursorLineNr', s:Yellow, s:Black, s:None)
 call s:HL('FoldColumn',   s:None, s:Black, s:None)
 call s:HL('SignColumn',   s:None, s:Black, s:None)
