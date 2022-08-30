@@ -128,7 +128,7 @@ return require("packer").startup(function(use)
   use {
     "williamboman/mason-lspconfig.nvim",
     config = function()
-      local servers = { "tsserver", "rust_analyzer", "sumneko_lua" }
+      local servers = { "tsserver", "eslint", "rust_analyzer", "sumneko_lua" }
       require("mason-lspconfig").setup({
         ensure_installed = servers
       })
@@ -143,7 +143,7 @@ return require("packer").startup(function(use)
   use {
     "neovim/nvim-lspconfig",
     config = function()
-      local servers = { "tsserver", "rust_analyzer", "sumneko_lua" }
+      local servers = { "tsserver", "eslint", "rust_analyzer", "sumneko_lua" }
       local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
       for _, lsp in pairs(servers) do
