@@ -18,4 +18,22 @@ cat << EOF > ~/.gitconfig
 	rebase = true
 EOF
 
+if [[ "$@" =~ "--lfs" ]]; then
+cat << EOF >> ~/.gitconfig
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+EOF
+fi
+
+if [[ "$@" =~ "--alias" ]]; then
+cat << EOF >> ~/.gitconfig
+[alias]
+	# stash staged
+	ss = "!f() { git stash -- $(git diff --staged --name-only); }; f"
+EOF
+fi
+
 cat ~/.gitconfig
