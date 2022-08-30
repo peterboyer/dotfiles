@@ -63,6 +63,8 @@ alias cfgzsh="(cd ~ && vim .zshrc)"
 alias cfggit="(cd ~ && vim .gitconfig)"
 alias cfgvim="(cd ~/.config/nvim && vim init.lua)"
 
+alias lg="lazygit"
+
 # =====
 
 if [[ $UNAME == "Linux" ]]; then
