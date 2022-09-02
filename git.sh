@@ -32,7 +32,7 @@ if [[ "$@" =~ "--alias" ]]; then
 cat << EOF >> ~/.gitconfig
 [alias]
 	# stash staged
-	ss = "!f() { git stash -- $(git diff --staged --name-only); }; f"
+	ss = "!f() { git stash -- \$(git diff --staged --name-only); }; f"
 EOF
 fi
 
