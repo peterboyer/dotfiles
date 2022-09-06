@@ -56,7 +56,8 @@ return require("packer").startup(function(use)
           file_ignore_patterns = {
             "%.git/",
             "%.yarn/",
-          }
+          },
+          path_display = { "truncate" }
         },
         pickers = {
           find_files = {
