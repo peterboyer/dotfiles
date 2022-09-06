@@ -33,12 +33,12 @@ call s:HL('Normal',       s:None, s:None, s:None)
 call s:HL('VertSplit',    s:None, s:None, s:None)
 
 " Status
-call s:HL('StatusLine',   s:Black, s:Blue, s:None)
-call s:HL('StatusLineNC', s:None, s:Black, s:None)
+call s:HL('StatusLine',   s:Black, s:Yellow, s:None)
+call s:HL('StatusLineNC', s:Black, s:White, s:None)
 
 " Cursor
-call s:HL('Cursor',       s:Yellow, s:Yellow, s:None)
-call s:HL('CursorLine',   s:None, s:Black, s:None)
+call s:HL('Cursor',       s:Black, s:Yellow, s:None)
+call s:HL('CursorLine',   s:White, s:Blue, s:None)
 call s:HL('CursorColumn', s:Yellow, s:None, s:None)
 
 " Selection
@@ -54,9 +54,9 @@ call s:HL('SignColumn',   s:None, s:Black, s:None)
 call s:HL('ColorColumn',  s:None, s:Gray, s:None)
 
 " Search/Matches
-call s:HL('Search',       s:Black, s:Blue, s:None)
+call s:HL('Search',       s:Black, s:Yellow, s:None)
 call s:HL('IncSearch',    s:Black, s:Yellow, s:None)
-call s:HL('MatchParen',   s:None, s:Green, s:None)
+call s:HL('MatchParen',   s:None, s:Yellow, s:None)
 
 " Diagnostics
 call s:HL('Float',        s:None, s:None, s:None)
