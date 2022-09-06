@@ -8,6 +8,11 @@ vim.o.number = true
 -- enable relative line numbers
 vim.o.relativenumber = true
 
+vim.cmd([[
+  autocmd WinEnter * setlocal nu rnu
+  autocmd WinLeave * setlocal nonu nornu
+]])
+
 -- disable line numbers for terminals
 vim.cmd("autocmd TermOpen * setlocal nonu nornu")
 
