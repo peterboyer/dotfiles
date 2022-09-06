@@ -37,6 +37,10 @@ map("n", "˚", "<A-k>", { recursive = true })
 -- map("v", "<A-j>", ":m '>+1<cr>gv=gv")
 -- map("v", "<A-k>", ":m '<-2<cr>gv=gv")
 
+-- [<n] prev [m>] next buffer
+map("n", "<leader>n", ":bp<cr>")
+map("n", "<leader>m", ":bn<cr>")
+
 -- switch buffer
 -- (g)o to alt buffer
 -- map("n", "<leader>g", "<C-6>", { recursive = true })
