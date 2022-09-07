@@ -48,7 +48,7 @@ export EDITOR=nvim
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
-alias todo="nvim ~/_todo.txt"
+alias todo="nvim ~/_zone/todo.txt"
 
 # =====
 
