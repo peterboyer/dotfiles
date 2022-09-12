@@ -43,6 +43,9 @@ return require("packer").startup(function(use)
     end,
   }
 
+  -- git tooling (blame)
+  use "tpope/vim-fugitive"
+
   -- add select all/trimmed line as text object (l)
   use {
     "kana/vim-textobj-line",
