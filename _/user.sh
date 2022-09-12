@@ -63,12 +63,12 @@ mkdir -p ~/.config
 
 (
   cd ~;
-  ln -fs ./_dotfiles/xinit .xinitrc;
+  ln -fs ./_dotfiles/_/xinit .xinitrc;
 )
 
 # https://wiki.archlinux.org/title/Xinit#Autostart_X_at_login
 
 (
   cd ~;
-  ln -fs ./_dotfiles/bash_profile .bash_profile;
+  ln -fs ./_dotfiles/_/bash_profile .bash_profile;
 )
