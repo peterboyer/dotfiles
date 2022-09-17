@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-set -x
-
 if [[ "$@" =~ "--help" ]]; then
   echo "usage: [<options>]"
-  echo "  --grub	force grub-mkconfig"
-  echo "  --install	install yay and packages"
+  echo "  --grub        force grub-mkconfig"
+  echo "  --install     install yay and packages"
   exit
 fi
 
@@ -27,9 +25,12 @@ link() {
   if [[ "$ALIAS" =~ "--" ]]; then
     ALIAS=""
   fi
-  cd $DEST;
-  $SUDO ln -fs $DIR$SRC $ALIAS;
-  cd $OLDPWD;
+  TARGET="$DEST/$(basename ${ALIAS:-$SRC})"
+  if [[ ! -e "$TARGET" || ! -h "$TARGET" ]]; then
+    cd $DEST;
+    $SUDO ln -fs $DIR$SRC $ALIAS;
+    cd $OLDPWD;
+  fi
 }
 
 # https://wiki.archlinux.org/title/GRUB#Configuration
@@ -87,19 +88,29 @@ if [[ "$@" =~ "--install" ]]; then
     tmux
     unzip
     openssh
-    neovim
+    zsh
+    oh-my-zsh-git # aur
+    exa
     lf-bin # aur
+    neovim
     lazygit
     xorg
     xorg-xinit
-    xorg-xrandr autorandr
-    xwallpaper
-    pulseaudio pulsemixer
+    xorg-xrandr
+    autorandr
+    pulseaudio
+    pulsemixer
     awesome
-    alacritty ttf-jetbrains-mono
+    alacritty
+    ttf-jetbrains-mono
+    nvm
     brave-bin # aur
   )
 
   yay -Syu
-  yay --noconfirm -S ${PACKAGES[@]}
+  yay -S --needed --noconfirm ${PACKAGES[@]}
+fi
+
+if [[ "$(which zsh &> /dev/null; echo $?)" == "0" && ! "$SHELL" =~ "zsh" ]]; then
+  chsh -s $(which zsh)
 fi

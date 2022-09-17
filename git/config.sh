@@ -2,10 +2,10 @@
 
 if [[ "$@" =~ "--help" ]]; then
   echo "usage: [<options>]"
-  echo "  --ask		read name/email from prompts"
-  echo "  --repo	read name/email from HEAD commit"
-  echo "  --lfs		include git-lfs filter options"
-  echo "  --alias	include helper command aliases"
+  echo "  --ask         read name/email from prompts"
+  echo "  --repo        read name/email from HEAD commit"
+  echo "  --lfs         include git-lfs filter options"
+  echo "  --alias       include helper command aliases"
   exit
 fi
 
