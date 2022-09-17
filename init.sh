@@ -26,7 +26,7 @@ link() {
     ALIAS=""
   fi
   TARGET="$DEST/$(basename ${ALIAS:-$SRC})"
-  if [[ ! -e "$TARGET" || ! -h "$TARGET" ]]; then
+  if [[ -e "$DIR$SRC" && ! -e "$TARGET" || ! -h "$TARGET" ]]; then
     cd $DEST;
     $SUDO ln -fs $DIR$SRC $ALIAS;
     cd $OLDPWD;
@@ -57,9 +57,11 @@ link $HOME tmux/tmux.conf .tmux.conf
 link $HOME/.config nvim
 link $HOME/.config alacritty
 
-if [[ -e $HOME/_zone/ssh ]]; then
-  link $HOME $HOME/_zone/ssh .ssh --absolute
-fi
+link $HOME $HOME/_zone/_dotfiles.private/ssh .ssh --absolute
+link $HOME $HOME/_zone/_dotfiles.private/gphoto .gphoto --absolute
+
+mkdir -p $HOME/.config/obs-studio
+link $HOME/.config/obs-studio $HOME/_zone/_dotfiles.private/obs/basic --absolute
 
 if [[ -d "$HOME/.ssh" ]]; then
   chmod 700 $HOME/.ssh
@@ -90,6 +92,7 @@ if [[ "$@" =~ "--install" ]]; then
     htop
     tmux
     unzip
+    rsync
     openssh
     zsh
     oh-my-zsh-git # aur
