@@ -107,6 +107,7 @@ if [[ "$@" =~ "--install" ]]; then
     alacritty
     ttf-jetbrains-mono
     nvm
+    docker
     brave-bin # aur
   )
 
@@ -115,6 +116,13 @@ if [[ "$@" =~ "--install" ]]; then
 fi
 
 # zsh
-if [[ "$(which zsh &> /dev/null; echo $?)" == "0" && ! "$SHELL" =~ "zsh" ]]; then
-  chsh -s $(which zsh)
+if [[ "$(which zsh &> /dev/null; echo $?)" == "0" ]]; then
+  if [[ ! "$SHELL" =~ "zsh" ]]; then chsh -s $(which zsh); fi
+fi
+
+# docker
+if [[ "$(which docker &> /dev/null; echo $?)" == "0" ]]; then
+  if [[ -z "$(systemctl status docker | grep running)" ]]; then sudo systemctl enable docker --now; fi
+  if [[ -z "$(cat /etc/group | grep docker)" ]]; then sudo groupadd docker; fi
+  if [[ -z "$(groups $USER | grep docker)" ]]; then sudo usermod -aG docker $USER; fi
 fi
