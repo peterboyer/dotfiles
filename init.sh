@@ -97,6 +97,7 @@ if [[ "$@" =~ "--install" ]]; then
     zsh
     oh-my-zsh-git # aur
     exa
+    xclip
     lf-bin # aur
     neovim
     lazygit
