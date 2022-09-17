@@ -1,7 +1,32 @@
 #!/usr/bin/env bash
 
-GIT_NAME="$(git config --global user.name)"
-GIT_EMAIL="$(git config --global user.email)"
+if [[ "$@" =~ "--help" ]]; then
+  echo "usage: [<options>]"
+  echo "  --ask		read name/email from prompts"
+  echo "  --repo	read name/email from HEAD commit"
+  echo "  --lfs		include git-lfs filter options"
+  echo "  --alias	include helper command aliases"
+  exit
+fi
+
+GIT_CONFIG_NAME="$(git config --global user.name)"
+GIT_CONFIG_EMAIL="$(git config --global user.email)"
+
+GIT_REPO_NAME="$(git log -n 1 --format='%an')"
+GIT_REPO_EMAIL="$(git log -n 1 --format='%aE')"
+
+if [[ "$@" =~ "--repo" ]]; then
+  GIT_CONFIG_NAME=""
+  GIT_CONFIG_EMAIL=""
+fi
+
+GIT_NAME="${GIT_CONFIG_NAME:-$GIT_REPO_NAME}"
+GIT_EMAIL="${GIT_CONFIG_EMAIL:-$GIT_REPO_EMAIL}"
+
+if [[ "$@" =~ "--ask" ]]; then
+  GIT_NAME=""
+  GIT_EMAIL=""
+fi
 
 if [[ -z "$GIT_NAME" ]]; then read -p "user.name: " GIT_NAME; fi
 if [[ -z "$GIT_EMAIL" ]]; then read -p "user.email: " GIT_EMAIL; fi
