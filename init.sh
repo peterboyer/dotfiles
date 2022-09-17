@@ -8,8 +8,8 @@ if [[ "$@" =~ "--help" ]]; then
 fi
 
 # link <dest> <src> [<alias>] [<options>]
-#   --sudo		execute as sudo
-#   --absolute		src will not be prefixed with $HOME/_dotfiles/
+#   --sudo              execute as sudo
+#   --absolute          src will not be prefixed with $HOME/_dotfiles/
 
 link() {
   DIR="$HOME/_dotfiles/"
@@ -33,6 +33,9 @@ link() {
   fi
 }
 
+mkdir -p $HOME/_dev
+mkdir -p $HOME/_zone
+
 # https://wiki.archlinux.org/title/GRUB#Configuration
 if [[ ! -h "/etc/default/grub" || "$@" =~ "--grub" ]]; then
   link /etc/default _/grub --sudo;
@@ -43,7 +46,9 @@ mkdir -p $HOME/.config
 
 link $HOME _/xinitrc .xinitrc;
 link $HOME _/xmodmap .Xmodmap;
-link $HOME _/bash_profile .bash_profile;
+link $HOME _/zprofile .zprofile;
+link $HOME/.config _/awesome
+link $HOME/.config _/autorandr
 link $HOME/.config _/fontconfig;
 link /etc/udev/rules.d _/udev/10-local.rules --sudo
 
@@ -51,8 +56,6 @@ link $HOME zsh/zshrc .zshrc
 link $HOME tmux/tmux.conf .tmux.conf
 link $HOME/.config nvim
 link $HOME/.config alacritty
-link $HOME/.config autorandr
-link $HOME/.config awesome
 
 if [[ -e $HOME/_zone/ssh ]]; then
   link $HOME $HOME/_zone/ssh .ssh --absolute
@@ -111,6 +114,7 @@ if [[ "$@" =~ "--install" ]]; then
   yay -S --needed --noconfirm ${PACKAGES[@]}
 fi
 
+# zsh
 if [[ "$(which zsh &> /dev/null; echo $?)" == "0" && ! "$SHELL" =~ "zsh" ]]; then
   chsh -s $(which zsh)
 fi

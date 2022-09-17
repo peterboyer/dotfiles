@@ -4,8 +4,6 @@ if [[ $UNAME != "Linux" && $UNAME != "Darwin" ]]; then
   exit 1
 fi
 
-# =====
-
 if [[ $UNAME == "Linux" ]]; then
   export ZSH=/usr/share/oh-my-zsh
 elif [[ $UNAME == "Darwin" ]]; then
@@ -41,16 +39,12 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-# =====
-
 export EDITOR=nvim
 
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 alias todo="nvim ~/_zone/todo.txt"
-
-# =====
 
 alias ls="exa"
 alias l="ls -l"
@@ -66,8 +60,6 @@ alias cfggit="(cd ~ && nvim .gitconfig)"
 alias cfgvim="(cd ~/.config/nvim && nvim init.lua)"
 
 alias lg="lazygit"
-
-# =====
 
 if [[ $UNAME == "Linux" ]]; then
   # https://aur.archlinux.org/packages/nvm#comment-764001
@@ -104,8 +96,6 @@ load-nvmrc() {
 load-nvmrc
 add-zsh-hook chpwd load-nvmrc
 
-# =====
-
 # docker-destroy-containers
 function ddc() {
   docker ps -a | grep "$1" | awk '{print $1}' | xargs docker rm -f
@@ -115,8 +105,6 @@ function ddc() {
 function ddui() {
   docker image ls | grep '<none>' | awk '{print $3}' | xargs docker rmi -f
 }
-
-# =====
 
 function deport() {
   TARGET_PORT=$1
@@ -128,8 +116,6 @@ function deport() {
     echo $TARGET_PID | xargs echo
   fi
 }
-
-# =====
 
 alias dslr-mount="sudo modprobe v4l2loopback exclusive_caps=1 max_buffers=2"
 alias dslr-unmount="sudo rmmod v4l2loopback"
