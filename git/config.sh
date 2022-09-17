@@ -58,6 +58,7 @@ cat << EOF >> ~/.gitconfig
 [alias]
 	# stash staged
 	ss = "!f() { git stash -- \$(git diff --staged --name-only); }; f"
+	serve = "!f() { zsh $HOME/_dotfiles/git/serve.sh; }; f"
 EOF
 fi
 
