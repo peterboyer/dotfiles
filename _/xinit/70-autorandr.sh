@@ -1,2 +1,3 @@
 #!/bin/sh
+
 autorandr --change

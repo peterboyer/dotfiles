@@ -44,35 +44,48 @@ fi
 
 mkdir -p $HOME/.config
 
-link $HOME _/xinitrc .xinitrc;
-link $HOME _/xinitrc.xmodmap .xinitrc.xmodmap;
-link /etc/X11/xinit/xinitrc.d _/xinitrc.d/60-autorandr.sh --sudo
 link $HOME _/xmodmap .Xmodmap;
+
+link $HOME _/xinitrc .xinitrc;
+link /etc/X11/xinit/xinitrc.d _/xinit/51-xrdb.sh --sudo
+link /etc/X11/xinit/xinitrc.d _/xinit/52-xmodmap.sh --sudo
+link /etc/X11/xinit/xinitrc.d _/xinit/70-autorandr.sh --sudo
+link /etc/X11/xinit/xinitrc.d _/xinit/80-xautolock.sh --sudo
 link $HOME _/zprofile .zprofile;
+
 link $HOME/.config _/awesome
+
 link $HOME/.config _/autorandr
-link /etc/udev/rules.d _/udev/10-local.rules --sudo
-link /usr/local/bin _/system/resume.sh --sudo
-link /etc/systemd/system _/system/resume.service --sudo
-if [[ -z "$(systemctl status resume | grep enabled)" ]]; then sudo systemctl enable resume; fi
-link $HOME/.config _/fontconfig;
+link /etc/udev/rules.d _/udev/10-autorandr.rules --sudo
+
+link /etc/systemd/system _/systemd/xmodmap@.service --sudo
+if [[ -z "$(systemctl status xmodmap@$USER | grep enabled)" ]]; then sudo systemctl enable xmodmap@$USER; fi
+
+link /etc/systemd/system _/systemd/slock@.service --sudo
+if [[ -z "$(systemctl status slock@$USER | grep enabled)" ]]; then sudo systemctl enable slock@$USER; fi
+
+mkdir -p $HOME/.config/fontconfig
+link $HOME/.config/fontconfig _/fonts fonts.conf;
 
 link $HOME zsh/zshrc .zshrc
+
 link $HOME tmux/tmux.conf .tmux.conf
+
 link $HOME/.config nvim
+
 link $HOME/.config alacritty
 
 link $HOME $HOME/_zone/_dotfiles.private/ssh .ssh --absolute
-link $HOME $HOME/_zone/_dotfiles.private/gphoto .gphoto --absolute
-
-mkdir -p $HOME/.config/obs-studio
-link $HOME/.config/obs-studio $HOME/_zone/_dotfiles.private/obs/basic --absolute
-
 if [[ -d "$HOME/.ssh" ]]; then
   chmod 700 $HOME/.ssh
   chmod 600 $HOME/.ssh/id_rsa
   chmod 600 $HOME/.ssh/id_rsa.pub
 fi
+
+link $HOME $HOME/_zone/_dotfiles.private/gphoto .gphoto --absolute
+
+mkdir -p $HOME/.config/obs-studio
+link $HOME/.config/obs-studio $HOME/_zone/_dotfiles.private/obs/basic --absolute
 
 cd $HOME/_dotfiles
 GIT_REMOTE="$(git remote -v | grep fetch | awk '{print $2}')"
@@ -113,6 +126,8 @@ if [[ "$@" =~ "--install" ]]; then
     pulseaudio
     pulsemixer
     awesome
+    slock
+    xautolock
     alacritty
     ttf-jetbrains-mono
     nvm

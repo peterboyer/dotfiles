@@ -1,0 +1,11 @@
+[Unit]
+Description=Reload X modmap config after suspend for user %i
+After=suspend.target
+
+[Service]
+User=%i
+Type=simple
+ExecStart=/etc/X11/xinit/xinitrc.d/52-xmodmap.sh
+
+[Install]
+WantedBy=suspend.target
