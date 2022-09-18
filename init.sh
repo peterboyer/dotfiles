@@ -45,12 +45,17 @@ fi
 mkdir -p $HOME/.config
 
 link $HOME _/xinitrc .xinitrc;
+link $HOME _/xinitrc.xmodmap .xinitrc.xmodmap;
+link /etc/X11/xinit/xinitrc.d _/xinitrc.d/60-autorandr.sh --sudo
 link $HOME _/xmodmap .Xmodmap;
 link $HOME _/zprofile .zprofile;
 link $HOME/.config _/awesome
 link $HOME/.config _/autorandr
-link $HOME/.config _/fontconfig;
 link /etc/udev/rules.d _/udev/10-local.rules --sudo
+link /usr/local/bin _/system/resume.sh --sudo
+link /etc/systemd/system _/system/resume.service --sudo
+if [[ -z "$(systemctl status resume | grep enabled)" ]]; then sudo systemctl enable resume; fi
+link $HOME/.config _/fontconfig;
 
 link $HOME zsh/zshrc .zshrc
 link $HOME tmux/tmux.conf .tmux.conf
