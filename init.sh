@@ -132,6 +132,7 @@ if [[ "$@" =~ "--install" ]]; then
     ttf-jetbrains-mono
     nvm
     docker
+    flameshot
     brave-bin # aur
   )
 
