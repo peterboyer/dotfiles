@@ -38,11 +38,11 @@ call s:HL('StatusLineNC', s:Black, s:White, s:None)
 
 " Cursor
 call s:HL('Cursor',       s:Black, s:Yellow, s:None)
-call s:HL('CursorLine',   s:White, s:Blue, s:None)
+call s:HL('CursorLine',   s:None, s:Black, s:None)
 call s:HL('CursorColumn', s:Yellow, s:None, s:None)
 
 " Selection
-call s:HL('Visual',       s:Black, s:Yellow, s:None)
+call s:HL('Visual',       s:Black, s:Green, s:None)
 
 " Gutter/Line Numbers
 call s:HL('LineNr',       s:Yellow, s:None, s:None)
@@ -54,9 +54,9 @@ call s:HL('SignColumn',   s:None, s:Black, s:None)
 call s:HL('ColorColumn',  s:None, s:Gray, s:None)
 
 " Search/Matches
-call s:HL('Search',       s:Black, s:Yellow, s:None)
+call s:HL('Search',       s:Red, s:Yellow, s:None)
 call s:HL('IncSearch',    s:Black, s:Yellow, s:None)
-call s:HL('MatchParen',   s:None, s:Yellow, s:None)
+call s:HL('MatchParen',   s:Magenta, s:Black, s:None)
 
 " Diagnostics
 call s:HL('Float',        s:None, s:None, s:None)
