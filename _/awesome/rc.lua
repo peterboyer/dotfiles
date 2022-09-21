@@ -316,7 +316,17 @@ globalkeys = gears.table.join(
 
     -- Menubar
     awful.key({ modkey }, "space", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+
+    -- Volume
+    awful.key({ modkey }, "Page_Up", function()
+      awful.util.spawn("pulsemixer --change-volume +10") end),
+
+    awful.key({ modkey }, "Page_Down", function()
+      awful.util.spawn("pulsemixer --change-volume -10") end),
+
+    awful.key({ modkey }, "Delete", function()
+      awful.util.spawn("pulsemixer --toggle-mute") end)
 )
 
 clientkeys = gears.table.join(
