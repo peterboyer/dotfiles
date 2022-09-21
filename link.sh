@@ -22,7 +22,7 @@ link() {
     mkdir -p $DIR
   fi
   TARGET="$DEST/$(basename ${ALIAS:-$SRC})"
-  if [[ -e "$DIR$SRC" && ! -e "$TARGET" || ! -h "$TARGET" ]]; then
+  if [[ -d "$(dirname $DIR$SRC)" && -e "$DIR$SRC" && (! -e "$TARGET" || ! -h "$TARGET") ]]; then
     cd $DEST;
     $SUDO ln -fs $DIR$SRC $ALIAS;
     cd $OLDPWD;
