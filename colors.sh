@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 NC='\033[0m'
 echo -e ""
 echo -e "    \033[39mRegular${NC}   \033[1;39mBold${NC}     \033[30;107mBackground${NC}    \033[30;107mLighter BG${NC}"
