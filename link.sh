@@ -46,16 +46,18 @@ link $HOME $HOME/_zone/_dotfiles.private/gphoto .gphoto --absolute
 link $HOME/.config/obs-studio $HOME/_zone/_dotfiles.private/obs/basic --absolute
 
 if [[ "$UNAME" == "Linux" ]]; then
+  link $HOME/.config _/awesome
+  link $HOME/.config/fontconfig _/fonts fonts.conf;
+
   link /etc/default _/grub --sudo;
 
-  link /usr/local/bin _/xenv --sudo;
+  link /usr/local/bin _/bin/shutdown --sudo;
+  link /usr/local/bin _/bin/suspend --sudo;
+  link /usr/local/bin _/bin/xenv --sudo;
   if [[ ! -f "/user" ]]; then
     sudo echo "$USER" > /tmp/user
     sudo cp /tmp/user /
   fi
-
-  link $HOME _/xmodmap .Xmodmap;
-  link /etc/udev/rules.d _/udev/10-xmodmap.rules --sudo
 
   link $HOME _/xinitrc .xinitrc;
   link /etc/X11/xinit/xinitrc.d _/xinit/51-xrdb.sh --sudo
@@ -64,7 +66,8 @@ if [[ "$UNAME" == "Linux" ]]; then
   link /etc/X11/xinit/xinitrc.d _/xinit/80-xautolock.sh --sudo
   link $HOME _/zprofile .zprofile;
 
-  link $HOME/.config _/awesome
+  link $HOME _/xmodmap .Xmodmap;
+  link /etc/udev/rules.d _/udev/10-xmodmap.rules --sudo
 
   link $HOME/.config _/autorandr
   link /etc/udev/rules.d _/udev/10-autorandr.rules --sudo
@@ -74,6 +77,4 @@ if [[ "$UNAME" == "Linux" ]]; then
 
   link /etc/systemd/system _/systemd/slock@.service --sudo
   if [[ -z "$(systemctl status slock@$USER | grep enabled)" ]]; then sudo systemctl enable slock@$USER; fi
-
-  link $HOME/.config/fontconfig _/fonts fonts.conf;
 fi
