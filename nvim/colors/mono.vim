@@ -69,7 +69,7 @@ call s:HL('PmenuSel',     s:Black, s:Yellow, s:None)
 
 " Markup
 call s:HL('Todo',         s:None, s:Green, 'bold')
-call s:HL('Folded',       s:Gray, s:None, s:None)
+call s:HL('Folded',       s:White, s:Green, s:None)
 call s:HL('NonText',      s:Gray, s:None, s:None)
 call s:HL('Underlined',   s:None, s:None, 'underline')
 call s:HL('Whitespace',   s:Yellow, s:None, s:None)
