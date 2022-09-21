@@ -45,10 +45,9 @@ map("n", "<leader>m", ":bn<cr>")
 -- (g)o to alt buffer
 -- map("n", "<leader>g", "<C-6>", { recursive = true })
 
--- destroy buffer
--- (q)uit | (Q)uit!
--- map("n", "<leader>q", "<cmd>bd<cr>")
--- map("n", "<leader>Q", "<cmd>bd!<cr>")
+-- destroy buffer (preserve window layout)
+-- (q)uit
+map("n", "<C-w>q", "<cmd>:Bdelete<cr>")
 
 -- select (a)ll
 -- map("n", "<C-a>", "gg<S-v>G")

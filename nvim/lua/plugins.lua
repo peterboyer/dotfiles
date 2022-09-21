@@ -20,6 +20,8 @@ return require("packer").startup(function(use)
   -- base config
   use "tpope/vim-sensible"
 
+  -- delete buffers without messing the layout
+  use "moll/vim-bbye"
 
   -- auto parenthesis
   use "cohama/lexima.vim"
