@@ -18,11 +18,11 @@ link() {
   if [[ "$ALIAS" =~ "--" ]]; then
     ALIAS=""
   fi
-  if [[ -d $DIR ]]; then
-    mkdir -p $DIR
-  fi
   TARGET="$DEST/$(basename ${ALIAS:-$SRC})"
   if [[ -d "$(dirname $DIR$SRC)" && -e "$DIR$SRC" && (! -e "$TARGET" || ! -h "$TARGET") ]]; then
+    if [[ ! -d $DEST ]]; then
+      $SUDO mkdir -p $DEST
+    fi
     cd $DEST;
     $SUDO ln -fs $DIR$SRC $ALIAS;
     cd $OLDPWD;
