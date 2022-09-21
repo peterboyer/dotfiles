@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# usage [<options>]:
+# --aur     also install aur packages
+
 # https://github.com/Jguer/yay
 if [[ "$(which yay &> /dev/null; echo $?)" != "0" ]]; then
   git clone https://aur.archlinux.org/yay-bin.git $HOME/yay
@@ -14,10 +17,11 @@ PACKAGES=(
   rsync
   openssh
   zsh
-  oh-my-zsh-git # aur
+  AUR:oh-my-zsh-git
   exa
   xclip
-  lf-bin # aur
+  AUR:lf-bin
+  ripgrep
   neovim
   lazygit
   xorg
@@ -31,14 +35,20 @@ PACKAGES=(
   xautolock
   alacritty
   ttf-jetbrains-mono
-  nvm
+  AUR:nvm
   docker
   flameshot
-  brave-bin # aur
+  AUR:brave-bin
 )
 
+packages=$((IFS=$'\n' && echo "${PACKAGES[*]}") | grep -v '^AUR:')
+packagesaur=$((IFS=$'\n' && echo "${PACKAGES[*]}") | grep '^AUR:' | sed 's/AUR://')
+
 yay -Syu
-yay -S --needed --noconfirm ${PACKAGES[@]}
+yay -S --needed --noconfirm ${packages[@]}
+if [[ "$@" =~ "--aur" ]]; then
+  yay -S --needed --noconfirm ${packagesaur[@]}
+fi
 
 # zsh
 if [[ "$(which zsh &> /dev/null; echo $?)" == "0" ]]; then
