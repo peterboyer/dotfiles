@@ -1,3 +1,6 @@
-BASE="$(dirname $0)"
-mkdir -p $BASE/repos
-docker run -p 8080:80 -v $PWD/$BASE/repos:/var/lib/git cirocosta/gitserver-http:formatting
+#!/usr/bin/env bash
+
+REPOS=$(dirname $0)/repos
+if [[ "${REPOS:0:1}" != "/" ]]; then REPOS=$PWD/${REPOS:2}; fi
+mkdir -p $REPOS
+docker run -p 8080:80 -v $REPOS:/var/lib/git cirocosta/gitserver-http:formatting
