@@ -1,0 +1,6 @@
+#!/bin/sh
+export XENV=1
+export HOME="/home/$(cat /user)"
+export XAUTHORITY=$HOME/.Xauthority
+export DISPLAY=:0
+${@:1} &

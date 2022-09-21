@@ -1,0 +1,1 @@
+ACTION=="add", SUBSYSTEM=="input", RUN="/usr/local/bin/xenv /etc/X11/xinit/xinitrc.d/52-xmodmap.sh"

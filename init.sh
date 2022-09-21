@@ -30,8 +30,14 @@ link() {
     cd $DEST;
     $SUDO ln -fs $DIR$SRC $ALIAS;
     cd $OLDPWD;
+    echo "linked: $TARGET"
   fi
 }
+
+if [[ ! -f "/user" ]]; then
+  sudo echo "$USER" > /tmp/user
+  sudo cp /tmp/user /
+fi
 
 mkdir -p $HOME/_dev
 mkdir -p $HOME/_zone
@@ -45,6 +51,8 @@ fi
 mkdir -p $HOME/.config
 
 link $HOME _/xmodmap .Xmodmap;
+link /usr/local/bin _/xenv --sudo;
+link /etc/udev/rules.d _/udev/10-xmodmap.rules --sudo
 
 link $HOME _/xinitrc .xinitrc;
 link /etc/X11/xinit/xinitrc.d _/xinit/51-xrdb.sh --sudo
