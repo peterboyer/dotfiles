@@ -20,13 +20,6 @@ return require("packer").startup(function(use)
   -- base config
   use "tpope/vim-sensible"
 
-  -- theme
-  use {
-    "pbrisbin/vim-colors-off",
-    config = function()
-
-    end,
-  }
 
   -- auto parenthesis
   use "cohama/lexima.vim"
