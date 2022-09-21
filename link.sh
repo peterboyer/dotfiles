@@ -51,9 +51,9 @@ if [[ "$UNAME" == "Linux" ]]; then
 
   link /etc/default _/grub --sudo;
 
-  link /usr/local/bin _/bin/shutdown --sudo;
-  link /usr/local/bin _/bin/suspend --sudo;
-  link /usr/local/bin _/bin/xenv --sudo;
+  link /usr/local/bin _/bin/_shutdown --sudo;
+  link /usr/local/bin _/bin/_suspend --sudo;
+  link /usr/local/bin _/bin/_user --sudo;
   if [[ ! -f "/user" ]]; then
     sudo echo "$USER" > /tmp/user
     sudo cp /tmp/user /
