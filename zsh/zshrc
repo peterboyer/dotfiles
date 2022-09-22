@@ -74,18 +74,17 @@ elif [[ $UNAME == "Darwin" ]]; then
   else
     echo "warning(nvm): NVM_DEFAULT=$NVM_DEFAULT -> node version not installed!"
   fi
+  # lazy load nvm (because it's so slow to init...)
+  lazy_load_nvm() {
+    unset -f nvm
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+    # [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+  }
+  nvm() {
+    lazy_load_nvm
+    nvm $@
+  }
 fi
-
-# lazy load nvm (because it's so slow to init...)
-lazy_load_nvm() {
-  unset -f nvm
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-  # [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-}
-nvm() {
-  lazy_load_nvm
-  nvm $@
-}
 
 autoload -U add-zsh-hook
 load-nvmrc() {
