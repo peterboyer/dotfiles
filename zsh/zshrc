@@ -97,7 +97,7 @@ add-zsh-hook chpwd load-nvmrc
 
 # docker-destroy-containers
 function ddc() {
-  docker ps -a | grep "$1" | awk '{print $1}' | xargs docker rm -f
+  docker ps -aq | xargs docker rm -f
 }
 
 # docker-destroy-untagged-images
