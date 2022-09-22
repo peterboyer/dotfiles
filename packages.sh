@@ -46,6 +46,7 @@ PACKAGES=(
   AUR:brave-bin
   signal-desktop
   AUR:flyctl-bin
+  AUR:spotify
 )
 
 packages=$((IFS=$'\n' && echo "${PACKAGES[*]}") | grep -v '^AUR:')
