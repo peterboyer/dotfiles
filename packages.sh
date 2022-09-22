@@ -28,7 +28,10 @@ PACKAGES=(
   xorg-xinit
   xorg-xrandr
   autorandr
+  bluez
+  bluez-utils
   pulseaudio
+  pulseaudio-bluetooth
   pulsemixer
   awesome
   slock
@@ -61,3 +64,6 @@ if [[ "$(which docker &> /dev/null; echo $?)" == "0" ]]; then
   if [[ -z "$(cat /etc/group | grep docker)" ]]; then sudo groupadd docker; fi
   if [[ -z "$(groups $USER | grep docker)" ]]; then sudo usermod -aG docker $USER; fi
 fi
+
+# bluez
+if [[ -z "$(systemctl status bluetooth | grep running)" ]]; then sudo systemctl enable bluetooth --now; fi

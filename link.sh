@@ -77,4 +77,6 @@ if [[ "$UNAME" == "Linux" ]]; then
 
   link /etc/systemd/system _/systemd/slock@.service --sudo
   if [[ -z "$(systemctl status slock@$USER | grep enabled)" ]]; then sudo systemctl enable slock@$USER; fi
+
+  link /etc/pulse/system.pa.d _/pulse/user.pa --sudo
 fi
