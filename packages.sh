@@ -40,8 +40,12 @@ PACKAGES=(
   ttf-jetbrains-mono
   AUR:nvm
   docker
+  calc
   flameshot
+  pdfarranger
   AUR:brave-bin
+  signal-desktop
+  AUR:flyctl-bin
 )
 
 packages=$((IFS=$'\n' && echo "${PACKAGES[*]}") | grep -v '^AUR:')
@@ -59,11 +63,9 @@ if [[ "$(which zsh &> /dev/null; echo $?)" == "0" ]]; then
 fi
 
 # docker
-if [[ "$(which docker &> /dev/null; echo $?)" == "0" ]]; then
-  if [[ -z "$(systemctl status docker | grep running)" ]]; then sudo systemctl enable docker --now; fi
-  if [[ -z "$(cat /etc/group | grep docker)" ]]; then sudo groupadd docker; fi
-  if [[ -z "$(groups $USER | grep docker)" ]]; then sudo usermod -aG docker $USER; fi
-fi
+if [[ -z "$(systemctl status docker | grep running)" ]]; then sudo systemctl enable docker --now; fi
+if [[ -z "$(cat /etc/group | grep docker)" ]]; then sudo groupadd docker; fi
+if [[ -z "$(groups $USER | grep docker)" ]]; then sudo usermod -aG docker $USER; fi
 
 # bluez
 if [[ -z "$(systemctl status bluetooth | grep running)" ]]; then sudo systemctl enable bluetooth --now; fi
