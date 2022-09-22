@@ -40,6 +40,7 @@ PACKAGES=(
   ttf-jetbrains-mono
   AUR:nvm
   docker
+  docker-compose
   calc
   flameshot
   pdfarranger
