@@ -48,6 +48,9 @@ PACKAGES=(
   signal-desktop
   AUR:flyctl-bin
   AUR:spotify
+  udisks2
+  udiskie
+  ntfs-3g
 )
 
 packages=$((IFS=$'\n' && echo "${PACKAGES[*]}") | grep -v '^AUR:')

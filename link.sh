@@ -63,8 +63,9 @@ if [[ "$UNAME" == "Linux" ]]; then
   link $HOME _/xinitrc .xinitrc;
   link /etc/X11/xinit/xinitrc.d _/xinit/51-xrdb.sh --sudo
   link /etc/X11/xinit/xinitrc.d _/xinit/52-xmodmap.sh --sudo
-  link /etc/X11/xinit/xinitrc.d _/xinit/70-autorandr.sh --sudo
-  link /etc/X11/xinit/xinitrc.d _/xinit/80-xautolock.sh --sudo
+  link /etc/X11/xinit/xinitrc.d _/xinit/71-udiskie.sh --sudo
+  link /etc/X11/xinit/xinitrc.d _/xinit/72-autorandr.sh --sudo
+  link /etc/X11/xinit/xinitrc.d _/xinit/81-xautolock.sh --sudo
   link $HOME _/zprofile .zprofile;
 
   link $HOME _/xmodmap .Xmodmap;
