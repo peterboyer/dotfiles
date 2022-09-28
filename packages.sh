@@ -15,6 +15,7 @@ PACKAGES=(
   tmux
   unzip
   rsync
+  bind
   openssh
   zsh
   AUR:oh-my-zsh-git
