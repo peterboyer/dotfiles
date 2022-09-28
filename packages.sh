@@ -44,6 +44,7 @@ PACKAGES=(
   docker-compose
   calc
   flameshot
+  gimp
   pdfarranger
   AUR:brave-bin
   signal-desktop
