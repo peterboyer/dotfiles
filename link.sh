@@ -71,7 +71,7 @@ if [[ "$UNAME" == "Linux" ]]; then
   link $HOME _/xmodmap .Xmodmap;
   link /etc/udev/rules.d _/udev/10-xmodmap.rules --sudo
 
-  link $HOME/.config _/autorandr
+  link $HOME/.config $HOME/_zone/_dotfiles.private/autorandr --absolute
   link /etc/udev/rules.d _/udev/10-autorandr.rules --sudo
 
   link /etc/systemd/system _/systemd/xmodmap@.service --sudo
