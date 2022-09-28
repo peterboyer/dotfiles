@@ -1,3 +1,3 @@
 #!/bin/sh
 
-udiskie &
+udiskie -sF &
