@@ -30,6 +30,11 @@ map("n", "<A-k>", "5<C-y>", { recursive = true })
 map("n", "∆", "<A-j>", { recursive = true })
 map("n", "˚", "<A-k>", { recursive = true })
 
+-- detab
+-- C-t (tab) shift right | or <Tab>
+-- C-d (de-tab) shift left | or <S-Tab>
+map("i", "<S-Tab>", "<C-d>", { recursive = true })
+
 -- move line (insert)
 -- map("i", "<A-j>", "<Esc>:m .+1<cr>==gi")
 -- map("i", "<A-k>", "<Esc>:m .-2<cr>==gi")
