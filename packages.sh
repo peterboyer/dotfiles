@@ -35,6 +35,7 @@ PACKAGES=(
   pulseaudio-bluetooth
   pulsemixer
   awesome
+  acpid
   slock
   xautolock
   alacritty
@@ -70,9 +71,27 @@ if [[ "$(which zsh &> /dev/null; echo $?)" == "0" ]]; then
 fi
 
 # docker
-if [[ -z "$(systemctl status docker | grep running)" ]]; then sudo systemctl enable docker --now; fi
-if [[ -z "$(cat /etc/group | grep docker)" ]]; then sudo groupadd docker; fi
-if [[ -z "$(groups $USER | grep docker)" ]]; then sudo usermod -aG docker $USER; fi
+if [[ -z "$(systemctl status docker | grep running)" ]]; then
+  sudo systemctl enable docker --now;
+fi
+if [[ -z "$(cat /etc/group | grep docker)" ]]; then
+  sudo groupadd docker;
+fi
+if [[ -z "$(groups $USER | grep docker)" ]]; then
+  sudo usermod -aG docker $USER;
+fi
 
 # bluez
-if [[ -z "$(systemctl status bluetooth | grep running)" ]]; then sudo systemctl enable bluetooth --now; fi
+if [[ -z "$(systemctl status bluetooth | grep running)" ]]; then
+  sudo systemctl enable bluetooth --now;
+fi
+
+# acpid
+if [[ -z "$(systemctl status acpid | grep running)" ]]; then
+  sudo systemctl enable acpid --now;
+fi
+
+# awesome
+if [[ ! -d ~/.config/awesome/battery-widget ]]; then
+  git clone https://github.com/deficient/battery-widget.git ~/.config/awesome/battery-widget
+fi
