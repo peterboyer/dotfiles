@@ -1,6 +1,10 @@
 -- custom colorscheme
 vim.cmd("colorscheme mono")
 
+-- disable mouse
+vim.o.mouse = false
+vim.o.ttymouse = false
+
 -- highlight current line
 vim.o.cursorline = true
 -- enable line numbers
