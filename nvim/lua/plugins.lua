@@ -41,6 +41,9 @@ return require("packer").startup(function(use)
   -- git tooling (blame)
   use "tpope/vim-fugitive"
 
+  -- git gutter (diff in the sign column)
+  use "airblade/vim-gitgutter"
+
   -- add select all/trimmed line as text object (l)
   use {
     "kana/vim-textobj-line",
