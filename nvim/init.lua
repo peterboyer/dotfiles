@@ -67,11 +67,12 @@ map("n", "<C-w>q", "<cmd>:Bdelete<cr>")
 map("n", "<leader>e", "<cmd>Lf<cr>")
 
 -- telescope
--- o(p)en | (b)uffers | (f)ind -> (g)rep | (h)elp-tags
+-- o(p)en | (b)uffers | (f)ind -> (g)rep | (h)elp-tags | git (s)tatus
 map("n", "<leader>p", function() require("telescope.builtin").find_files() end)
 map("n", "<leader>b", function() require("telescope.builtin").buffers() end)
 map("n", "<leader>fg", function() require("telescope.builtin").live_grep() end)
 map("n", "<leader>fh", function() require("telescope.builtin").help_tags() end)
+map("n", "<leader>fs", function() require("telescope.builtin").git_status() end)
 
 -- lsp
 map("n", "[d", function() vim.diagnostic.goto_prev() end)
