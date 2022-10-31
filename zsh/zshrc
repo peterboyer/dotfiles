@@ -61,6 +61,9 @@ alias cfgvim="(cd ~/.config/nvim && nvim init.lua)"
 
 alias lg="lazygit"
 
+alias iphone-mount="ifuse /run/media/iphone"
+alias iphone-umount="fusermount -u /run/media/iphone"
+
 if [[ $UNAME == "Linux" ]]; then
   # https://aur.archlinux.org/packages/nvm#comment-764001
   source /usr/share/nvm/init-nvm.sh
