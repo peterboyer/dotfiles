@@ -54,6 +54,10 @@ PACKAGES=(
   udisks2
   udiskie
   ntfs-3g
+  ifuse
+  nemo
+  gthumb
+  vlc
 )
 
 packages=$((IFS=$'\n' && echo "${PACKAGES[*]}") | grep -v '^AUR:')
