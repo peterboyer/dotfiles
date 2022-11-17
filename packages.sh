@@ -64,6 +64,7 @@ PACKAGES=(
   gphoto2
   obs-studio
   AUR:obs-linuxbrowser-bin
+  joyutils
 )
 
 packages=$((IFS=$'\n' && echo "${PACKAGES[*]}") | grep -v '^AUR:')
