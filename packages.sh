@@ -59,6 +59,11 @@ PACKAGES=(
   nemo
   gthumb
   vlc
+  linux-headers
+  v4l2loopback-dkms
+  gphoto2
+  obs-studio
+  AUR:obs-linuxbrowser-bin
 )
 
 packages=$((IFS=$'\n' && echo "${PACKAGES[*]}") | grep -v '^AUR:')
