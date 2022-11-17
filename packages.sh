@@ -44,6 +44,7 @@ PACKAGES=(
   docker
   docker-compose
   calc
+  peek
   flameshot
   gimp
   pdfarranger
