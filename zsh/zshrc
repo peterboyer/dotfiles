@@ -50,6 +50,12 @@ alias ls="exa"
 alias l="ls -l"
 alias la="ls -la"
 
+alias pm="pulsemixer"
+# pulsemixer default
+pmd() { pulsemixer --list-sinks | grep -i speaker | awk '{print $3}' | sed s/,// | xargs pulsemixer --set-default-sink --id }
+# pulsemixer headphones
+pmh() { pulsemixer --list-sinks | grep -i 458bt | awk '{print $3}' | sed s/,// | xargs pulsemixer --set-default-sink --id }
+
 alias cdx="cd ~/_dev"
 alias cdz="cd ~/_zone"
 alias cdd="cd ~/_dotfiles"
