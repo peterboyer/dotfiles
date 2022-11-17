@@ -67,7 +67,15 @@ alias cfgvim="(cd ~/.config/nvim && nvim init.lua)"
 
 alias lg="lazygit"
 
-alias iphone-mount="ifuse /run/media/iphone"
+_iphone_mount() {
+  if [[ ! -d /run/media/iphone ]]; then
+    sudo mkdir -p /run/media/iphone
+    sudo chown -R $USER /run/media/iphone
+  fi
+  ifuse /run/media/iphone
+}
+
+alias iphone-mount="_iphone_mount"
 alias iphone-umount="fusermount -u /run/media/iphone"
 
 if [[ $UNAME == "Linux" ]]; then
