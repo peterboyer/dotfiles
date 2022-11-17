@@ -72,6 +72,15 @@ return require("packer").startup(function(use)
             follow = true, -- follow symlinks
             hidden = true, -- show dotfiles
           },
+          buffers = {
+            show_all_buffers = true,
+            sort_lastused = true,
+            mappings = {
+              i = {
+                ["<c-d>"] = "delete_buffer"
+              }
+            }
+          }
         },
       }
     end,
