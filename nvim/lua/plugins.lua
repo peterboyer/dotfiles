@@ -86,6 +86,9 @@ return require("packer").startup(function(use)
     end,
   }
 
+  -- ripgrep for quickfix flist
+  use "jremmen/vim-ripgrep"
+
   use {
     "ptzz/lf.vim",
     requires = {
