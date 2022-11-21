@@ -26,6 +26,9 @@ return require("packer").startup(function(use)
   -- base config
   use "tpope/vim-sensible"
 
+  -- statusline
+  use 'vim-airline/vim-airline'
+
   -- delete buffers without messing the layout
   use "moll/vim-bbye"
 
