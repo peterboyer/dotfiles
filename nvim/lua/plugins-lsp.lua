@@ -1,12 +1,10 @@
 local M = {
   config = function()
     local servers = { "tsserver", "eslint", "rust_analyzer", "sumneko_lua" }
-    local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
     for _, lsp in pairs(servers) do
       require("lspconfig")[lsp].setup {
         on_attach = lsp_on_attach,
-        capabilities = capabilities,
       }
     end
 
