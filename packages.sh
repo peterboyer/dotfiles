@@ -13,7 +13,7 @@ fi
 PACKAGES=(
   htop
   tmux
-  unzip
+  p7zip
   rsync
   bind
   openssh
