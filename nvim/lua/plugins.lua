@@ -27,7 +27,21 @@ return require("packer").startup(function(use)
   use "tpope/vim-sensible"
 
   -- statusline
-  use 'vim-airline/vim-airline'
+  use {
+    'vim-airline/vim-airline',
+    config = function ()
+      vim.cmd([[
+        let g:airline_powerline_fonts = 1
+        let g:airline_skip_empty_sections = 1
+        let g:airline_section_b = airline#section#create([])
+        let g:airline_section_x = airline#section#create(['tagbar'])
+        let g:airline_section_y = airline#section#create([])
+        let g:airline_symbols.colnr = ':'
+        let g:airline_symbols.linenr = ' '
+        let g:airline_symbols.maxlinenr = ' '
+      ]])
+    end
+  }
 
   -- delete buffers without messing the layout
   use "moll/vim-bbye"
