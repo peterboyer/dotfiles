@@ -81,4 +81,6 @@ if [[ "$UNAME" == "Linux" ]]; then
   if [[ -z "$(systemctl status slock@$USER | grep enabled)" ]]; then sudo systemctl enable slock@$USER; fi
 
   link /etc/pulse/system.pa.d _/pulse/user.pa --sudo
+
+  link /usr/local/share fonts --sudo
 fi
