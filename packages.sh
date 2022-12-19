@@ -65,6 +65,8 @@ PACKAGES=(
   obs-studio
   AUR:obs-linuxbrowser-bin
   joyutils
+  cmatrix
+  AUR:slides-bin
 )
 
 packages=$((IFS=$'\n' && echo "${PACKAGES[*]}") | grep -v '^AUR:')
