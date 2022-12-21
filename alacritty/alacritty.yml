@@ -1,33 +1,22 @@
-# Colors (Nord)
-colors:
-   # Default colors
-   primary:
-     background: '#2E3440'
-     foreground: '#D8DEE9'
-
-   # Normal colors
-   normal:
-     black:   '#3B4252'
-     red:     '#BF616A'
-     green:   '#A3BE8C'
-     yellow:  '#EBCB8B'
-     blue:    '#81A1C1'
-     magenta: '#B48EAD'
-     cyan:    '#88C0D0'
-     gray:    '#434C5E'
-     white:   '#E5E9F0'
-
-   # Bright colors
-   bright:
-     black:   '#434C5E'
-     red:     '#BF616A'
-     green:   '#A3BE8C'
-     yellow:  '#EBCB8B'
-     blue:    '#81A1C1'
-     magenta: '#B48EAD'
-     cyan:    '#8FBCBB'
-     gray:    '#434C5E'
-     white:   '#ECEFF4'
-
 font:
   size: 10.0
+
+# base16 default dark
+colors:
+  primary:
+    foreground: '#e8e8e8' # base06
+    background: '#282828' # base01
+
+
+
+normal:
+  black:   '#181818' # base00
+  gray:    '#b8b8b8' # base04
+  white:   '#f8f8f8' # base07
+
+  red:     '#ab4642' # base08
+  yellow:  '#f7ca88' # base0A
+  green:   '#a1b56c' # base0B
+  blue:    '#86c1b9' # base0C
+  cyan:    '#7cafc2' # base0D
+  magenta: '#ba8baf' # base0E
