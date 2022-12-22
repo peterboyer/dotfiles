@@ -112,6 +112,15 @@ return require("packer").startup(function(use)
     },
   }
 
+  -- sticky context headers
+  use {
+    'nvim-treesitter/nvim-treesitter-context',
+    requires = {
+      "nvim-treesitter/nvim-treesitter",
+    }
+  }
+
+  -- handle externally installed binaries for language features
   use {
     "williamboman/mason.nvim",
     config = require("plugins-mason").config
