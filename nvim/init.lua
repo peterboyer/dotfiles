@@ -1,17 +1,15 @@
 require("plugins")
 require("options")
 
-function map(mode, shortcut, command, opts)
-  opts = opts or {}
-  vim.keymap.set(mode, shortcut, command, {
-    silent = true,
-    buffer = opts.buffer,
-    remap = opts.recursive,
-  })
-end
-
--- leader space
 vim.g.mapleader = " "
+
+-- centered cursor on scroll
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+-- centered cursor on search
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
 
 -- reference
 -- zc (close fold) zC (close ALL fold levels)
@@ -21,106 +19,107 @@ vim.g.mapleader = " "
 -- zm (maximise folding, CLOSE over whole buffer), zM (maximise ALL folding, to top)
 
 -- cursor up/down 5 lines
-map("", "<C-j>", "5j")
-map("", "<C-k>", "5k")
+vim.keymap.set("", "<C-j>", "5j")
+vim.keymap.set("", "<C-k>", "5k")
 -- scroll up/down 5 lines
-map("n", "<A-j>", "5<C-e>", { recursive = true })
-map("n", "<A-k>", "5<C-y>", { recursive = true })
+vim.keymap.set("n", "<A-j>", "5<C-e>", { remap = true })
+vim.keymap.set("n", "<A-k>", "5<C-y>", { remap = true })
 -- [macOS]
-map("n", "∆", "<A-j>", { recursive = true })
-map("n", "˚", "<A-k>", { recursive = true })
+vim.keymap.set("n", "∆", "<A-j>", { remap = true })
+vim.keymap.set("n", "˚", "<A-k>", { remap = true })
 
 -- detab
 -- C-t (tab) shift right | or <Tab>
 -- C-d (de-tab) shift left | or <S-Tab>
-map("i", "<S-Tab>", "<C-d>", { recursive = true })
+vim.keymap.set("i", "<S-Tab>", "<C-d>", { remap = true })
 
 -- move line (insert)
--- map("i", "<A-j>", "<Esc>:m .+1<cr>==gi")
--- map("i", "<A-k>", "<Esc>:m .-2<cr>==gi")
+-- vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<cr>==gi")
+-- vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<cr>==gi")
 -- move lines (visual)
--- map("v", "<A-j>", ":m '>+1<cr>gv=gv")
--- map("v", "<A-k>", ":m '<-2<cr>gv=gv")
+-- vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv")
+-- vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv")
 
 -- [<n] prev [m>] next buffer
-map("n", "<leader>n", ":bp<cr>")
-map("n", "<leader>m", ":bn<cr>")
+vim.keymap.set("n", "<leader>n", ":bp<cr>")
+vim.keymap.set("n", "<leader>m", ":bn<cr>")
 
 -- switch buffer
 -- (g)o to alt buffer
--- map("n", "<leader>g", "<C-6>", { recursive = true })
+-- vim.keymap.set("n", "<leader>g", "<C-6>", { remap = true })
 
 -- destroy buffer (preserve window layout)
 -- (q)uit
-map("n", "<C-w>q", "<cmd>:Bdelete<cr>")
+vim.keymap.set("n", "<C-w>q", "<cmd>:Bdelete<cr>")
+vim.keymap.set("n", "<C-w><C-q>", "<cmd>:bdelete<cr>")
 
 -- select (a)ll
--- map("n", "<C-a>", "gg<S-v>G")
+-- vim.keymap.set("n", "<C-a>", "gg<S-v>G")
 
 -- (d)elete without yank
--- map("n", "<leader>d", "\"_d")
--- map("n", "<leader>s", "\"_s")
--- map("n", "<leader>x", "\"_x")
+-- vim.keymap.set("n", "<leader>d", "\"_d")
+-- vim.keymap.set("n", "<leader>s", "\"_s")
+-- vim.keymap.set("n", "<leader>x", "\"_x")
 
 -- lf
 -- (e)xplore
-map("n", "<leader>e", "<cmd>Lf<cr>")
+vim.keymap.set("n", "<leader>e", "<cmd>Lf<cr>")
 
 -- telescope
 -- o(p)en | (b)uffers | (f)ind -> (g)rep | (h)elp-tags | git (s)tatus
-map("n", "<leader>p", function() require("telescope.builtin").find_files() end)
-map("n", "<leader>P", function() require("telescope.builtin").oldfiles() end)
-map("n", "<leader>b", function() require("telescope.builtin").buffers() end)
-map("n", "<leader>fg", function() require("telescope.builtin").live_grep() end)
-map("n", "<leader>fh", function() require("telescope.builtin").help_tags() end)
-map("n", "<leader>fs", function() require("telescope.builtin").git_status() end)
+vim.keymap.set("n", "<leader>p", function() require("telescope.builtin").find_files() end)
+vim.keymap.set("n", "<leader>P", function() require("telescope.builtin").oldfiles() end)
+vim.keymap.set("n", "<leader>b", function() require("telescope.builtin").buffers() end)
+vim.keymap.set("n", "<leader>fg", function() require("telescope.builtin").live_grep() end)
+vim.keymap.set("n", "<leader>fh", function() require("telescope.builtin").help_tags() end)
+vim.keymap.set("n", "<leader>fs", function() require("telescope.builtin").git_status() end)
 
 -- lsp
-map("n", "[d", function() vim.diagnostic.goto_prev() end)
-map("n", "]d", function() vim.diagnostic.goto_next() end)
-map("n", "<leader>k", function() vim.diagnostic.open_float() end)
--- map("n", "<leader>q", function() vim.diagnostic.setloclist() end)
+vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end)
+vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end)
+vim.keymap.set("n", "<leader>k", function() vim.diagnostic.open_float() end)
+-- vim.keymap.set("n", "<leader>q", function() vim.diagnostic.setloclist() end)
 
-lsp_on_attach = function(_client, buffer)
+lsp_on_attach = function(_, buffer)
   vim.api.nvim_buf_set_option(buffer, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   local opts = { buffer = buffer }
-  map("n", "K", function() vim.lsp.buf.hover() end, opts)
-  map("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-  map("n", "gd", function() vim.lsp.buf.definition() end, opts)
-  map("n", "gi", function() vim.lsp.buf.implementation() end, opts)
-  map("n", "gr", function() vim.lsp.buf.references() end, opts)
-  map("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-  map("n", "<leader>D", function() vim.lsp.buf.type_definition() end, opts)
-  map("n", "<leader>f", function() vim.lsp.buf.formatting() end, opts)
-  map("n", "<leader>wa", function() vim.lsp.buf.add_workspace_folder() end, opts)
-  map("n", "<leader>wr", function() vim.lsp.buf.remove_workspace_folder() end, opts)
-  map("n", "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
-  map("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
-  map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
+  vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+  vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
+  vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+  vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
+  vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
+  vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+  vim.keymap.set("n", "<leader>D", function() vim.lsp.buf.type_definition() end, opts)
+  vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.formatting() end, opts)
+  vim.keymap.set("n", "<leader>wa", function() vim.lsp.buf.add_workspace_folder() end, opts)
+  vim.keymap.set("n", "<leader>wr", function() vim.lsp.buf.remove_workspace_folder() end, opts)
+  vim.keymap.set("n", "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
+  vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
+  vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
 end
 
 -- debugger
 -- J (over v) | L (in >) | K (out ^) | H (< continue)
-map("n", "<S-C-h>", function() require"dap".continue() end)
-map("n", "<S-C-j>", function() require"dap".step_over() end)
-map("n", "<S-C-l>", function() require"dap".step_into() end)
-map("n", "<S-C-k>", function() require"dap".step_out() end)
+vim.keymap.set("n", "<S-C-h>", function() require"dap".continue() end)
+vim.keymap.set("n", "<S-C-j>", function() require"dap".step_over() end)
+vim.keymap.set("n", "<S-C-l>", function() require"dap".step_into() end)
+vim.keymap.set("n", "<S-C-k>", function() require"dap".step_out() end)
 -- (d)ebugger -> (b)reakpoint | (B)reakpoint condition | (q)uit | (r)epl | (i)nteractive | (?) verbose
-map("n", "<leader>db", function() require"dap".toggle_breakpoint() end)
-map("n", "<leader>dB", function() require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: ")) end)
-map("n", "<leader>dq", function() require"dap".terminate() end)
-map("n", "<leader>dr", function() require"dap".repl.open() end)
-map("n", "<leader>dl", function() require"dap".run_last() end)
-map("n", "<leader>di", function() require"dap.ui.widgets".hover() end)
-map("n", "<leader>d?", function() local widgets=require"dap.ui.widgets";widgets.centered_float(widgets.scopes) end)
+vim.keymap.set("n", "<leader>db", function() require"dap".toggle_breakpoint() end)
+vim.keymap.set("n", "<leader>dB", function() require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: ")) end)
+vim.keymap.set("n", "<leader>dq", function() require"dap".terminate() end)
+vim.keymap.set("n", "<leader>dr", function() require"dap".repl.open() end)
+vim.keymap.set("n", "<leader>dl", function() require"dap".run_last() end)
+vim.keymap.set("n", "<leader>di", function() require"dap.ui.widgets".hover() end)
+vim.keymap.set("n", "<leader>d?", function() local widgets=require"dap.ui.widgets";widgets.centered_float(widgets.scopes) end)
 
 -- jester
 -- (t)est -> (t)est | (f)ile | (l)ast | [(d)ebug -> (t)est | (f)ile | (l)ast]
-map("n", "<leader>tt", function() require"jester".run() end)
-map("n", "<leader>tf", function() require"jester".run_file() end)
-map("n", "<leader>tl", function() require"jester".run_last() end)
-map("n", "<leader>tdt", function() require"jester".debug() end)
-map("n", "<leader>tdf", function() require"jester".debug_file() end)
-map("n", "<leader>tdl", function() require"jester".debug_last() end)
+vim.keymap.set("n", "<leader>tt", function() require"jester".run() end)
+vim.keymap.set("n", "<leader>tf", function() require"jester".run_file() end)
+vim.keymap.set("n", "<leader>tl", function() require"jester".run_last() end)
+vim.keymap.set("n", "<leader>tdt", function() require"jester".debug() end)
+vim.keymap.set("n", "<leader>tdf", function() require"jester".debug_file() end)
+vim.keymap.set("n", "<leader>tdl", function() require"jester".debug_last() end)
 
