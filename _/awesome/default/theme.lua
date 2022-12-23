@@ -11,12 +11,12 @@ local themes_path = gfs.get_configuration_dir()
 
 local theme = {}
 
-theme.font          = "Cousine Nerd Font 12"
+theme.font          = "Cousine Nerd Font 10"
 
-theme.bg_normal     = "#151515"
+theme.bg_normal     = "#272727"
 theme.bg_focus      = "#535353"
 theme.bg_urgent     = "#BF616A"
-theme.bg_minimize   = "#272727"
+theme.bg_minimize   = "#101010"
 theme.bg_systray    = "#2E3440"
 
 theme.fg_normal     = "#dddddd"
