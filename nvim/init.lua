@@ -40,14 +40,6 @@ vim.keymap.set("i", "<S-Tab>", "<C-d>", { remap = true })
 -- vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv")
 -- vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv")
 
--- [<n] prev [m>] next buffer
-vim.keymap.set("n", "<leader>n", ":bp<cr>")
-vim.keymap.set("n", "<leader>m", ":bn<cr>")
-
--- switch buffer
--- (g)o to alt buffer
--- vim.keymap.set("n", "<leader>g", "<C-6>", { remap = true })
-
 -- destroy buffer (preserve window layout)
 -- (q)uit
 vim.keymap.set("n", "<C-w>q", "<cmd>:Bdelete<cr>")
