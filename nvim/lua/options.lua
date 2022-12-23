@@ -27,7 +27,7 @@ vim.o.softtabstop = 2
 -- number of spaces to use for indentation
 vim.o.shiftwidth = 2
 -- <Tab> inserts spaces instead of real tabs
-vim.o.expandtab = true
+-- vim.o.expandtab = true
 
 -- ignore case of search expr
 vim.o.ignorecase = true
@@ -58,9 +58,9 @@ vim.o.listchars = table.concat({
   -- char in last column for line beyond screen width
   "extends:»",
   -- char to represent tabs
-  "tab:»·",
+  "tab:──",
   -- char to represent trailing spaces
-  "trail:·",
+  "trail:~",
   -- char to show end of line chars
   -- "eol:~",
 }, ",")
