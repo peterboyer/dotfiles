@@ -195,14 +195,15 @@ root.keys(globalkeys)
 
 local clientkeys = gears.table.join(
 	awful.key({ modkey, "Shift" }, "c", actions.client_kill, { description = "close", group = "client" }),
+	awful.key({ modkey, "Shift" }, "space", actions.client_center, { description = "center", group = "client" }),
 
 	awful.key({ modkey }, "h", actions.client_hide, { description = "minimize", group = "client" }),
 	awful.key({ modkey }, "f", actions.client_toggle_fullscreen, {description = "toggle fullscreen", group = "client" }),
 	awful.key({ modkey }, "t", actions.client_toggle_ontop, { description = "toggle keep on top", group = "client" }),
 	awful.key({ modkey }, "m", actions.client_toggle_maximized, { description = "(un)maximize", group = "client" }),
-	awful.key({ modkey, "Control" }, "space", actions.client_toggle_floating, { description = "toggle floating", group = "client" }),
 	awful.key({ modkey, "Control" }, "m", actions.client_toggle_maximized_vertical, { description = "(un)maximize vertically", group = "client" }),
-	awful.key({ modkey, "Shift" }, "m", actions.client_toggle_maximized_horizontal, { description = "(un)maximize horizontally", group = "client" })
+	awful.key({ modkey, "Shift" }, "m", actions.client_toggle_maximized_horizontal, { description = "(un)maximize horizontally", group = "client" }),
+	awful.key({ modkey, "Control" }, "space", actions.client_toggle_floating, { description = "toggle floating", group = "client" })
 )
 
 local clientbuttons = gears.table.join(

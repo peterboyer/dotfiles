@@ -127,6 +127,9 @@ local M = function (context)
 		client_kill = function (c)
 			c:kill()
 		end,
+		client_center = function (c)
+			awful.placement.centered(c)
+		end,
 		client_hide = function (c)
 			c.minimized = true
 		end,
