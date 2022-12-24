@@ -69,6 +69,7 @@ if [[ "$UNAME" == "Linux" ]]; then
   link $HOME _/zprofile .zprofile;
 
   link $HOME _/xmodmap .Xmodmap;
+  link $HOME _/xresources .Xresources;
   link /etc/udev/rules.d _/udev/10-xmodmap.rules --sudo
 
   link $HOME/.config $HOME/_zone/_dotfiles.private/autorandr --absolute
