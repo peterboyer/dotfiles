@@ -1,67 +1,49 @@
--- custom colorscheme
 vim.cmd("colorscheme mono")
 
--- disable mouse
 vim.o.mouse = false
-vim.o.ttymouse = false
+-- vim.o.ttymouse = false
 
--- highlight current line
+vim.o.wrap = false
+vim.o.autoread = true
+
 vim.o.cursorline = true
--- enable line numbers
 vim.o.number = true
--- enable relative line numbers
 vim.o.relativenumber = true
 
-vim.cmd([[
-  autocmd WinEnter * setlocal nu rnu
-  autocmd WinLeave * setlocal nonu nornu
-]])
-
--- disable line numbers for terminals
 vim.cmd("autocmd TermOpen * setlocal nonu nornu")
 
--- number of columns for a tab
-vim.o.tabstop = 2
--- number of columns for a tab when editing
-vim.o.softtabstop = 2
--- number of spaces to use for indentation
-vim.o.shiftwidth = 2
--- <Tab> inserts spaces instead of real tabs
--- vim.o.expandtab = true
+-- hide/show line numbers on blur/focus
+vim.cmd([[
+	autocmd WinEnter * setlocal nu rnu
+	autocmd WinLeave * setlocal nonu nornu
+]])
 
--- ignore case of search expr
+-- tabs
+vim.o.tabstop = 4
+vim.o.softtabstop = 2
+vim.o.shiftwidth = 2
+
+-- search
 vim.o.ignorecase = true
--- use bash-like tab completions
+
+-- autocomplete
 vim.o.wildmode = "longest,list"
 
+-- windows
 vim.o.splitright = true
 vim.o.splitbelow = true
-
--- autoread
-vim.o.autoread = true
 
 -- folding
 vim.o.foldenable = true
 vim.o.foldmethod = "syntax"
 vim.o.foldlevelstart = 99
 
--- comfy vertical viewport
-vim.o.scrolloff = 7
-
--- disable word wrap
-vim.o.wrap = false
--- vim.o.sidescroll = 50
-
--- visible control characters
+-- whitespace
 vim.o.list = true
 vim.o.listchars = table.concat({
-  -- char in last column for line beyond screen width
-  "extends:»",
-  -- char to represent tabs
-  "tab:──",
-  -- char to represent trailing spaces
-  "trail:~",
-  -- char to show end of line chars
-  -- "eol:~",
+	"extends:»",
+	"tab:┄┄",
+	"trail:∙",
+	-- "eol:↵",
 }, ",")
 
