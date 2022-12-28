@@ -51,9 +51,6 @@ if [[ "$UNAME" == "Linux" ]]; then
 
   link /etc/default _/grub --sudo;
 
-  link /usr/local/bin _/bin/_suspend --sudo;
-  link /usr/local/bin _/bin/_reboot --sudo;
-  link /usr/local/bin _/bin/_shutdown --sudo;
   link /usr/local/bin _/bin/_user --sudo;
   if [[ ! -f "/user" ]]; then
     sudo echo "$USER" > /tmp/user

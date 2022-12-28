@@ -39,7 +39,7 @@ awful.layout.layouts = {
 
 local launcher_menu = awful.menu({
 	items = {
-		{ "suspend", "_suspend" },
+		{ "suspend", "systemctl suspend" },
 		{ "awesome", {
 			{ "hotkeys", function () hotkeys_popup.show_help(nil, awful.screen.focused()) end },
 			{ "config", editor_cmd .. " " .. awesome.conffile },
@@ -47,8 +47,8 @@ local launcher_menu = awful.menu({
 			{ "restart", awesome.restart },
 			{ "quit", function () awesome.quit() end },
 		}, beautiful.awesome_icon },
-		{ "reboot", "_reboot" },
-		{ "shutdown", "_shutdown" }
+		{ "reboot", "systemctl reboot" },
+		{ "shutdown", "systemctl poweroff" }
 	}
 })
 
