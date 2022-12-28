@@ -9,4 +9,4 @@ if [[ "$remote" =~ "https://" ]]; then
 fi
 
 $(dirname $0)/link.sh
-$(dirname $0)/packages.sh
+$(dirname $0)/packages.sh bootstrap
