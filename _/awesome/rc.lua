@@ -253,6 +253,16 @@ awful.rules.rules = {
 			floating = true,
 		},
 	},
+	{
+		rule_any = {
+			class = {
+				"Alacritty"
+			}
+		},
+		properties = {
+			placement = awful.placement.centered,
+		}
+	}
 }
 
 -- Signal function to execute when a new client appears.
