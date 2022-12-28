@@ -182,7 +182,7 @@ for i = 1, tags do
 	local keycode = "#" .. i + 9
 	globalkeys = gears.table.join(
 		globalkeys,
-		awful.key({ modkey }, keycode, function () actions.tag_view_id(i) end, { description = "view tag #"..i, group = "tag" }),
+		awful.key({ modkey }, keycode, function () actions.tag_view(i) end, { description = "view tag #"..i, group = "tag" }),
 		awful.key({ modkey, "Control" }, keycode, function () actions.tag_toggle(i) end, { description = "toggle tag #" .. i, group = "tag" }),
 		awful.key({ modkey, "Shift" }, keycode, function () actions.tag_move_current_client(i) end, { description = "move focused client to tag #"..i, group = "tag" }),
 		awful.key({ modkey, "Control", "Shift" }, keycode, function () actions.tag_toggle_current_client(i) end, { description = "toggle focused client on tag #" .. i, group = "tag" })
