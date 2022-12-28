@@ -7,8 +7,6 @@ colors:
     foreground: '#e8e8e8' # base06
     background: '#282828' # base01
 
-
-
 normal:
   black:   '#181818' # base00
   gray:    '#b8b8b8' # base04
