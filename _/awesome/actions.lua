@@ -124,6 +124,13 @@ local M = function (context)
 			awful.util.spawn("pulsemixer --toggle-mute")
 		end,
 
+		screen_brightness_up = function ()
+			awful.util.spawn("brightnessctl set +10%")
+		end,
+		screen_brightness_down = function ()
+			awful.util.spawn("brightnessctl set 10%-")
+		end,
+
 		client_kill = function (c)
 			c:kill()
 		end,

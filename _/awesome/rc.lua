@@ -175,7 +175,13 @@ local globalkeys = gears.table.join(
 
 	awful.key({ "Mod1" }, "Page_Up", actions.audio_volume_up, { description = "volume up", group = "audio" }),
 	awful.key({ "Mod1" }, "Page_Down", actions.audio_volume_down, { description = "volume down", group = "audio" }),
-	awful.key({ "Mod1" }, "Delete", actions.audio_volume_mute, { description = "toggle mute", group = "audio" })
+	awful.key({ "Mod1" }, "Delete", actions.audio_volume_mute, { description = "toggle mute", group = "audio" }),
+	awful.key({}, "XF86AudioRaiseVolume", actions.audio_volume_up, { description = "volume up", group = "audio" }),
+	awful.key({}, "XF86AudioLowerVolume", actions.audio_volume_down, { description = "volume up", group = "audio" }),
+	awful.key({}, "XF86AudioMute", actions.audio_volume_mute, { description = "volume up", group = "audio" }),
+
+	awful.key({}, "XF86MonBrightnessUp", actions.screen_brightness_up, { description = "brightness up", group = "screen" }),
+	awful.key({}, "XF86MonBrightnessDown", actions.screen_brightness_down, { description = "brightness down", group = "screen" })
 )
 
 for i = 1, tags do

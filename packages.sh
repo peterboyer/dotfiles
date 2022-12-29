@@ -28,6 +28,7 @@ PACKAGES=(
 	xorg-xinit
 	xorg-xrandr
 	autorandr
+	brightnessctl
 	bluez
 	bluez-utils
 	pulseaudio
