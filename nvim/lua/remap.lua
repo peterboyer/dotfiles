@@ -48,14 +48,6 @@ vim.keymap.set("i", "<S-Tab>", "<C-d>", { remap = true })
 vim.keymap.set("n", "<C-w>q", "<cmd>:Bdelete<cr>")
 vim.keymap.set("n", "<C-w><C-q>", "<cmd>:bdelete<cr>")
 
--- select (a)ll
--- vim.keymap.set("n", "<C-a>", "gg<S-v>G")
-
--- (d)elete without yank
--- vim.keymap.set("n", "<leader>d", "\"_d")
--- vim.keymap.set("n", "<leader>s", "\"_s")
--- vim.keymap.set("n", "<leader>x", "\"_x")
-
 -- (e)xplore
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 
@@ -69,10 +61,17 @@ vim.keymap.set("n", "<leader>fh", function() require("telescope.builtin").help_t
 vim.keymap.set("n", "<leader>fs", function() require("telescope.builtin").git_status() end)
 
 -- lsp
-vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end)
-vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end)
+vim.keymap.set("n", "[d", function()
+	vim.diagnostic.goto_prev()
+	vim.cmd("execute \"normal zz\"")
+end)
+vim.keymap.set("n", "]d", function()
+	vim.diagnostic.goto_next()
+	vim.cmd("execute \"normal zz\"")
+end)
+
 vim.keymap.set("n", "<leader>k", function() vim.diagnostic.open_float() end)
--- vim.keymap.set("n", "<leader>q", function() vim.diagnostic.setloclist() end)
+vim.keymap.set("n", "<leader>q", function() vim.diagnostic.setloclist() end)
 
 lsp_on_attach = function(_, buffer)
 	vim.api.nvim_buf_set_option(buffer, "omnifunc", "v:lua.vim.lsp.omnifunc")
