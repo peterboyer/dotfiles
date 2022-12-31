@@ -83,6 +83,9 @@ if [[ "$UNAME" == "Linux" ]]; then
 	link /etc/udev/rules.d _/udev/10-autorandr.rules --sudo
 
 	link /etc/pulse/system.pa.d _/pulse/user.pa --sudo
+	# https://wiki.archlinux.org/title/PulseAudio/Troubleshooting#No_sound_after_resume_from_suspend
+	link /etc/systemd/system _/systemd/pulseaudio-resume@.service --sudo
+	systemd_enable_service_for_user pulseaudio-resume
 
 	link /etc/systemd/system _/systemd/slock@.service --sudo
 	systemd_enable_service_for_user slock
