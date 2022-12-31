@@ -19,7 +19,7 @@ vim.cmd([[
 ]])
 
 -- tabs
-vim.o.tabstop = 4
+vim.o.tabstop = 2
 vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
 
