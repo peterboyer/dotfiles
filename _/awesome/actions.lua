@@ -115,13 +115,13 @@ local M = function (context)
 		end,
 
 		audio_volume_up = function ()
-			awful.util.spawn("pulsemixer --change-volume +10")
+			awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ +10%")
 		end,
 		audio_volume_down = function ()
-			awful.util.spawn("pulsemixer --change-volume -10")
+			awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ -10%")
 		end,
 		audio_volume_mute = function ()
-			awful.util.spawn("pulsemixer --toggle-mute")
+			awful.util.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")
 		end,
 
 		screen_brightness_up = function ()

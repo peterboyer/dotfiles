@@ -33,6 +33,7 @@ PACKAGES=(
 	bluez-utils
 	pulseaudio
 	pulseaudio-bluetooth
+	pasystray
 	awesome
 	luarocks
 	acpid
@@ -179,9 +180,6 @@ BOOTSTRAP+=("acpid_init")
 awesome_deps() {
 	if [[ ! -d ~/.config/awesome/battery-widget ]]; then
 		git clone https://github.com/deficient/battery-widget.git ~/.config/awesome/battery-widget
-	fi
-	if [[ ! -d ~/.config/awesome/pulseaudio_widget ]]; then
-		git clone https://github.com/stefano-m/awesome-pulseaudio_widget.git ~/.config/awesome/pulseaudio_widget
 	fi
 }
 
