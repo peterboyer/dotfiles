@@ -1,22 +1,23 @@
 vim.cmd("colorscheme mono")
+vim.o.termguicolors = false
 
 vim.o.mouse = false
--- vim.o.ttymouse = false
-
-vim.o.wrap = false
-vim.o.autoread = true
-
+vim.o.guicursor = ""
 vim.o.cursorline = true
+
 vim.o.number = true
 vim.o.relativenumber = true
-
-vim.cmd("autocmd TermOpen * setlocal nonu nornu")
-
--- hide/show line numbers on blur/focus
+-- auto hide/show line numbers on blur/focus
 vim.cmd([[
 	autocmd WinEnter * setlocal nu rnu
 	autocmd WinLeave * setlocal nonu nornu
 ]])
+-- auto hide line numbers for terminals
+vim.cmd("autocmd TermOpen * setlocal nonu nornu")
+
+-- textwrap
+vim.o.wrap = false
+vim.o.autoread = true
 
 -- tabs
 vim.o.tabstop = 4
@@ -26,16 +27,16 @@ vim.o.shiftwidth = 0
 vim.o.ignorecase = true
 
 -- autocomplete
-vim.o.wildmode = "longest,list"
+-- vim.o.wildmode = "longest,list"
 
 -- windows
 vim.o.splitright = true
 vim.o.splitbelow = true
 
 -- folding
-vim.o.foldenable = true
-vim.o.foldmethod = "syntax"
-vim.o.foldlevelstart = 99
+-- vim.o.foldenable = true
+-- vim.o.foldmethod = "syntax"
+-- vim.o.foldlevelstart = 99
 
 -- whitespace
 vim.o.list = true
