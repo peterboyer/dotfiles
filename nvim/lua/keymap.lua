@@ -7,8 +7,8 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 
 -- cursor up/down 5 lines
-vim.keymap.set("", "<C-j>", "5jzz")
-vim.keymap.set("", "<C-k>", "5kzz")
+vim.keymap.set("", "<C-j>", "5j")
+vim.keymap.set("", "<C-k>", "5k")
 
 -- faster e/y scroll
 vim.keymap.set("n", "<C-e>", "5<C-e>")
