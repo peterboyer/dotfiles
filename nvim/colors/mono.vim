@@ -29,12 +29,14 @@ function! s:HL(group, fg, bg, attr)
 endfunction
 
 " Base
-call s:HL('Normal',       s:None, s:None, s:None)
+call s:HL('Normal',       s:White, s:None, s:None)
+call s:HL('NormalFloat',  s:None, s:None, s:None)
+call s:HL('NormalNC',     s:Blue, s:None, s:None)
 call s:HL('VertSplit',    s:None, s:None, s:None)
 
 " Status
 call s:HL('StatusLine',   s:Black, s:Yellow, s:None)
-call s:HL('StatusLineNC', s:Black, s:White, s:None)
+call s:HL('StatusLineNC', s:Yellow, s:Gray, s:None)
 
 " Cursor
 call s:HL('Cursor',       s:Black, s:Yellow, s:None)
@@ -45,7 +47,7 @@ call s:HL('CursorColumn', s:Yellow, s:None, s:None)
 call s:HL('Visual',       s:Black, s:Green, s:None)
 
 " Gutter/Line Numbers
-call s:HL('LineNr',       s:Yellow, s:None, s:None)
+call s:HL('LineNr',       s:Gray, s:None, s:None)
 call s:HL('CursorLineNr', s:Yellow, s:Black, s:None)
 call s:HL('FoldColumn',   s:None, s:Black, s:None)
 call s:HL('SignColumn',   s:None, s:Black, s:None)
