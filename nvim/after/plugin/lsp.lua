@@ -18,6 +18,8 @@ lsp.ensure_installed {
 	"sumneko_lua",
 	"vimls",
 	"yamlls",
+	"bashls",
+	"jsonls",
 }
 
 local cmp = require("cmp")
