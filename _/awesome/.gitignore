@@ -1,0 +1,6 @@
+*
+!.gitignore
+!.luarc.json
+!rc.lua
+!actions.lua
+!default
