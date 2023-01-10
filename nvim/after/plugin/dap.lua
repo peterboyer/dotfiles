@@ -100,10 +100,10 @@ vim.cmd[[
 ]]
 
 -- [d]ebug
--- > [b]reakpoint
-vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
--- > [B]reakpoint with condition
-vim.keymap.set("n", "<leader>dB", function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end)
+-- > [i]nsert breakpoint
+vim.keymap.set("n", "<leader>di", dap.toggle_breakpoint)
+-- > [I]nsert breakpoint with condition
+vim.keymap.set("n", "<leader>dI", function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end)
 -- > log[p]oint with message
 vim.keymap.set("n", "<leader>dp", function() dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end)
 -- > [s]tart
