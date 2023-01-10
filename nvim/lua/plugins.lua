@@ -1,6 +1,6 @@
 local ensure_packer = function()
 	local fn = vim.fn
-	local install_path = fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
+	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 	if fn.empty(fn.glob(install_path)) > 0 then
 		fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
 		vim.cmd [[packadd packer.nvim]]
@@ -29,47 +29,75 @@ return require("packer").startup(function(use)
 		},
 	}
 
-	-- syntax parser
+	-- syntax ast
 	use {
 		"nvim-treesitter/nvim-treesitter",
 		run = {
 			":TSUpdate",
-		}
+		},
 	}
 
-	-- sticky headers for functions/objects/scopes
+	-- syntax ast sticky headers
 	use {
 		"nvim-treesitter/nvim-treesitter-context",
 		requires = {
 			{ "nvim-treesitter/nvim-treesitter" },
-		}
+		},
 	}
 
 	-- lsp
 	use {
 		"VonHeikemen/lsp-zero.nvim",
 		requires = {
-			{"neovim/nvim-lspconfig"},
-			{"williamboman/mason.nvim"},
-			{"williamboman/mason-lspconfig.nvim"},
+			{ "neovim/nvim-lspconfig" },
+			{ "williamboman/mason.nvim" },
+			{ "williamboman/mason-lspconfig.nvim" },
 
-			{"hrsh7th/nvim-cmp"},
-			{"hrsh7th/cmp-buffer"},
-			{"hrsh7th/cmp-path"},
-			{"hrsh7th/cmp-nvim-lsp"},
-			{"hrsh7th/cmp-nvim-lua"},
+			{ "hrsh7th/nvim-cmp" },
+			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/cmp-path" },
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-nvim-lua" },
 
-			{"L3MON4D3/LuaSnip"},
-			{"rafamadriz/friendly-snippets"},
-		}
+			{ "L3MON4D3/LuaSnip" },
+			{ "rafamadriz/friendly-snippets" },
+		},
 	}
 
-	-- ensure installed extra tooling
+	-- dap
 	use {
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		"mxsdev/nvim-dap-vscode-js",
 		requires = {
-			{ "williamboman/mason.nvim" },
-		}
+			{ "mfussenegger/nvim-dap" },
+			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
+		},
+	}
+
+	-- dap inline values
+	use {
+		"theHamsta/nvim-dap-virtual-text",
+		requires = {
+			{ "mfussenegger/nvim-dap" },
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+	}
+
+	-- neotest
+	use {
+		"nvim-neotest/neotest",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim",
+		},
+	}
+
+	-- neotest jest integration
+	use {
+		"haydenmeade/neotest-jest",
+		requires = {
+			{ "nvim-neotest/neotest" },
+		},
 	}
 
 	-- text object (l)
