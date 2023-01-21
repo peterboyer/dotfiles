@@ -1,3 +1,5 @@
+export $(envsubst < .env)
+
 export UNAME="$(uname)"
 if [[ $UNAME != "Linux" && $UNAME != "Darwin" ]]; then
   echo "panic: unknown UNAME system information"
