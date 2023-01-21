@@ -1,92 +1,97 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-# link <dest> <src> [<alias>] [<options>]
-#		--sudo				execute as sudo
-#		--absolute		src will not be prefixed with $HOME/_dotfiles/
+[[ "$@" =~ "--force" ]] && force=true
 
+# link <src> <dest> [--sudo|--force]
 link() {
-	DIR="$HOME/_dotfiles/"
-	DEST="$1"
-	SRC="$2"
-	ALIAS="$3"
+	src="$1"
+	if [[ ! "$src" =~ ^/ ]]; then
+		relative_dir="$(dirname ${BASH_SOURCE[1]:-BASH_SOURCE[0]})"
+		src="$(realpath $relative_dir/$src)"
+	fi
+	if [[ ! -e "$src" ]]; then
+		echo "BADSRC: $src"
+		return
+	fi
+	src_name="$(basename $src)"
+	dest="${2/"#"/${src_name}}"
+	if [[ ! "$force" == "true" && -e $dest ]]; then
+		echo "EXISTS: $dest"
+		return
+	fi
+	dest_dir="$(dirname $dest)"
+	dest_name="$(basename $dest)"
 	if [[ "$@" =~ "--sudo" ]]; then
-		SUDO="sudo"
+		sudocmd="sudo"
 	fi
-	if [[ "$@" =~ "--absolute" ]]; then
-		DIR=""
-	fi
-	if [[ "$ALIAS" =~ "--" ]]; then
-		ALIAS=""
-	fi
-	TARGET="$DEST/$(basename ${ALIAS:-$SRC})"
-	if [[ -d "$(dirname $DIR$SRC)" && -e "$DIR$SRC" && (! -e "$TARGET" || ! -h "$TARGET") ]]; then
-		if [[ ! -d $DEST ]]; then
-			$SUDO mkdir -p $DEST
-		fi
-		cd $DEST;
-		$SUDO ln -fs $DIR$SRC $ALIAS;
-		cd $OLDPWD;
-		echo "linked: $TARGET"
-	fi
+	$sudocmd mkdir -p $dest_dir
+	cd $dest_dir
+	$sudocmd ln -sf $src $dest_name
+	cd $OLDPWD
+	echo "LINKED: $src -> $dest"
 }
 
-link $HOME zsh/zshrc .zshrc
-link $HOME tmux/tmux.conf .tmux.conf
-link $HOME/.config nvim
-link $HOME/.config alacritty
+export link
 
-link $HOME $HOME/_zone/_dotfiles.private/ssh .ssh --absolute
-if [[ -d "$HOME/.ssh" ]]; then
-	chmod 700 $HOME/.ssh
-	chmod 600 $HOME/.ssh/id_rsa
-	chmod 600 $HOME/.ssh/id_rsa.pub
+link ./zsh/zshrc ~/.#
+link ./tmux/tmux.conf ~/.#
+link ./nvim ~/.config/#
+link ./alacritty ~/.config/#
+
+link ~/_zone/_dotfiles.private/ssh ~/.#
+if [[ -d "~/.ssh" ]]; then
+	chmod 700 ~/.ssh
+	chmod 600 ~/.ssh/id_rsa
+	chmod 600 ~/.ssh/id_rsa.pub
 fi
 
-link $HOME $HOME/_zone/_dotfiles.private/gphoto .gphoto --absolute
-link $HOME/.config/obs-studio $HOME/_zone/_dotfiles.private/obs/basic --absolute
+link ~/_zone/_dotfiles.private/gphoto ~/.#
+link ~/_zone/_dotfiles.private/obs/basic ~/.config/obs-studio/#
 
-if [[ "$UNAME" == "Linux" ]]; then
-	link $HOME/.config _/awesome
-	link $HOME/.config/fontconfig _/fonts fonts.conf;
+os="_"
+if [[ "$(uname)" == "Linux" ]]; then os=arch; fi
+if [[ "$(uname)" == "Darwin" ]]; then os=macos; fi
 
-	link /etc/default _/grub --sudo;
+if [[ "$os" == "arch" ]]; then
+	link ./_arch/awesome ~/.config/#
+	link ~/_zone/wallpapers/looker.jpg ~/.config/wallpaper
 
-	link /usr/local/bin _/bin/_user --sudo;
-	if [[ ! -f "/user" ]]; then
-		sudo echo "$USER" > /tmp/user
-		sudo cp /tmp/user /
+	link ./fonts /usr/local/share/# --sudo
+	link ./_arch/fonts.conf ~/.config/fontconfig/#
+
+	link ./_arch/env ~/.#
+	link ./_arch/bashrc ~/.#
+	link ./_arch/bash_profile ~/.#
+	link ./_arch/bash_logout ~/.#
+	link ./_arch/zprofile ~/.#
+
+	link ./_arch/xinitrc ~/.#;
+	link ./_arch/xmodmap ~/.Xmodmap
+	link ./_arch/xresources ~/.Xresources
+	link ./_arch/xinitrc.d/51-xrdb.sh /etc/X11/xinit/xinitrc.d/# --sudo
+	link ./_arch/xinitrc.d/52-xmodmap.sh /etc/X11/xinit/xinitrc.d/# --sudo
+	link ./_arch/xinitrc.d/71-udiskie.sh /etc/X11/xinit/xinitrc.d/# --sudo
+	link ./_arch/xinitrc.d/72-autorandr.sh /etc/X11/xinit/xinitrc.d/# --sudo
+	link ./_arch/xinitrc.d/81-xautolock.sh /etc/X11/xinit/xinitrc.d/# --sudo
+
+	# TODO: remove
+	link ./_arch/bin/_user /usr/local/bin/# --sudo
+	if [[ ! -e "/user" ]]; then
+		sudo echo "$USER" > /user
 	fi
+
+	link ./_arch/udev/10-xmodmap.rules /etc/udev/rules.d/# --sudo
+	link ./_arch/udev/10-autorandr.rules /etc/udev/rules.d/# --sudo
+	link ~/_zone/_dotfiles.private/autorandr ~/.config/#
+
+	link ./_arch/systemd/slock@.service /etc/systemd/system/# --sudo
+	link ./_arch/systemd/xmodmap@.service /etc/systemd/system/# --sudo
 
 	systemd_enable_service_for_user() {
 		if [[ -z "$(systemctl status $1@$USER | grep enabled)" ]]; then
 			sudo systemctl enable $1@$USER
 		fi
 	}
-
-	link /usr/local/share fonts --sudo
-
-	link $HOME _/xinitrc .xinitrc;
-	link /etc/X11/xinit/xinitrc.d _/xinit/51-xrdb.sh --sudo
-	link /etc/X11/xinit/xinitrc.d _/xinit/52-xmodmap.sh --sudo
-	link /etc/X11/xinit/xinitrc.d _/xinit/71-udiskie.sh --sudo
-	link /etc/X11/xinit/xinitrc.d _/xinit/72-autorandr.sh --sudo
-	link /etc/X11/xinit/xinitrc.d _/xinit/81-xautolock.sh --sudo
-	link $HOME _/zprofile .zprofile;
-
-	link $HOME _/xmodmap .Xmodmap;
-	link $HOME _/xresources .Xresources;
-	link /etc/udev/rules.d _/udev/10-xmodmap.rules --sudo
-	link /etc/systemd/system _/systemd/xmodmap@.service --sudo
-	systemd_enable_service_for_user xmodmap
-
-	link $HOME/.config $HOME/_zone/_dotfiles.private/autorandr --absolute
-	link /etc/udev/rules.d _/udev/10-autorandr.rules --sudo
-
-	link /etc/pulse/system.pa.d _/pulse/user.pa --sudo
-	# https://wiki.archlinux.org/title/PulseAudio/Troubleshooting#No_sound_after_resume_from_suspend
-	link /etc/systemd/system _/systemd/pulseaudio-resume@.service --sudo
-	systemd_enable_service_for_user pulseaudio-resume
-
-	link /etc/systemd/system _/systemd/slock@.service --sudo
 	systemd_enable_service_for_user slock
+	systemd_enable_service_for_user xmodmap
 fi

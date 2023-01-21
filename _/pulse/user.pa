@@ -1,4 +1,0 @@
-# https://wiki.archlinux.org/title/Bluetooth#PulseAudio
-load-module module-bluetooth-policy
-load-module module-bluetooth-discover
-load-module module-switch-on-connect

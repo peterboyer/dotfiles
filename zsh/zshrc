@@ -1,4 +1,4 @@
-export $(envsubst < .env)
+[[ -e ~/.env ]] && export $(envsubst < ~/.env)
 
 export UNAME="$(uname)"
 if [[ $UNAME != "Linux" && $UNAME != "Darwin" ]]; then

@@ -1,0 +1,2 @@
+[[ -f ~/.env ]] && export $(envsubst < ~/.env)
+[[ $- != *i* ]] && return

@@ -12,8 +12,6 @@ PACKAGES=(
 	htop
 	tmux
 	p7zip
-	rsync
-	bind
 	openssh
 	zsh
 	AUR:oh-my-zsh-git
@@ -31,11 +29,7 @@ PACKAGES=(
 	brightnessctl
 	bluez
 	bluez-utils
-	pulseaudio
-	pulseaudio-bluetooth
-	pasystray
 	awesome
-	luarocks
 	acpid
 	slock
 	xautolock
@@ -61,7 +55,6 @@ PACKAGES=(
 	nemo
 	gthumb
 	vlc
-	linux-headers
 	v4l2loopback-dkms
 	gphoto2
 	obs-studio
@@ -69,7 +62,10 @@ PACKAGES=(
 	joyutils
 	cmatrix
 	AUR:slides-bin
-	AUR:timeshift-bin
+	pipewire
+	pipewire-alsa
+	pipewire-pulse
+	wireplumber
 )
 
 BOOTSTRAP=()
@@ -126,6 +122,15 @@ zsh_init() {
 	zsh_chsh
 }
 BOOTSTRAP+=("zsh_init")
+
+# nvm/node/npm
+
+nvm_install_lts() {
+	if [[ "$(which node &> /dev/null; echo $?)" != "0" ]]; then
+		source /usr/share/nvm/init-nvm.sh
+		nvm install --lts
+	fi
+}
 
 # docker
 

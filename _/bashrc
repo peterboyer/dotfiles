@@ -1,2 +1,0 @@
-export $(envsubst < .env)
-[[ $- != *i* ]] && return
