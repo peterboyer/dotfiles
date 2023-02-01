@@ -20,6 +20,7 @@ lsp.ensure_installed {
 	"yamlls",
 	"bashls",
 	"jsonls",
+	"html",
 }
 
 local cmp = require("cmp")
