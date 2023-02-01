@@ -127,6 +127,9 @@ return require("packer").startup(function(use)
 	-- git tooling (blame)
 	use { "tpope/vim-fugitive" }
 
+	-- fs tooling (rename buffer and file)
+	use { "tpope/vim-eunuch" }
+
 	-- git gutter (diff in the sign column)
 	use { "airblade/vim-gitgutter" }
 
