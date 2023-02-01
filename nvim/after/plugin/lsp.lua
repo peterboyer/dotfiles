@@ -36,6 +36,12 @@ cmp_mappings["<S-Tab>"] = nil
 
 lsp.setup_nvim_cmp {
 	mapping = cmp_mappings,
+	sources = {
+		-- always order lsp first
+		{ name = 'nvim_lsp', keyword_length = 3 },
+		{ name = 'path' },
+		{ name = 'buffer', keyword_length = 3 },
+	},
 }
 
 lsp.on_attach(function(_, buffer)
