@@ -59,6 +59,8 @@ if [[ "$os" == "arch" ]]; then
 	link ./fonts /usr/local/share/# --sudo
 	link ./_arch/fonts.conf ~/.config/fontconfig/#
 
+	link ./_arch/networkmanager/dns-servers.conf /etc/NetworkManager/conf.d/# --sudo
+
 	link ./_arch/env ~/.#
 	link ./_arch/bashrc ~/.#
 	link ./_arch/bash_profile ~/.#
