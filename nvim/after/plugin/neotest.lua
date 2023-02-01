@@ -3,7 +3,8 @@
 require("neotest").setup({
 	adapters = {
 		require("neotest-jest")({
-			jestCommand = "npm run test",
+			jestCommand = "npm test --",
+			env = { CI = true },
 		}),
 	},
 	diagnostic = {
