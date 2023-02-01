@@ -14,6 +14,10 @@ vim.keymap.set("", "<C-k>", "5k")
 vim.keymap.set("n", "<C-e>", "5<C-e>")
 vim.keymap.set("n", "<C-y>", "5<C-y>")
 
+-- faster e/y scroll with centered cursor
+vim.keymap.set("n", "E", "5jzz")
+vim.keymap.set("n", "Y", "5kzz")
+
 -- centered cursor on scroll
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
