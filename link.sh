@@ -66,6 +66,7 @@ if [[ "$os" == "arch" ]]; then
 	link ./_arch/bash_profile ~/.#
 	link ./_arch/bash_logout ~/.#
 	link ./_arch/zprofile ~/.#
+	link ./_arch/issue /etc/# --sudo
 
 	link ./_arch/xinitrc ~/.#;
 	link ./_arch/xmodmap ~/.Xmodmap
