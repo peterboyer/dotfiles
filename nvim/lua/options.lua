@@ -42,3 +42,11 @@ vim.o.listchars = table.concat({
 	"trail:∙",
 	-- "eol:↵",
 }, ",")
+
+-- auto-netrw
+vim.cmd[[
+	augroup InitNetrw
+		autocmd!
+		autocmd VimEnter * if expand("%") == "" | edit . | endif
+	augroup END
+]]
