@@ -33,7 +33,7 @@ PACKAGES=(
 	acpid
 	slock
 	xautolock
-	alacritty
+	kitty
 	ttf-jetbrains-mono
 	AUR:nvm
 	docker

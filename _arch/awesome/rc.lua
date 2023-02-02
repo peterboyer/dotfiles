@@ -15,7 +15,7 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "default/theme.lua")
 local tags = 4
 local modkey = "Mod4"
 
-local terminal = "alacritty"
+local terminal = "kitty"
 menubar.utils.terminal = terminal
 
 local editor = os.getenv("EDITOR") or "nvim"

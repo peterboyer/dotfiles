@@ -37,6 +37,7 @@ link ./zsh/zshrc ~/.#
 link ./tmux/tmux.conf ~/.#
 link ./nvim ~/.config/#
 link ./alacritty ~/.config/#
+link ./kitty ~/.config/#
 
 link ~/_zone/_dotfiles.private/ssh ~/.#
 if [[ -d "~/.ssh" ]]; then
