@@ -85,7 +85,6 @@ if [[ "$os" == "arch" ]]; then
 	fi
 
 	link ./_arch/udev/10-xmodmap.rules /etc/udev/rules.d/# --sudo
-	link ./_arch/udev/10-autorandr.rules /etc/udev/rules.d/# --sudo
 	link ~/_zone/_dotfiles.private/autorandr ~/.config/#
 
 	link ./_arch/systemd/slock@.service /etc/systemd/system/# --sudo
