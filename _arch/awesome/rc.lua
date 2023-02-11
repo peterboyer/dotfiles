@@ -152,6 +152,8 @@ local globalkeys = gears.table.join(
 	awful.key({ modkey }, "Return", actions.terminal_spawn, { description = "open a terminal", group = "launcher" }),
 	awful.key({ modkey }, "r", actions.prompt_open, { description = "run prompt", group = "launcher" }),
 
+	awful.key({ "Mod1", "Shift" }, "4", function () awful.spawn("flameshot gui") end, { description = "screenshot", group = "launcher" }),
+
 	awful.key({ modkey }, "Right", actions.tag_view_next, { description = "view next", group = "tag" }),
 	awful.key({ modkey }, "Left", actions.tag_view_prev, { description = "view previous", group = "tag" }),
 
