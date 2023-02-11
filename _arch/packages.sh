@@ -66,6 +66,7 @@ PACKAGES=(
 	pipewire-alsa
 	pipewire-pulse
 	wireplumber
+	AUR:insomnia-bin
 )
 
 BOOTSTRAP=()
