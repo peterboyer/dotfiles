@@ -257,13 +257,13 @@ awful.rules.rules = {
 	{
 		rule_any = {
 			class = {
-				"Alacritty"
-			}
+				terminal,
+			},
 		},
 		properties = {
 			placement = awful.placement.centered,
-		}
-	}
+		},
+	},
 }
 
 -- Signal function to execute when a new client appears.
