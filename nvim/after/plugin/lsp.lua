@@ -12,16 +12,16 @@ lsp.set_preferences {
 }
 
 lsp.ensure_installed {
+	"vimls",
+	"bashls",
+	"jsonls",
+	"yamlls",
+	"lua_ls",
+	"html",
+	"tailwindcss",
 	"eslint",
 	"tsserver",
 	"rust_analyzer",
-	"sumneko_lua",
-	"vimls",
-	"yamlls",
-	"bashls",
-	"jsonls",
-	"html",
-	"tailwindcss",
 }
 
 local cmp = require("cmp")
