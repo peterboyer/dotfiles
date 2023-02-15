@@ -58,7 +58,11 @@ yes | pacstrap /mnt \
 	man man-db man-pages \
 	networkmanager \
 	zsh tmux neovim git rsync \
-	snapper grub-btrfs snap-pac
+	snapper grub-btrfs \
+	openssh neofetch udisks2 \
+	acpid brightnessctl \
+	bluez bluez-utils \
+	pipewire pipewire-alsa pipewire-pulse wireplumber
 
 cat <<- "EOF" > /mnt/continue.sh
 	cat <<- eof > /etc/tmpfiles.d/tmp.conf
@@ -132,6 +136,13 @@ cat <<- "EOF" > /mnt/continue.sh
 	sudo -u $user git clone https://github.com/$repo.git _dotfiles
 	sudo -u $user git -C _dotfiles remote set-url origin git@github.com:$repo
 	cd -
+
+	git clone https://aur.archlinux.org/yay-bin.git /tmp/yay
+	(cd /tmp/yay && yes | makepkg -si --noconfirm)
+	rm -rf /tmp/yay
+
+	systemctl enable acpid
+	systemctl enable bluetooth
 
 	exit
 EOF
