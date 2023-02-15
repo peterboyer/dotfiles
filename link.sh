@@ -1,1 +1,1 @@
-_manjaro/link.sh
+./_arch/link.sh
