@@ -5,8 +5,6 @@ main() {
 	link ./tmux/tmux.conf ~/.@
 	link ./nvim ~/.config/@
 
-	link ~/_zone/wallpapers/valley.jpg ~/.config/wallpaper
-
 	link ~/_zone/_dotfiles.private/ssh ~/.@
 	if [[ -d "~/.ssh" ]]; then
 		chmod 700 ~/.ssh
@@ -14,8 +12,12 @@ main() {
 		chmod 600 ~/.ssh/id_rsa.pub
 	fi
 
+	link ~/_zone/wallpapers/valley.jpg ~/.config/wallpaper
 	link ~/_zone/_dotfiles.private/gphoto ~/.@
 	link ~/_zone/_dotfiles.private/obs/basic ~/.config/obs-studio/@
+
+	link ./_arch/personal.map /usr/share/kbd/keymaps/@ --sudo
+	link ./_arch/vconsole.conf /etc/@ --sudo
 
 	return
 
