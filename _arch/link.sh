@@ -1,9 +1,9 @@
 #!/bin/bash
 
 main() {
-	link ./zsh/zshrc ~/.@
-	link ./tmux/tmux.conf ~/.@
-	link ./nvim ~/.config/@
+	link ~/_dotfiles/zsh/zshrc ~/.@
+	link ~/_dotfiles/tmux/tmux.conf ~/.@
+	link ~/_dotfiles/nvim ~/.config/@
 
 	link ~/_zone/_dotfiles.private/ssh ~/.@
 	if [[ -d "~/.ssh" ]]; then
@@ -16,43 +16,39 @@ main() {
 	link ~/_zone/_dotfiles.private/gphoto ~/.@
 	link ~/_zone/_dotfiles.private/obs/basic ~/.config/obs-studio/@
 
-	link ./_arch/personal.map /usr/share/kbd/keymaps/@ --sudo
-	link ./_arch/vconsole.conf /etc/@ --sudo
+	link ~/_dotfiles/_arch/issue /etc/@ --sudo
+	link ~/_dotfiles/_arch/personal.map /usr/share/kbd/keymaps/@ --sudo
+	link ~/_dotfiles/_arch/vconsole.conf /etc/@ --sudo
 
 	return
 
-	link ./fonts /usr/local/share/# --sudo
-	link ./_arch/fonts.conf ~/.config/fontconfig/#
+	link ~/_dotfiles/fonts /usr/local/share/@ --sudo
+	link ~/_dotfiles/_arch/fonts.conf ~/.config/fontconfig/@
 
-	link ./_arch/networkmanager/dns-servers.conf /etc/NetworkManager/conf.d/# --sudo
+	link ~/_dotfiles/_arch/networkmanager/dns-servers.conf /etc/NetworkManager/conf.d/@ --sudo
 
-	link ./_arch/env ~/.#
-	link ./_arch/bashrc ~/.#
-	link ./_arch/bash_profile ~/.#
-	link ./_arch/bash_logout ~/.#
-	link ./_arch/zprofile ~/.#
-	link ./_arch/issue /etc/# --sudo
+	link ~/_dotfiles/_arch/env ~/.@
+	link ~/_dotfiles/_arch/bashrc ~/.@
+	link ~/_dotfiles/_arch/bash_profile ~/.@
+	link ~/_dotfiles/_arch/bash_logout ~/.@
+	link ~/_dotfiles/_arch/zprofile ~/.@
 
-	link ./_arch/xinitrc ~/.#
-	link ./_arch/xmodmap ~/.Xmodmap
-	link ./_arch/xresources ~/.Xresources
-	link ./_arch/xinitrc.d/51-xrdb.sh /etc/X11/xinit/xinitrc.d/# --sudo
-	link ./_arch/xinitrc.d/52-xmodmap.sh /etc/X11/xinit/xinitrc.d/# --sudo
-	link ./_arch/xinitrc.d/71-udiskie.sh /etc/X11/xinit/xinitrc.d/# --sudo
-	link ./_arch/xinitrc.d/72-autorandr.sh /etc/X11/xinit/xinitrc.d/# --sudo
-	link ./_arch/xinitrc.d/81-xautolock.sh /etc/X11/xinit/xinitrc.d/# --sudo
+	link ~/_dotfiles/_arch/xinitrc ~/.@
+	link ~/_dotfiles/_arch/xmodmap ~/.Xmodmap
+	link ~/_dotfiles/_arch/xresources ~/.Xresources
+	link ~/_dotfiles/_arch/xinitrc.d/51-xrdb.sh /etc/X11/xinit/xinitrc.d/@ --sudo
+	link ~/_dotfiles/_arch/xinitrc.d/52-xmodmap.sh /etc/X11/xinit/xinitrc.d/@ --sudo
+	link ~/_dotfiles/_arch/xinitrc.d/71-udiskie.sh /etc/X11/xinit/xinitrc.d/@ --sudo
+	link ~/_dotfiles/_arch/xinitrc.d/72-autorandr.sh /etc/X11/xinit/xinitrc.d/@ --sudo
+	link ~/_dotfiles/_arch/xinitrc.d/81-xautolock.sh /etc/X11/xinit/xinitrc.d/@ --sudo
 
-	link ./_arch/udev/10-xmodmap.rules /etc/udev/rules.d/# --sudo
-	link ~/_zone/_dotfiles.private/autorandr ~/.config/#
+	link ~/_dotfiles/_arch/udev/10-xmodmap.rules /etc/udev/rules.d/@ --sudo
+	link ~/_zone/_dotfiles.private/autorandr ~/.config/@
 }
 
 # link <src> <dest> [--sudo]
 link() {
 	src="$1"
-	if [[ ! "$src" =~ ^/ ]]; then
-		relative_dir="$(dirname ${BASH_SOURCE[1]:-BASH_SOURCE[0]})"
-		src="$(realpath $relative_dir/$src)"
-	fi
 	if [[ ! -e "$src" ]]; then
 		echo "BADSRC: $src"
 		return
@@ -71,10 +67,8 @@ link() {
 	$sudocmd mkdir -p $dest_dir
 	cd $dest_dir
 	$sudocmd ln -sf $src $dest_name
-	cd $OLDPWD
+	cd -
 	echo "LINKED: $src -> $dest"
 }
-
-export link
 
 main
