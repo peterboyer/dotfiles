@@ -1,0 +1,8 @@
+#!/bin/sh
+
+export HOME="/home/$(users | awk "{print$1}")"
+export XAUTHORITY=$HOME/.Xauthority
+export DISPLAY=:0
+
+setxkbmap -option caps:ctrl_modifier,altwin:swap_lalt_lwin
+xset r rate 170 30

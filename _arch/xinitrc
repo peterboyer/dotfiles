@@ -1,7 +1,6 @@
 #!/bin/bash
 
-setxkbmap -option caps:ctrl_modifier,altwin:swap_lalt_lwin
-xset r rate 170 30
-
+/etc/default/keyboard
+xrdb -merge -I$HOME ~/.xresources
 autorandr --change
 exec awesome
