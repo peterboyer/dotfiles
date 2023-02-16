@@ -17,6 +17,9 @@ require("telescope").setup {
 			follow = true, -- symlinks
 			no_ignore = true,
 		},
+		live_grep = {
+			additional_args = { "--hidden" },
+		},
 		buffers = {
 			sort_lastused = true,
 			mappings = {
