@@ -109,6 +109,9 @@ return require("packer").startup(function(use)
 	-- trim trailing whitespace/lines
 	use { "cappyzawa/trim.nvim" }
 
+	-- toggle quickfix/locationlist
+	use { "milkypostman/vim-togglelist" }
+
 	-- language specific formatting
 	use { "sbdchd/neoformat" }
 

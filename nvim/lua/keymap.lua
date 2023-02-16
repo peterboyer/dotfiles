@@ -48,3 +48,7 @@ vim.keymap.set("n", "<A-k>", "<cmd>cprev<CR>zz")
 -- (q)uit
 vim.keymap.set("n", "<C-w>q", "<cmd>:Bdelete<cr>")
 vim.keymap.set("n", "<C-w><C-q>", "<cmd>:bdelete<cr>")
+
+-- fast quickfix next/prev item
+vim.keymap.set("n", "[q", "<cmd>:cprev<cr>")
+vim.keymap.set("n", "]q", "<cmd>:cnext<cr>")
