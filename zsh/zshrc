@@ -1,5 +1,3 @@
-[[ -e ~/.env ]] && export $(envsubst < ~/.env)
-
 export UNAME="$(uname)"
 if [[ $UNAME != "Linux" && $UNAME != "Darwin" ]]; then
   echo "panic: unknown UNAME system information"
@@ -40,6 +38,7 @@ if [[ $UNAME == "Linux" ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
+PATH="$HOME/.local/bin:$PATH"
 
 export EDITOR=nvim
 
