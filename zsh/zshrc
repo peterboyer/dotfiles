@@ -69,6 +69,8 @@ alias cfgawm="(cd ~/.config/awesome && nvim rc.lua)"
 
 alias lg="lazygit"
 
+alias yarnx="yarn $@ && git config --unset core.hooksPath && echo hooks uninstalled"
+
 _iphone_mount() {
   if [[ ! -d /run/media/iphone ]]; then
     sudo mkdir -p /run/media/iphone
