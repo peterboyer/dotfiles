@@ -5,6 +5,7 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 
 -- (e)xplore
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>w", vim.cmd.Lf)
 
 -- cursor up/down 5 lines
 vim.keymap.set("", "<C-j>", "5j")

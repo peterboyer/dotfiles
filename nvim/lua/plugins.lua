@@ -100,6 +100,14 @@ return require("packer").startup(function(use)
 		},
 	}
 
+	-- lf
+	use {
+		"ptzz/lf.vim",
+		requires = {
+			"voldikss/vim-floaterm"
+		},
+	}
+
 	-- text object (l)
 	use {
 		"kana/vim-textobj-line",
