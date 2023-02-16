@@ -12,12 +12,9 @@ swap_gb=$(($memory_gb + 2))
 
 (
 	echo g;
-	echo n; echo; echo; echo +256M;
-	echo t; echo uefi;
-	echo n; echo; echo; echo +${swap_gb}G;
-	echo t; echo; echo swap;
-	echo n; echo; echo; echo;
-	echo t; echo; echo linux;
+	echo n; echo; echo; echo +256M; echo t; echo uefi;
+	echo n; echo; echo; echo +${swap_gb}G; echo t; echo; echo swap;
+	echo n; echo; echo; echo; echo t; echo; echo linux;
 	echo w;
 ) | fdisk $dev --wipe always --wipe-partitions always
 
@@ -54,15 +51,10 @@ yes | pacstrap /mnt \
 	base base-devel \
 	linux linux-headers intel-ucode \
 	linux-firmware sof-firmware \
-	grub efibootmgr \
+	grub efibootmgr snapper grub-btrfs \
 	man man-db man-pages \
 	networkmanager \
-	zsh tmux neovim git rsync \
-	snapper grub-btrfs \
-	openssh neofetch udisks2 \
-	acpid brightnessctl \
-	bluez bluez-utils \
-	pipewire pipewire-alsa pipewire-pulse wireplumber
+	zsh git rsync
 
 cat <<- "EOF" > /mnt/continue.sh
 	cat <<- eof > /etc/tmpfiles.d/tmp.conf
@@ -141,9 +133,6 @@ cat <<- "EOF" > /mnt/continue.sh
 	(cd /tmp/yay && yes | makepkg -si --noconfirm)
 	rm -rf /tmp/yay
 
-	systemctl enable acpid
-	systemctl enable bluetooth
-
 	exit
 EOF
 
@@ -154,5 +143,7 @@ arch-chroot /mnt /continue.sh
 rm /mnt/continue.sh
 
 cp $0 /mnt
+
+arch-chroot /mnt "cd \$HOME/_dotfiles"
 
 exit
