@@ -12,6 +12,7 @@ lsp.set_preferences {
 }
 
 lsp.ensure_installed {
+	"marksman",
 	"vimls",
 	"bashls",
 	"jsonls",
