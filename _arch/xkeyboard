@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export HOME="/home/$(users | awk "{print$1}")"
+export HOME="/home/$(users | awk '{print$1}')"
 export XAUTHORITY=$HOME/.Xauthority
 export DISPLAY=:0
 
