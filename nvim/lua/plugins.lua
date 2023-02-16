@@ -147,8 +147,8 @@ return require("packer").startup(function(use)
 	-- ripgrep into quickfix (:Rg <string|pattern>)
 	use { "jremmen/vim-ripgrep" }
 
-  -- project specific vim config options
-  use { "embear/vim-localvimrc" }
+	-- project specific vim config options
+	use { "embear/vim-localvimrc" }
 
 	if packer_bootstrap then
 		require("packer").sync()
