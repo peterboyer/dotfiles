@@ -10,7 +10,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.autofocus")
 require("awful.hotkeys_popup.keys")
 
-beautiful.init(gears.filesystem.get_configuration_dir() .. "default/theme.lua")
+beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
 local tags = 4
 local modkey = "Mod4"
@@ -124,7 +124,7 @@ awful.screen.connect_for_each_screen(function(screen)
 			spacing = 10,
 
 			wibox.widget.systray {},
-			require("battery-widget") {},
+			-- require("battery-widget") {},
 			wibox.widget.textclock("[%Y-%m-%d %H:%M]"),
 			(function ()
 				local layoutbox = awful.widget.layoutbox(screen)
