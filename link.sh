@@ -1,9 +1,10 @@
 #!/bin/bash
 
 main() {
-	link $HOME/_dotfiles/nvim                           $HOME/.config/@
 	link $HOME/_dotfiles/zsh/zshrc                      $HOME/.@
 	link $HOME/_dotfiles/tmux/tmux.conf                 $HOME/.@
+	link $HOME/_dotfiles/nvim                           $HOME/.config/@
+	link $HOME/_dotfiles/kitty                          $HOME/.config/@
 
 	link $HOME/_zone/ssh                                $HOME/.@
 	link $HOME/_zone/_dotfiles.private/gphoto           $HOME/.@

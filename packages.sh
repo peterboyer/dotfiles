@@ -82,7 +82,11 @@ systemctl enable bluetooth --now
 # nvm
 source /usr/share/nvm/init-nvm.sh
 nvm install --lts
+npm install -g yarn
 
 # docker
 sudo usermod -aG docker $USER
 sudo systemctl enable docker --now
+
+# kitty
+git clone git@github.com:dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
