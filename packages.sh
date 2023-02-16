@@ -1,26 +1,52 @@
 #!/bin/bash
 
 PACKAGES=(
-	exa
-	ranger
-	ripgrep
-	lazygit
-	oh-my-zsh-git
+	openssh
+	udisks2
+
+	acpid
+		brightnessctl
+	bluez
+		bluez-utils
+	pipewire
+		pipewire-alsa
+		pipewire-pulse
+		pipewire-jack
+		wireplumber
+
+	zsh
+		tmux
+		oh-my-zsh-git
+		exa
+		p7zip
+		ranger
+		neofetch
+
+	git
+		lazygit
 
 	nvm
-	docker
-	docker-compose
+	neovim
+		ripgrep
 
-	p7zip
+	docker
+		docker-compose
+
+	ttf-font-awesome
 	ttf-jetbrains-mono
 
+	xorg
+	xorg-xinit
+	xorg-xrandr
+	awesome
+	autorandr
+
+	kitty
 	brave-bin
 
 	# xclip
-	# autorandr
 	# slock
 	# xautolock
-	# kitty
 	# calc
 	# peek
 	# xcolor
@@ -38,14 +64,20 @@ PACKAGES=(
 	# v4l2loopback-dkms
 	# gphoto2
 	# obs-studio
-	# AUR:obs-linuxbrowser-bin
+	# obs-linuxbrowser-bin
 	# joyutils
 	# cmatrix
 	# slides-bin
 	# insomnia-bin
 )
 
-yay -S --needed --noconfirm ${PACKAGES[@]}
+yay -S --needed ${PACKAGES[@]}
+
+# acpid
+systemctl enable acpid --now
+
+# bluetooth
+systemctl enable bluetooth --now
 
 # nvm
 source /usr/share/nvm/init-nvm.sh

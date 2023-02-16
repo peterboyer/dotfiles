@@ -121,17 +121,21 @@ cat <<- "EOF" > /mnt/continue.sh
 
 	chpasswd <<< "$user:password"
 
-	cd /home/$user
-	sudo -u $user touch .zshrc
-	sudo -u $user mkdir -p ./{_dev,_zone}
-	repo=peterboyer/dotfiles
-	sudo -u $user git clone https://github.com/$repo.git _dotfiles
-	sudo -u $user git -C _dotfiles remote set-url origin git@github.com:$repo
-	cd -
-
 	git clone https://aur.archlinux.org/yay-bin.git /tmp/yay
 	(cd /tmp/yay && yes | makepkg -si --noconfirm)
 	rm -rf /tmp/yay
+
+	cd /home/$user
+	sudo -iu $user
+	touch .zshrc
+	mkdir -p ./{_dev,_zone}
+	repo=peterboyer/dotfiles
+	git clone https://github.com/$repo.git _dotfiles
+	git -C _dotfiles remote set-url origin git@github.com:$repo
+	./git/config.sh
+	./link.sh
+	./packages.sh
+	cd -
 
 	exit
 EOF
@@ -143,7 +147,5 @@ arch-chroot /mnt /continue.sh
 rm /mnt/continue.sh
 
 cp $0 /mnt
-
-arch-chroot /mnt "cd \$HOME/_dotfiles"
 
 exit
