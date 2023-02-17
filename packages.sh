@@ -36,39 +36,44 @@ PACKAGES=(
 	ttf-jetbrains-mono
 
 	xorg
-	xorg-xinit
-	xorg-xrandr
+		xorg-xinit
+		xorg-xrandr
+		autorandr
 	awesome
-	autorandr
+	nemo
+		nemo-fileroller
+		nemo-preview
+
+	ntfs-3g
+	ifuse
 
 	kitty
-	brave-bin
 
-	# xclip
-	# slock
-	# xautolock
-	# calc
-	# peek
-	# xcolor
-	# flameshot
-	# gimp
-	# pdfarranger
-	# signal-desktop
-	# flyctl-bin
-	# spotify
-	# ntfs-3g
-	# ifuse
-	# nemo
-	# gthumb
-	# vlc
-	# v4l2loopback-dkms
-	# gphoto2
-	# obs-studio
-	# obs-linuxbrowser-bin
-	# joyutils
-	# cmatrix
-	# slides-bin
-	# insomnia-bin
+	vlc
+	spotify
+	brave-bin
+	signal-desktop
+
+	flyctl-bin
+	insomnia-bin
+
+	gimp
+	xcolor
+	gthumb
+	pdfarranger
+
+	peek
+	flameshot
+
+	calc
+	cmatrix
+	slides-bin
+	joyutils
+
+	obs-studio
+	obs-linuxbrowser-bin
+	gphoto2
+	v4l2loopback-dkms
 )
 
 yay -S --needed ${PACKAGES[@]}
@@ -90,3 +95,16 @@ sudo systemctl enable docker --now
 
 # kitty
 git clone git@github.com:dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
+
+# nemo
+dconf load / <<- "EOF"
+	[org/nemo/preferences]
+	close-device-view-on-device-eject=true
+	date-format='iso'
+	default-folder-viewer='list-view'
+	enable-delete=false
+	inherit-folder-viewer=true
+	show-full-path-titles=true
+	sort-directories-first=false
+	sort-favorites-first=true
+EOF
