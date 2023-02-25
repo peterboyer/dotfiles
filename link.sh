@@ -19,10 +19,12 @@ main() {
 	link $HOME/_dotfiles/_arch/issue                    /etc/@ --sudo
 	link $HOME/_dotfiles/_arch/vkeyboard.map            /usr/share/kbd/keymaps/@ --sudo
 	link $HOME/_dotfiles/_arch/vconsole.conf            /etc/@ --sudo
-	link $HOME/_dotfiles/_arch/fonts                    /usr/local/share/@ --sudo
 	link $HOME/_dotfiles/_arch/fonts.conf               $HOME/.config/fontconfig/@
 	link $HOME/_dotfiles/_arch/xkeyboard                /etc/default/keyboard
 	link $HOME/_dotfiles/_arch/udev/60-keyboard.rules   /etc/udev/rules.d/@ --sudo
+
+	link $HOME/_zone/fonts/CousineMono                  /usr/local/share/fonts/@ --sudo
+	link $HOME/_zone/fonts/BerkeleyMono                 /usr/local/share/fonts/@ --sudo
 
 	return
 
