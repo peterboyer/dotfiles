@@ -108,3 +108,8 @@ dconf load / <<- "EOF"
 	sort-directories-first=false
 	sort-favorites-first=true
 EOF
+
+# awesome
+git clone \
+	git@github.com:deficient/battery-widget.git \
+	$HOME/.config/awesome/battery-widget
