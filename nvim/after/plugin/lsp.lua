@@ -17,6 +17,7 @@ lsp.ensure_installed {
 	"bashls",
 	"jsonls",
 	"yamlls",
+	"lemminx",
 	"lua_ls",
 	"html",
 	"tailwindcss",
