@@ -13,7 +13,7 @@ local theme = {}
 
 theme.wallpaper = gfs.get_xdg_config_home() .. "wallpaper"
 
-theme.font          = "Cousine Nerd Font 10"
+theme.font          = "monospace 9"
 
 theme.bg_normal     = "#272727"
 theme.bg_focus      = "#535353"
