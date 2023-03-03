@@ -65,9 +65,35 @@ return require("packer").startup(function(use)
 		},
 	}
 
+	-- lsp faster
+	use {
+		"jose-elias-alvarez/null-ls.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+		},
+	}
+
 	-- lsp incremental rename
 
 	use { "smjonas/inc-rename.nvim" }
+
+	-- lsp list all errors
+
+	use {
+		"folke/trouble.nvim",
+		requires = {
+			"nvim-tree/nvim-web-devicons",
+		},
+	}
+
+	-- lsp enhanced typescript (renaming/refactoring)
+
+	use {
+		"jose-elias-alvarez/typescript.nvim",
+		requires = {
+			"jose-elias-alvarez/null-ls.nvim",
+		},
+	}
 
 	-- dap
 	use {

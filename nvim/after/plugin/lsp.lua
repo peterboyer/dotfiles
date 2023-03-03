@@ -50,7 +50,8 @@ lsp.setup_nvim_cmp {
 
 lsp.on_attach(function(_, buffer)
 	local opts = { buffer = buffer, silent = true }
-	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+	-- using inc-rename
+	-- vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 end)
 
