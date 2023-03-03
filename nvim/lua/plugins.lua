@@ -46,6 +46,7 @@ return require("packer").startup(function(use)
 	}
 
 	-- lsp
+
 	use {
 		"VonHeikemen/lsp-zero.nvim",
 		requires = {
@@ -63,6 +64,10 @@ return require("packer").startup(function(use)
 			{ "rafamadriz/friendly-snippets" },
 		},
 	}
+
+	-- lsp incremental rename
+
+	use { "smjonas/inc-rename.nvim" }
 
 	-- dap
 	use {
