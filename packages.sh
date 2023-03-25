@@ -18,6 +18,7 @@ PACKAGES=(
 		tmux
 		oh-my-zsh-git
 		exa
+		fzf
 		p7zip
 		ranger
 		neofetch
