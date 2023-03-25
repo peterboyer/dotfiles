@@ -12,18 +12,20 @@ lsp.set_preferences {
 }
 
 lsp.ensure_installed {
-	"marksman",
+	"marksman", -- md
 	"vimls",
 	"bashls",
 	"jsonls",
 	"yamlls",
-	"lemminx",
+	"lemminx", -- xml
 	"lua_ls",
 	"html",
 	"tailwindcss",
 	"eslint",
 	"tsserver",
 	"rust_analyzer",
+	"dockerls", -- Dockerfile
+	"taplo", -- toml
 }
 
 local cmp = require("cmp")
