@@ -22,6 +22,7 @@ PACKAGES=(
 		p7zip
 		ranger
 		neofetch
+		dive
 
 	git
 		lazygit
