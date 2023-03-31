@@ -1,10 +1,10 @@
--- Wrap and spellcheck for non-code files.
-vim.opt.wrap = false
-vim.opt.spell = false
-vim.api.nvim_create_autocmd("Filetype", {
-    pattern = { "gitcommit", "markdown", "text" },
-    callback = function()
-        vim.opt_local.wrap = true
-        vim.opt_local.spell = true
-    end
-})
+-- hide line numbers for terminal windows
+vim.cmd("autocmd TermOpen * setlocal nonu nornu")
+
+-- open netrw by default if no current file
+vim.cmd[[
+	augroup InitNetrw
+		autocmd!
+		autocmd VimEnter * if expand("%") == "" | edit . | endif
+	augroup END
+]]

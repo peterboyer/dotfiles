@@ -9,11 +9,13 @@ vim.o.colorcolumn = "80"
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.signcolumn = "yes"
-vim.cmd("autocmd TermOpen * setlocal nonu nornu")
 
 -- wrap
 vim.o.wrap = false
 vim.o.autoread = true
+
+-- spell
+vim.o.spell = false
 
 -- scroll
 vim.o.scrolloff = 8
@@ -42,11 +44,3 @@ vim.o.listchars = table.concat({
 	"trail:∙",
 	-- "eol:↵",
 }, ",")
-
--- auto-netrw
-vim.cmd[[
-	augroup InitNetrw
-		autocmd!
-		autocmd VimEnter * if expand("%") == "" | edit . | endif
-	augroup END
-]]

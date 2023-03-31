@@ -49,3 +49,6 @@ vim.keymap.set("n", "<C-w><C-q>", "<cmd>:bdelete<cr>")
 -- fast quickfix next/prev item
 vim.keymap.set("n", "[q", "<cmd>:cprev<cr>")
 vim.keymap.set("n", "]q", "<cmd>:cnext<cr>")
+
+-- toggle spellcheck
+vim.keymap.set("n", "gs", function () vim.o.spell = not vim.o.spell end)
