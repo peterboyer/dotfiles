@@ -1,6 +1,5 @@
 require('nvim-treesitter.configs').setup {
 	ensure_installed = {
-		"help",
 		"html",
 		"css",
 		"javascript",
