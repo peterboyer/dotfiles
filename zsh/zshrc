@@ -5,7 +5,7 @@ if [[ $UNAME != "Linux" && $UNAME != "Darwin" ]]; then
 fi
 
 if [[ $UNAME == "Linux" ]]; then
-	export ZSH=/usr/share/oh-my-zsh
+	export ZSH="/usr/share/oh-my-zsh-git"
 elif [[ $UNAME == "Darwin" ]]; then
 	export ZSH="$HOME/.oh-my-zsh"
 fi
@@ -87,8 +87,17 @@ alias iphone-mount="_iphone_mount"
 alias iphone-umount="fusermount -u /run/media/iphone"
 
 if [[ $UNAME == "Linux" ]]; then
-	# https://aur.archlinux.org/packages/nvm#comment-764001
-	source /usr/share/nvm/init-nvm.sh
+	export NVM_DIR="/usr/share/nvm-git"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+	update_nvm () {
+		(
+		  cd "$NVM_DIR"
+		  git fetch --tags origin
+		  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+		) && \. "$NVM_DIR/nvm.sh"
+	}
 elif [[ $UNAME == "Darwin" ]]; then
 	export NVM_DIR="$HOME/.nvm"
 	NVM_DEFAULT="v18"
