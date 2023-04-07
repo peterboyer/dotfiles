@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ ! -h ~/.zshrc ]]; then
+	echo "abort: run ./link.sh first!"
+	exit 1
+fi
+
 # == hardware ==
 # sudo zypper install alsa-firmware
 # sudo zypper install sof-firmware
