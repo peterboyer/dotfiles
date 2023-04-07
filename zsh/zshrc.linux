@@ -1,0 +1,63 @@
+# == omz ==
+export ZSH="/usr/share/oh-my-zsh-git"
+export UPDATE_ZSH_DAYS=7
+export ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+	mkdir $ZSH_CACHE_DIR
+fi
+
+# == nvm ==
+export NVM_DIR="/usr/share/nvm-git"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+update_nvm () {
+	(
+	  cd "$NVM_DIR"
+	  git fetch --tags origin
+	  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+	) && \. "$NVM_DIR/nvm.sh"
+}
+
+# == ios ==
+_iphone_mount() {
+	if [[ ! -d /run/media/iphone ]]; then
+		sudo mkdir -p /run/media/iphone
+		sudo chown -R $USER /run/media/iphone
+	fi
+	ifuse /run/media/iphone
+}
+
+alias iphone-mount="_iphone_mount"
+alias iphone-umount="fusermount -u /run/media/iphone"
+
+function deport() {
+	TARGET_PORT=$1
+	TARGET_PID="$(lsof -i:$TARGET_PORT -t)"
+	if [[ -z "$TARGET_PID" ]]; then
+		echo "no process on port $TARGET_PORT"
+	else
+		echo $TARGET_PID | xargs kill
+		echo $TARGET_PID | xargs echo
+	fi
+}
+
+# == gphoto2-webcam ==
+# alias dslr-mount="sudo modprobe v4l2loopback exclusive_caps=1 max_buffers=2"
+# alias dslr-unmount="sudo rmmod v4l2loopback"
+
+# alias dslr-ls="ls /dev/video*"
+# alias dslr-gls="gphoto2 --abilities"
+
+# function dslr_stream() {
+	# # use first arg
+	# TARGET="$1"
+	# # if first arg empty, default to last device
+	# if [[ -z "$1" ]]; then
+		# TARGET=$(ls -1 /dev/video* | awk 'BEGIN{ RS = "" ; FS = "\n" }{print $NF}')
+		# echo $TARGET
+	# fi
+	# # gphoto output | stream to encoder | stream to device
+	# gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 $TARGET
+# }
+# alias dslr-stream="dslr_stream"

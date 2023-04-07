@@ -1,0 +1,43 @@
+# == omz ==
+export ZSH="$HOME/.oh-my-zsh"
+
+zstyle ':omz:update' mode auto
+zstyle ':omz:update' frequency 7
+
+# == nvm ==
+export NVM_DIR="$HOME/.nvm"
+NVM_DEFAULT="v18"
+NVM_DEFAULT_VERSION="$(ls -l $NVM_DIR/versions/node | grep $NVM_DEFAULT | awk '{ print $7 }')"
+if [[ -n "$NVM_DEFAULT_VERSION" ]]; then
+	# add default version to path
+	PATH="$NVM_DIR/versions/node/$NVM_DEFAULT_VERSION/bin:$PATH"
+else
+	echo "warning(nvm): NVM_DEFAULT=$NVM_DEFAULT -> node version not installed!"
+fi
+
+# lazy load nvm (because it's so slow to init...)
+lazy_load_nvm() {
+	unset -f nvm
+	[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+	# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+}
+nvm() {
+	lazy_load_nvm
+	nvm $@
+}
+
+node_env_ready=0
+reset-node-env() {
+	node_env_ready=0
+}
+add-zsh-hook chpwd reset-node-env
+
+yarn() {
+	if [[ $node_env_ready == 0 ]]; then
+		if [[ -f .nvmrc && -r .nvmrc ]]; then
+			nvm use
+		fi
+		node_env_ready=1
+	fi
+	command yarn $@
+}

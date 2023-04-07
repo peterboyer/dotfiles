@@ -1,65 +1,33 @@
+export EDITOR=nvim
+
 export UNAME="$(uname)"
 if [[ $UNAME != "Linux" && $UNAME != "Darwin" ]]; then
-	echo "panic: unknown UNAME system information"
+	echo "abort: unknown UNAME: $UNAME"
 	exit 1
 fi
 
 if [[ $UNAME == "Linux" ]]; then
-	export ZSH="/usr/share/oh-my-zsh-git"
+	source ~/_dotfiles/zsh/zshrc.linux
 elif [[ $UNAME == "Darwin" ]]; then
-	export ZSH="$HOME/.oh-my-zsh"
+	source ~/_dotfiles/zsh/zshrc.macos
 fi
 
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="eastwood"
-
-# CASE_SENSITIVE="true"
-# HYPHEN_INSENSITIVE="true"
 COMPLETION_WAITING_DOTS="true"
-# ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-if [[ $UNAME == "Linux" ]]; then
-	# DISABLE_AUTO_UPDATE="true"
-	# DISABLE_UPDATE_PROMPT="true"
-	export UPDATE_ZSH_DAYS=7
-elif [[ $UNAME == "Darwin" ]]; then
-	zstyle ':omz:update' mode auto # ... | disabled | auto | reminder
-	zstyle ':omz:update' frequency 7
-fi
-
-plugins=(git fzf)
-# fzf (https://github.com/junegunn/fzf)
-# CTRL-T (search files from pwd)
-# CTRL-R (search bash history)
-# ALT-C (search dirs, cd into them)
-
-if [[ $UNAME == "Linux" ]]; then
-	ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
-	if [[ ! -d $ZSH_CACHE_DIR ]]; then
-		mkdir $ZSH_CACHE_DIR
-	fi
-fi
+plugins=(
+	git
+	fzf
+	# fzf (https://github.com/junegunn/fzf)
+	# CTRL-T (search files from pwd)
+	# CTRL-R (search bash history)
+	# ALT-C (search dirs, cd into them)
+)
 
 source $ZSH/oh-my-zsh.sh
 PATH="$HOME/.local/bin:$PATH"
-
-export EDITOR=nvim
-
-alias v="nvim"
-alias vi="nvim"
-alias vim="nvim"
-alias todo="nvim ~/_zone/todo.txt"
-
-alias ls="exa"
-alias l="ls -l"
-alias la="ls -la"
-
-alias pm="pulsemixer"
-# pulsemixer default
-pmd() { pulsemixer --list-sinks | grep -i speaker | awk '{print $3}' | sed s/,// | xargs pulsemixer --set-default-sink --id }
-# pulsemixer headphones
-pmh() { pulsemixer --list-sinks | grep -i 458bt | awk '{print $3}' | sed s/,// | xargs pulsemixer --set-default-sink --id }
 
 alias cdx="cd ~/_dev"
 alias cdz="cd ~/_zone"
@@ -69,76 +37,51 @@ alias srczsh="source ~/.zshrc"
 alias cfgzsh="(cd ~ && nvim .zshrc)"
 alias cfggit="(cd ~ && nvim .gitconfig)"
 alias cfgvim="(cd ~/.config/nvim && nvim .)"
-alias cfgawm="(cd ~/.config/awesome && nvim rc.lua)"
+
+alias ls="exa"
+alias l="ls -l"
+alias la="ls -la"
+
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+
+alias todo="nvim ~/_zone/todo.txt"
 
 alias lg="lazygit"
 
 alias yarnx="yarn $@ && git config --unset core.hooksPath && echo hooks uninstalled"
 
-_iphone_mount() {
-	if [[ ! -d /run/media/iphone ]]; then
-		sudo mkdir -p /run/media/iphone
-		sudo chown -R $USER /run/media/iphone
-	fi
-	ifuse /run/media/iphone
-}
-
-alias iphone-mount="_iphone_mount"
-alias iphone-umount="fusermount -u /run/media/iphone"
-
-if [[ $UNAME == "Linux" ]]; then
-	export NVM_DIR="/usr/share/nvm-git"
-	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-	update_nvm () {
-		(
-		  cd "$NVM_DIR"
-		  git fetch --tags origin
-		  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
-		) && \. "$NVM_DIR/nvm.sh"
-	}
-elif [[ $UNAME == "Darwin" ]]; then
-	export NVM_DIR="$HOME/.nvm"
-	NVM_DEFAULT="v18"
-	NVM_DEFAULT_VERSION="$(ls -l $NVM_DIR/versions/node | grep $NVM_DEFAULT | awk '{ print $7 }')"
-	if [[ -n "$NVM_DEFAULT_VERSION" ]]; then
-		# add default version to path
-		PATH="$NVM_DIR/versions/node/$NVM_DEFAULT_VERSION/bin:$PATH"
+# == tmux-sessioniser ==
+switch() {
+	if [[ $# -eq 1 ]]; then
+		selected=$1
 	else
-		echo "warning(nvm): NVM_DEFAULT=$NVM_DEFAULT -> node version not installed!"
+		selected=$(find ~/_dev -mindepth 1 -maxdepth 1 -type d | fzf)
 	fi
 
-	# lazy load nvm (because it's so slow to init...)
-	lazy_load_nvm() {
-		unset -f nvm
-		[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-		# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-	}
-	nvm() {
-		lazy_load_nvm
-		nvm $@
-	}
+	if [[ -z $selected ]]; then
+		return 1
+	fi
 
-	node_env_ready=0
-	reset-node-env() {
-		node_env_ready=0
-	}
-	add-zsh-hook chpwd reset-node-env
+	selected_name=$(basename "$selected" | tr . _)
+	tmux_running=$(pgrep tmux)
 
-	yarn() {
-		if [[ $node_env_ready == 0 ]]; then
-			if [[ -f .nvmrc && -r .nvmrc ]]; then
-				nvm use
-			fi
-			node_env_ready=1
-		fi
-		command yarn $@
-	}
-fi
+	if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+		tmux new-session -s $selected_name -c $selected
+		return 0
+	fi
+
+	if ! tmux has-session -t=$selected_name 2> /dev/null; then
+		tmux new-session -ds $selected_name -c $selected
+	fi
+
+	tmux switch-client -t $selected_name
+}
 
 autoload -U add-zsh-hook
 
+# == docker ==
 # docker-destroy-containers
 function ddc() {
 	docker ps -aq | xargs docker rm -f
@@ -148,33 +91,3 @@ function ddc() {
 function ddui() {
 	docker image ls | grep '<none>' | awk '{print $3}' | xargs docker rmi -f
 }
-
-function deport() {
-	TARGET_PORT=$1
-	TARGET_PID="$(lsof -i:$TARGET_PORT -t)"
-	if [[ -z "$TARGET_PID" ]]; then
-		echo "no process on port $TARGET_PORT"
-	else
-		echo $TARGET_PID | xargs kill
-		echo $TARGET_PID | xargs echo
-	fi
-}
-
-alias dslr-mount="sudo modprobe v4l2loopback exclusive_caps=1 max_buffers=2"
-alias dslr-unmount="sudo rmmod v4l2loopback"
-
-alias dslr-ls="ls /dev/video*"
-alias dslr-gls="gphoto2 --abilities"
-
-function dslr_stream() {
-	# use first arg
-	TARGET="$1"
-	# if first arg empty, default to last device
-	if [[ -z "$1" ]]; then
-		TARGET=$(ls -1 /dev/video* | awk 'BEGIN{ RS = "" ; FS = "\n" }{print $NF}')
-		echo $TARGET
-	fi
-	# gphoto output | stream to encoder | stream to device
-	gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 $TARGET
-}
-alias dslr-stream="dslr_stream"
