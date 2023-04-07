@@ -18,6 +18,7 @@ link() {
 	src_name="$(basename $src)"
 	dest="${2/"@"/${src_name}}"
 	[[ -e $dest ]] && $sudocmd rm -r $dest
+	[[ -e $dest ]] && echo "ERROR: failed to remove $dest" && exit 1
 	dest_dir="$(dirname $dest)"
 	dest_name="$(basename $dest)"
 	$sudocmd mkdir -p $dest_dir
