@@ -24,6 +24,10 @@ fi
 # sudo zypper install git
 # sudo zypper install neofetch
 
+# == kitty ==
+# sudo zypper install kitty
+git clone git@github.com:dexpota/kitty-themes.git ~/.config/kitty-themes
+
 # == lazygit ==
 # export LAZYGIT_DIR="/usr/share/lazygit-bin" && (
 	# sudo mkdir -p $LAZYGIT_DIR
@@ -38,11 +42,16 @@ fi
 # sudo zypper install gcc # for treesitter
 # sudo zypper install gcc-c++ # for treesitter
 # sudo zypper install ripgrep # for telescope
+
+# == node/npm/yarn ==
 # export NVM_DIR="/usr/share/nvm-git" && (
 	# sudo git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
 	# sudo chown -R $USER:$USER $NVM_DIR
 	# cd "$NVM_DIR"
 	# git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+	# source $NVM_DIR/nvm.sh
+	# nvm install --lts
+	# npm install -g yarn
 # ) && \. "$NVM_DIR/nvm.sh"
 
 # == brave ==
@@ -51,7 +60,7 @@ fi
 # sudo zypper install brave-browser
 
 # == vlc ==
-sudo zypper install vlc
+# sudo zypper install vlc
 
 # == packman ==
 # sudo zypper addrepo -cfp 90 http://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/ packman
@@ -72,66 +81,19 @@ sudo zypper install vlc
 exit
 
 PACKAGES=(
-	openssh
-	udisks2
-
-	acpid
-		brightnessctl
-	bluez
-		bluez-utils
-	pipewire
-		pipewire-alsa
-		pipewire-pulse
-		pipewire-jack
-		wireplumber
-
-	zsh
-		tmux
-		oh-my-zsh-git
-		exa
-		fzf
-		p7zip
-		ranger
-		neofetch
-		dive
-
-	git
-		lazygit
-
-	nvm
-	neovim
-		ripgrep
-
+	lf
 	docker
 		docker-compose
+		dive
 
-	ttf-font-awesome
-	ttf-jetbrains-mono
-
-	xorg
-		xorg-xinit
-		xorg-xrandr
-		autorandr
-	awesome
-	nemo
-		nemo-fileroller
-		nemo-preview
+sudo usermod -aG docker $USER
+sudo systemctl enable docker --now
 
 	ntfs-3g
 	ifuse
 
-	kitty
-
-	vlc
-	spotify
-	brave-bin
-	signal-desktop
-
-	flyctl-bin
 	insomnia-bin
 
-	gimp
-	xcolor
 	gthumb
 	pdfarranger
 
@@ -142,47 +104,4 @@ PACKAGES=(
 	cmatrix
 	slides-bin
 	joyutils
-
-	obs-studio
-	obs-linuxbrowser-bin
-	gphoto2
-	v4l2loopback-dkms
 )
-
-yay -S --needed ${PACKAGES[@]}
-
-# acpid
-systemctl enable acpid --now
-
-# bluetooth
-systemctl enable bluetooth --now
-
-# nvm
-source /usr/share/nvm/init-nvm.sh
-nvm install --lts
-npm install -g yarn
-
-# docker
-sudo usermod -aG docker $USER
-sudo systemctl enable docker --now
-
-# kitty
-git clone git@github.com:dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
-
-# nemo
-dconf load / <<- "EOF"
-	[org/nemo/preferences]
-	close-device-view-on-device-eject=true
-	date-format='iso'
-	default-folder-viewer='list-view'
-	enable-delete=false
-	inherit-folder-viewer=true
-	show-full-path-titles=true
-	sort-directories-first=false
-	sort-favorites-first=true
-EOF
-
-# awesome
-git clone \
-	git@github.com:deficient/battery-widget.git \
-	$HOME/.config/awesome/battery-widget
