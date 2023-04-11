@@ -1,3 +1,6 @@
+# == keyboard ==
+setxkbmap -option caps:ctrl_modifier,altwin:swap_lalt_lwin
+
 # == omz ==
 export ZSH="/usr/share/oh-my-zsh-git"
 export UPDATE_ZSH_DAYS=7
