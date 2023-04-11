@@ -26,7 +26,7 @@ fi
 
 # == kitty ==
 # sudo zypper install kitty
-git clone git@github.com:dexpota/kitty-themes.git ~/.config/kitty-themes
+# git clone git@github.com:dexpota/kitty-themes.git ~/.config/kitty-themes
 
 # == lazygit ==
 # export LAZYGIT_DIR="/usr/share/lazygit-bin" && (
@@ -77,6 +77,9 @@ git clone git@github.com:dexpota/kitty-themes.git ~/.config/kitty-themes
 
 # == obs-studio ==
 # flatpak install com.obsproject.Studio
+
+# == fly ==
+# curl -L https://fly.io/install.sh | sh
 
 exit
 
