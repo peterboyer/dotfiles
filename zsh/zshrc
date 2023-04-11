@@ -61,7 +61,9 @@ switch() {
 	if [[ $# -eq 1 ]]; then
 		selected=$1
 	else
-		selected=$(find ~/_dev -mindepth 1 -maxdepth 1 -type d | fzf)
+		dirs=$(find ~/_dev -mindepth 1 -maxdepth 1 -type d)
+		dirs+="\n$HOME/_dotfiles"
+		selected=$(echo $dirs | fzf)
 	fi
 
 	if [[ -z $selected ]]; then
