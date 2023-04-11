@@ -85,8 +85,6 @@ switch() {
 	tmux switch-client -t $selected_name
 }
 
-autoload -U add-zsh-hook
-
 # == docker ==
 # docker-destroy-containers
 function ddc() {

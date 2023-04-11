@@ -30,6 +30,7 @@ node_env_ready=0
 reset-node-env() {
 	node_env_ready=0
 }
+autoload -U add-zsh-hook
 add-zsh-hook chpwd reset-node-env
 
 yarn() {
