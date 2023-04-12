@@ -9,6 +9,8 @@ main() {
 	link $HOME/_zone/ssh                                $HOME/.@
 	link $HOME/_zone/_dotfiles.private/gphoto           $HOME/.@
 	link $HOME/_zone/_dotfiles.private/obs/basic        $HOME/.config/obs-studio/@
+	link $HOME/_zone/fonts/BerkeleyMono                 $HOME/.config/fonts/@
+	link $HOME/_dotfiles/fonts.conf                     $HOME/.config/fontconfig/@
 }
 
 # link <src> <dest> [--sudo]
