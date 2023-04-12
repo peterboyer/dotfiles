@@ -26,19 +26,10 @@ nvm() {
 	nvm $@
 }
 
-node_env_ready=0
-reset-node-env() {
-	node_env_ready=0
+apply-node-env() {
+	if [[ -f .nvmrc && -r .nvmrc ]]; then
+		nvm use
+	fi
 }
 autoload -U add-zsh-hook
-add-zsh-hook chpwd reset-node-env
-
-yarn() {
-	if [[ $node_env_ready == 0 ]]; then
-		if [[ -f .nvmrc && -r .nvmrc ]]; then
-			nvm use
-		fi
-		node_env_ready=1
-	fi
-	command yarn $@
-}
+add-zsh-hook chpwd apply-node-env
