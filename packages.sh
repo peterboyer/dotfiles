@@ -19,10 +19,17 @@ fi
 # sudo zypper install exa
 # sudo zypper install tmux
 # sudo zypper install fzf
+# sudo zypper install htop
 
 # == general ==
 # sudo zypper install git
 # sudo zypper install neofetch
+# sudo zypper install ranger
+# sudo zypper install colorpicker
+
+# == docker ==
+# sudo zypper install podman
+# sudo zypper install podman-docker
 
 # == kitty ==
 # sudo zypper install kitty
@@ -76,6 +83,7 @@ fi
 # flatpak install com.discordapp.Discord
 
 # == obs-studio ==
+# sudo zypper install gphoto2-webcam
 # flatpak install com.obsproject.Studio
 
 # == fly ==
