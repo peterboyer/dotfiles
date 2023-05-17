@@ -29,8 +29,8 @@ fi
 # sudo zypper install pdfarranger
 
 # == docker ==
-# sudo zypper install podman
-# sudo zypper install podman-docker
+# sudo zypper install docker
+# sudo zypper install docker-compose
 
 # == kitty ==
 # sudo zypper install kitty
