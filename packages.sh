@@ -26,6 +26,7 @@ fi
 # sudo zypper install neofetch
 # sudo zypper install ranger
 # sudo zypper install colorpicker
+# sudo zypper install pdfarranger
 
 # == docker ==
 # sudo zypper install podman
@@ -106,7 +107,6 @@ sudo systemctl enable docker --now
 	insomnia-bin
 
 	gthumb
-	pdfarranger
 
 	peek
 	flameshot
