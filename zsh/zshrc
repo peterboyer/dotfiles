@@ -33,7 +33,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export FLYCTL_INSTALL="$HOME/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
-bindkey -s ^f "$HOME/_dotfiles/tmux-sessioniser.sh\n"
+bindkey -s "^f" "$HOME/_dotfiles/tmux-sessioniser.sh\n"
 
 alias cdx="cd ~/_dev"
 alias cdz="cd ~/_zone"
