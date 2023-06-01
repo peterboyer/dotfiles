@@ -197,6 +197,10 @@ end
 
 return {
 	{
+			"williamboman/mason.nvim",
+			build = ":MasonUpdate",
+	},
+	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"williamboman/mason.nvim",
