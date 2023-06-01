@@ -1,3 +1,7 @@
+local keymap = function()
+	vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+end
+
 vim.cmd([[
 	let g:netrw_liststyle = 1
 	let g:netrw_sizestyle = "h"
@@ -19,8 +23,7 @@ return {
 			require("netrw").setup({
 				use_devicons = true,
 			})
-
-			vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+			keymap()
 		end,
 	},
 }

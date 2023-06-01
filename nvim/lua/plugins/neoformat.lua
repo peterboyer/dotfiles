@@ -1,6 +1,5 @@
 return {
 	{
-		lazy = true,
 		"sbdchd/neoformat",
 		config = function()
 			vim.cmd([[

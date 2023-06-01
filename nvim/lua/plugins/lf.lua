@@ -1,6 +1,9 @@
+local keymap = function()
+	vim.keymap.set("n", "<leader>E", require("lf").start, { noremap = true })
+end
+
 return {
 	{
-		lazy = true,
 		"lmburns/lf.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -12,8 +15,7 @@ return {
 				winblend = 0, -- background fix
 				default_cmd = 'lf -command "set hidden"', -- show hidden files
 			})
-
-			vim.keymap.set("n", "<leader>E", ":Lf<CR>")
+			keymap()
 		end,
 	},
 }

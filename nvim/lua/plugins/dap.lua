@@ -1,3 +1,49 @@
+local keymap = function()
+	local dap = require("dap")
+	local widgets = require("dap.ui.widgets")
+
+	-- [p]eak at value
+	vim.keymap.set("n", "<C-p>", widgets.hover)
+
+	-- close widgets.hover with C-c or q
+	-- https://github.com/mfussenegger/nvim-dap/issues/415#issuecomment-1017180055
+	vim.cmd([[
+	augroup dap_float
+		autocmd!
+		autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>
+		autocmd FileType dap-float nnoremap <buffer><silent> <C-c> <cmd>close!<CR>
+		" prevent nested hover instances
+		autocmd FileType dap-float nnoremap <buffer><silent> <C-p> <nop>
+	augroup end
+]])
+
+	-- [d]ebug
+	-- > [i]nsert breakpoint
+	vim.keymap.set("n", "<leader>di", dap.toggle_breakpoint)
+	-- > [I]nsert breakpoint with condition
+	vim.keymap.set("n", "<leader>dI", function()
+		dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+	end)
+	-- > log[p]oint with message
+	vim.keymap.set("n", "<leader>dp", function()
+		dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+	end)
+	-- > [s]tart
+	vim.keymap.set("n", "<leader>ds", dap.continue)
+	-- > [S]top
+	vim.keymap.set("n", "<leader>dS", dap.terminate)
+	-- > to [l]ocation
+	vim.keymap.set("n", "<leader>dl", dap.run_to_cursor)
+	-- > [n]ext
+	vim.keymap.set("n", "<leader>dn", dap.step_over)
+	-- > [N]ext into
+	vim.keymap.set("n", "<leader>dN", dap.step_into)
+	-- > [o]ut
+	vim.keymap.set("n", "<leader>do", dap.step_out)
+	-- > [r]epl toggle
+	vim.keymap.set("n", "<leader>dr", dap.repl.toggle)
+end
+
 local config = function()
 	-- https://github.com/anasrar/.dotfiles/tree/2023/neovim/.config/nvim/lua/rin/DAP
 	require("mason-tool-installer").setup({
@@ -82,50 +128,7 @@ local config = function()
 			"go",
 		},
 	})
-
-	local dap = require("dap")
-	local widgets = require("dap.ui.widgets")
-
-	-- [p]eak at value
-	vim.keymap.set("n", "<C-p>", widgets.hover)
-
-	-- close widgets.hover with C-c or q
-	-- https://github.com/mfussenegger/nvim-dap/issues/415#issuecomment-1017180055
-	vim.cmd([[
-	augroup dap_float
-		autocmd!
-		autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>
-		autocmd FileType dap-float nnoremap <buffer><silent> <C-c> <cmd>close!<CR>
-		" prevent nested hover instances
-		autocmd FileType dap-float nnoremap <buffer><silent> <C-p> <nop>
-	augroup end
-]])
-
-	-- [d]ebug
-	-- > [i]nsert breakpoint
-	vim.keymap.set("n", "<leader>di", dap.toggle_breakpoint)
-	-- > [I]nsert breakpoint with condition
-	vim.keymap.set("n", "<leader>dI", function()
-		dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-	end)
-	-- > log[p]oint with message
-	vim.keymap.set("n", "<leader>dp", function()
-		dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
-	end)
-	-- > [s]tart
-	vim.keymap.set("n", "<leader>ds", dap.continue)
-	-- > [S]top
-	vim.keymap.set("n", "<leader>dS", dap.terminate)
-	-- > to [l]ocation
-	vim.keymap.set("n", "<leader>dl", dap.run_to_cursor)
-	-- > [n]ext
-	vim.keymap.set("n", "<leader>dn", dap.step_over)
-	-- > [N]ext into
-	vim.keymap.set("n", "<leader>dN", dap.step_into)
-	-- > [o]ut
-	vim.keymap.set("n", "<leader>do", dap.step_out)
-	-- > [r]epl toggle
-	vim.keymap.set("n", "<leader>dr", dap.repl.toggle)
+	keymap()
 end
 
 return {

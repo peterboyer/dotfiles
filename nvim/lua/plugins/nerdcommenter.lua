@@ -1,6 +1,5 @@
 return {
 	{
-		lazy = true,
 		"preservim/nerdcommenter",
 		config = function()
 			vim.cmd([[

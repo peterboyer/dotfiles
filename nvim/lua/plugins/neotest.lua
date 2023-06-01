@@ -1,17 +1,4 @@
-local config = function()
-	-- https://github.com/JoosepAlviste/dotfiles/blob/master/config/nvim/lua/j/plugins/neotest.lua
-	require("neotest").setup({
-		adapters = {
-			require("neotest-jest")({
-				jestCommand = "npm test --",
-				env = { CI = true },
-			}),
-		},
-		diagnostic = {
-			enabled = true,
-		},
-	})
-
+local keymap = function()
 	-- [t]est
 	-- > [r]un
 	vim.keymap.set("n", "<leader>tr", function()
@@ -44,10 +31,25 @@ local config = function()
 	end)
 end
 
+local config = function()
+	-- https://github.com/JoosepAlviste/dotfiles/blob/master/config/nvim/lua/j/plugins/neotest.lua
+	require("neotest").setup({
+		adapters = {
+			require("neotest-jest")({
+				jestCommand = "npm test --",
+				env = { CI = true },
+			}),
+		},
+		diagnostic = {
+			enabled = true,
+		},
+	})
+	keymap()
+end
+
 return {
 	{
 		enabled = false,
-		lazy = true,
 		"nvim-neotest/neotest",
 		dependencies = {
 			"nvim-lua/plenary.nvim",

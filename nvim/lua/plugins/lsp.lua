@@ -1,7 +1,88 @@
+local keys = {
+	buffer = function()
+		local map = function(fn)
+			return {
+				{ "n", "K", vim.lsp.buf.hover },
+				{ "n", "gd", vim.lsp.buf.definition },
+				{ "n", "gD", vim.lsp.buf.declaration },
+				{ "n", "gi", vim.lsp.buf.implementation },
+				{ "n", "go", vim.lsp.buf.type_definition },
+				{ "n", "gr", vim.lsp.buf.references },
+				{ "n", "gs", vim.lsp.buf.signature_help },
+				{ "n", "<leader>rn", fn.rename, { expr = true } },
+				{ { "n", "v" }, "<leader>ca", vim.lsp.buf.code_action },
+				{ "n", "<leader>wa", vim.lsp.buf.add_workspace_folder },
+				{ "n", "<leader>wr", vim.lsp.buf.remove_workspace_folder },
+				{ "n", "<leader>wl", fn.list_workspace_folders },
+				{ "n", "<leader>F", fn.format },
+			}
+		end
+		return map({
+			rename = function()
+				return ":IncRename " .. vim.fn.expand("<cword>")
+			end,
+			list_workspace_folders = function()
+				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+			end,
+			format = function()
+				vim.lsp.buf.format({ async = true })
+			end,
+		})
+	end,
+	diagnostic = function()
+		local map = function(fn)
+			return {
+				{ "n", "gl", vim.diagnostic.open_float },
+				{ "n", "gq", vim.diagnostic.setloclist },
+				{ "n", "[d", fn.goto_prev },
+				{ "n", "]d", fn.goto_next },
+			}
+		end
+		return map({
+			goto_prev = function()
+				vim.diagnostic.goto_prev()
+				vim.cmd('execute "normal zz"')
+			end,
+			goto_next = function()
+				vim.diagnostic.goto_next()
+				vim.cmd('execute "normal zz"')
+			end,
+		})
+	end,
+	complete = function(cmp)
+		local map = function(fn)
+			return {
+				["<C-d>"] = cmp.mapping.scroll_docs(4),
+				["<C-u>"] = cmp.mapping.scroll_docs(-4),
+				["<C-n>"] = cmp.mapping.confirm({ select = true }),
+				["<C-h>"] = cmp.mapping.abort(),
+				["<C-j>"] = cmp.mapping(fn.next_item),
+				["<C-k>"] = cmp.mapping(fn.prev_item),
+			}
+		end
+		return map({
+			next_item = function()
+				if cmp.visible() then
+					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+				else
+					cmp.complete()
+				end
+			end,
+			prev_item = function()
+				if cmp.visible() then
+					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+				else
+					cmp.complete()
+				end
+			end,
+		})
+	end,
+}
+
 local config = function()
-	-- completion
 	local cmp = require("cmp")
 	local lspkind = require("lspkind")
+	local keys_complete = keys.complete(cmp)
 	-- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#basic-customisations
 	cmp.setup({
 		completion = {
@@ -29,32 +110,13 @@ local config = function()
 				-- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#basic-customisations
 				menu = {
 					nvim_lsp = "[LSP]",
+					luasnip = "[Snippet]",
 					path = "[Path]",
 					buffer = "[Buffer]",
 				},
 			}),
 		},
-		mapping = cmp.mapping.preset.insert({
-			-- https://github.com/VonHeikemen/lsp-zero.nvim/blob/9c9201eb3a3aace6746e3b85ca38adb4f73d4857/lua/lsp-zero/cmp.lua#LL210C11-L210C11
-			["<C-d>"] = cmp.mapping.scroll_docs(4),
-			["<C-u>"] = cmp.mapping.scroll_docs(-4),
-			["<C-n>"] = cmp.mapping.confirm({ select = true }),
-			["<C-h>"] = cmp.mapping.abort(),
-			["<C-j>"] = cmp.mapping(function()
-				if cmp.visible() then
-					cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-				else
-					cmp.complete()
-				end
-			end),
-			["<C-k>"] = cmp.mapping(function()
-				if cmp.visible() then
-					cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-				else
-					cmp.complete()
-				end
-			end),
-		}),
+		mapping = cmp.mapping.preset.insert(keys_complete),
 		snippet = {
 			expand = function(args)
 				require("luasnip").lsp_expand(args.body)
@@ -62,92 +124,73 @@ local config = function()
 		},
 	})
 
-	require("mason").setup({
-		ui = {
-			border = "rounded",
-		},
-	})
-
+	require("mason").setup({ ui = { border = "rounded" } })
 	require("mason-lspconfig").setup({ automatic_installation = true })
-	local capabilities = require("cmp_nvim_lsp").default_capabilities()
-	local setup_opts = { capabilities = capabilities }
-	require("lspconfig").lua_ls.setup(setup_opts)
-	require("lspconfig").tsserver.setup(setup_opts)
-	require("lspconfig").jsonls.setup(setup_opts)
-	require("lspconfig").html.setup(setup_opts)
-	require("lspconfig").tailwindcss.setup(setup_opts)
-	require("lspconfig").marksman.setup(setup_opts)
-	require("lspconfig").bashls.setup(setup_opts)
-	require("lspconfig").yamlls.setup(setup_opts)
-	require("lspconfig").dockerls.setup(setup_opts)
-	require("lspconfig").docker_compose_language_service.setup(setup_opts)
-
 	require("mason-null-ls").setup({ automatic_installation = true })
+
+	local lspconfig = require("lspconfig")
+	local setup_opts = { capabilities = require("cmp_nvim_lsp").default_capabilities() }
+	lspconfig.lua_ls.setup(setup_opts)
+	lspconfig.tsserver.setup(setup_opts)
+	lspconfig.jsonls.setup(setup_opts)
+	lspconfig.html.setup(setup_opts)
+	lspconfig.tailwindcss.setup(setup_opts)
+	lspconfig.marksman.setup(setup_opts)
+	lspconfig.bashls.setup(setup_opts)
+	lspconfig.yamlls.setup(setup_opts)
+	lspconfig.dockerls.setup(setup_opts)
+	lspconfig.docker_compose_language_service.setup(setup_opts)
+
 	local null_ls = require("null-ls")
 	null_ls.setup({
 		sources = {
 			null_ls.builtins.diagnostics.eslint_d,
 			require("typescript.extensions.null-ls.code-actions"),
 			null_ls.builtins.formatting.stylua,
-			-- null_ls.builtins.completion.spell,
 		},
 	})
 
 	-- addons
 	require("inc_rename").setup()
-	local inc_rename = function()
-		return ":IncRename " .. vim.fn.expand("<cword>")
-	end
-	require("typescript").setup({
-		go_to_source_definition = { fallback = true },
-	})
+	require("typescript").setup({ go_to_source_definition = { fallback = true } })
 
-	-- borders
+	-- ui
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 	vim.lsp.handlers["textDocument/signatureHelp"] =
 		vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 	vim.diagnostic.config({ float = { border = "rounded" } })
 
 	-- lsp
-	vim.keymap.set("n", "gl", vim.diagnostic.open_float)
-	vim.keymap.set("n", "gq", vim.diagnostic.setloclist)
-	vim.keymap.set("n", "[d", function()
-		vim.diagnostic.goto_prev()
-		vim.cmd('execute "normal zz"')
-	end)
-	vim.keymap.set("n", "]d", function()
-		vim.diagnostic.goto_next()
-		vim.cmd('execute "normal zz"')
-	end)
-	vim.keymap.set("n", "<leader>rn", function()
-		print(":IncRename [lsp not ready]")
-	end, { expr = true })
+	local keys_buffer = keys.buffer()
+	local keys_diagnostic = keys.diagnostic()
+	local keymap = function()
+		for _, v in pairs(keys_diagnostic) do
+			vim.keymap.set(v[1], v[2], v[3])
+		end
+		for _, v in pairs(keys_buffer) do
+			vim.keymap.set(v[1], v[2], function()
+				print("[" .. v[2] .. "] LSP: Not Attached")
+			end)
+		end
+	end
+	local keymap_on_buffer = function(buffer)
+		for _, v in pairs(keys_buffer) do
+			local opts = { buffer = buffer }
+			local keyopts = v[4] or {}
+			for K, V in pairs(keyopts) do
+				opts[K] = V
+			end
+			vim.keymap.set(v[1], v[2], v[3], opts)
+		end
+		-- enable completion triggered by <c-x><c-o>
+		vim.bo[buffer].omnifunc = "v:lua.vim.lsp.omnifunc"
+	end
 
+	keymap()
 	vim.api.nvim_create_autocmd("LspAttach", {
 		group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-		callback = function(ev)
-			-- enable completion triggered by <c-x><c-o>
-			vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-			local opts = { buffer = ev.buf }
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-			vim.keymap.set("n", "go", vim.lsp.buf.type_definition, opts)
-			vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-			vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
-			vim.keymap.set("n", "<leader>rn", inc_rename, { expr = true })
-			-- vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-			vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
-			vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
-			vim.keymap.set("n", "<leader>wl", function()
-				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-			end, opts)
-			vim.keymap.set("n", "<leader>F", function()
-				vim.lsp.buf.format({ async = true })
-			end, opts)
+		callback = function(event)
+			keymap_on_buffer(event.buf)
 		end,
 	})
 end
@@ -158,31 +201,32 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+			-- null-ls
+			"jose-elias-alvarez/null-ls.nvim",
+			"jay-babu/mason-null-ls.nvim",
+			"nvim-lua/plenary.nvim",
+			-- addons
 			"smjonas/inc-rename.nvim",
 			"jose-elias-alvarez/typescript.nvim",
+			-- cmp
 			"hrsh7th/nvim-cmp",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lsp",
 			"L3MON4D3/LuaSnip",
 			"onsails/lspkind.nvim",
-			"jose-elias-alvarez/null-ls.nvim",
-			"nvim-lua/plenary.nvim",
-			"williamboman/mason.nvim",
-			"jay-babu/mason-null-ls.nvim",
 		},
 		config = config,
 	},
 	{
 		"j-hui/fidget.nvim",
-		lazy = true,
 		config = function()
 			require("fidget").setup()
 		end,
 	},
 	{
-		"folke/trouble.nvim",
 		enabled = false,
+		"folke/trouble.nvim",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
