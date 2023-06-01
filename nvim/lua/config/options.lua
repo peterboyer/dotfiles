@@ -6,9 +6,10 @@ vim.o.guicursor = ""
 vim.o.cursorline = true
 vim.o.colorcolumn = "80"
 
+vim.o.signcolumn = "yes"
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.signcolumn = "yes"
+vim.cmd("autocmd TermOpen * setlocal nonu nornu")
 
 -- wrap
 vim.o.wrap = false
@@ -21,7 +22,7 @@ vim.o.spell = false
 vim.o.scrolloff = 8
 
 -- tabs
-vim.o.tabstop = 4
+vim.o.tabstop = 2
 vim.o.shiftwidth = 0
 
 -- search
