@@ -32,4 +32,8 @@ apply-node-env() {
 	fi
 }
 autoload -U add-zsh-hook
+
+# check current dir
+apply-node-env
+# check current dir on change
 add-zsh-hook chpwd apply-node-env
