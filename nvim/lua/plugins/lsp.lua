@@ -36,6 +36,7 @@ local keys = {
 				{ "n", "gq", vim.diagnostic.setloclist },
 				{ "n", "[d", fn.goto_prev },
 				{ "n", "]d", fn.goto_next },
+				{ "n", "gL", fn.toggle },
 			}
 		end
 		return map({
@@ -46,6 +47,14 @@ local keys = {
 			goto_next = function()
 				vim.diagnostic.goto_next()
 				vim.cmd('execute "normal zz"')
+			end,
+			toggle = function()
+				local current_buffer = 0
+				if vim.diagnostic.is_disabled() then
+					vim.diagnostic.enable(current_buffer)
+				else
+					vim.diagnostic.disable(current_buffer)
+				end
 			end,
 		})
 	end,
@@ -131,6 +140,7 @@ local config = function()
 	local lspconfig = require("lspconfig")
 	local setup_opts = { capabilities = require("cmp_nvim_lsp").default_capabilities() }
 	lspconfig.lua_ls.setup(setup_opts)
+	lspconfig.eslint.setup(setup_opts)
 	lspconfig.tsserver.setup(setup_opts)
 	lspconfig.jsonls.setup(setup_opts)
 	lspconfig.html.setup(setup_opts)
@@ -144,8 +154,8 @@ local config = function()
 	local null_ls = require("null-ls")
 	null_ls.setup({
 		sources = {
-			null_ls.builtins.diagnostics.eslint_d,
 			require("typescript.extensions.null-ls.code-actions"),
+			null_ls.builtins.formatting.eslint_d,
 			null_ls.builtins.formatting.stylua,
 		},
 	})
@@ -197,8 +207,8 @@ end
 
 return {
 	{
-			"williamboman/mason.nvim",
-			build = ":MasonUpdate",
+		"williamboman/mason.nvim",
+		build = ":MasonUpdate",
 	},
 	{
 		"neovim/nvim-lspconfig",
