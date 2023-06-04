@@ -3,6 +3,9 @@ vim.g.mapleader = " "
 -- consistent C-c/Esc behavour
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
+-- close all buffers
+vim.keymap.set("n", "<leader>Q", ":%bd")
+
 -- cursor up/down 5 lines
 vim.keymap.set("", "<C-j>", "5j")
 vim.keymap.set("", "<C-k>", "5k")
@@ -24,8 +27,7 @@ vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
 
 -- fast system clipboard yank prefix
-vim.keymap.set("n", "<leader>y", '"+y')
-vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 
 -- substitute current word
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
