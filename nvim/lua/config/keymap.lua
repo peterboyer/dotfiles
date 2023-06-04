@@ -3,8 +3,11 @@ vim.g.mapleader = " "
 -- consistent C-c/Esc behavour
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
+-- prompt new file in same dir as current buffer
+vim.keymap.set("n", "<leader>%", ":e %:h/")
+
 -- close all buffers
-vim.keymap.set("n", "<leader>Q", ":%bd")
+vim.keymap.set("n", "<leader>Q", ":%bd<CR>")
 
 -- cursor up/down 5 lines
 vim.keymap.set("", "<C-j>", "5j")
@@ -13,10 +16,6 @@ vim.keymap.set("", "<C-k>", "5k")
 -- faster e/y scroll
 vim.keymap.set("n", "<C-e>", "5<C-e>")
 vim.keymap.set("n", "<C-y>", "5<C-y>")
-
--- centered cursor on scroll
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- centered cursor on search
 vim.keymap.set("n", "n", "nzzzv")
