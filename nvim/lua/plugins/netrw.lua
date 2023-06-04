@@ -1,6 +1,4 @@
-local keymap = function()
-	vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
-end
+local keymap = function() end
 
 vim.cmd([[
 	let g:netrw_liststyle = 1
@@ -11,6 +9,9 @@ vim.cmd([[
 return {
 	{
 		"tpope/vim-vinegar",
+		config = function()
+			vim.keymap.del("n", "-")
+		end,
 	},
 	{
 		"prichrd/netrw.nvim",
