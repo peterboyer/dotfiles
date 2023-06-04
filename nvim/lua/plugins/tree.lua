@@ -31,9 +31,6 @@ return {
 				renderer = {
 					group_empty = true,
 				},
-				filters = {
-					dotfiles = true,
-				},
 			})
 			keymap()
 
