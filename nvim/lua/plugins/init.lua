@@ -6,6 +6,7 @@ return {
 			"kana/vim-textobj-user",
 		},
 	},
+	{ "airblade/vim-gitgutter" },
 	-- toggle quickfix/locationlist
 	{ "milkypostman/vim-togglelist" },
 	-- auto closing bracket/quotes
