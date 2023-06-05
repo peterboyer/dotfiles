@@ -9,7 +9,14 @@ return {
 	{
 		"stevearc/oil.nvim",
 		config = function()
-			require("oil").setup({})
+			require("oil").setup({
+				view_options = {
+					show_hidden = true,
+					keymaps = {
+						["<C-c>"] = false,
+					}
+				}
+			})
 			keymap()
 		end,
 	},
