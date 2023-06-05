@@ -154,7 +154,6 @@ local config = function()
 	local null_ls = require("null-ls")
 	null_ls.setup({
 		sources = {
-			require("typescript.extensions.null-ls.code-actions"),
 			null_ls.builtins.formatting.eslint_d,
 			null_ls.builtins.formatting.stylua,
 		},
