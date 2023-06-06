@@ -135,7 +135,6 @@ local config = function()
 
 	require("mason").setup({ ui = { border = "rounded" } })
 	require("mason-lspconfig").setup({ automatic_installation = true })
-	require("mason-null-ls").setup({ automatic_installation = true })
 
 	local lspconfig = require("lspconfig")
 	local setup_opts = { capabilities = require("cmp_nvim_lsp").default_capabilities() }
@@ -158,6 +157,7 @@ local config = function()
 			null_ls.builtins.formatting.stylua,
 		},
 	})
+	require("mason-null-ls").setup({ automatic_installation = true })
 
 	-- addons
 	require("inc_rename").setup()
