@@ -34,10 +34,10 @@ local keys = {
 		local map = function(fn)
 			return {
 				{ "n", "gl", vim.diagnostic.open_float },
-				{ "n", "gq", vim.diagnostic.setloclist },
+				{ "n", "gL", fn.toggle },
+				{ "n", "gQ", vim.diagnostic.setqflist },
 				{ "n", "[d", fn.goto_prev },
 				{ "n", "]d", fn.goto_next },
-				{ "n", "gL", fn.toggle },
 			}
 		end
 		return map({
