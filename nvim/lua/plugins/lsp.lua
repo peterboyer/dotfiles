@@ -15,6 +15,7 @@ local keys = {
 				{ "n", "<leader>wr", vim.lsp.buf.remove_workspace_folder },
 				{ "n", "<leader>wl", fn.list_workspace_folders },
 				{ "n", "<leader>F", fn.format },
+				{ "n", "<leader>RN", ":TypescriptRenameFile<CR>" },
 			}
 		end
 		return map({
