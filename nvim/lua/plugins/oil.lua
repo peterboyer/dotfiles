@@ -12,10 +12,10 @@ return {
 			require("oil").setup({
 				view_options = {
 					show_hidden = true,
-					keymaps = {
-						["<C-c>"] = false,
-					}
-				}
+				},
+				keymaps = {
+					["<C-c>"] = false,
+				},
 			})
 			keymap()
 		end,
