@@ -173,6 +173,7 @@ local config = function()
 	-- addons
 	require("inc_rename").setup()
 	require("typescript").setup({ go_to_source_definition = { fallback = true } })
+	require("illuminate").configure({ providers = { "lsp" }, under_cursor = false })
 
 	-- ui
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
