@@ -9,24 +9,34 @@ local keys = {
 				{ "n", "go", vim.lsp.buf.type_definition },
 				{ "n", "gr", vim.lsp.buf.references },
 				{ "n", "gs", vim.lsp.buf.signature_help },
+				{ "n", "gn", fn.goto_next_reference },
+				{ "n", "gN", fn.goto_prev_reference },
 				{ "n", "<leader>rn", fn.rename, { expr = true } },
+				{ "n", "<leader>RN", ":TypescriptRenameFile<CR>" },
 				{ { "n", "v" }, "<leader>ca", vim.lsp.buf.code_action },
 				{ "n", "<leader>wa", vim.lsp.buf.add_workspace_folder },
 				{ "n", "<leader>wr", vim.lsp.buf.remove_workspace_folder },
 				{ "n", "<leader>wl", fn.list_workspace_folders },
 				{ "n", "<leader>F", fn.format },
-				{ "n", "<leader>RN", ":TypescriptRenameFile<CR>" },
 			}
 		end
 		return map({
+			goto_next_reference = function()
+				require("illuminate").goto_next_reference()
+				vim.cmd('execute "normal zz"')
+			end,
+			goto_prev_reference = function()
+				require("illuminate").goto_prev_reference()
+				vim.cmd('execute "normal zz"')
+			end,
 			rename = function()
 				return ":IncRename " .. vim.fn.expand("<cword>")
 			end,
-			list_workspace_folders = function()
-				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-			end,
 			format = function()
 				vim.lsp.buf.format({ async = true })
+			end,
+			list_workspace_folders = function()
+				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 			end,
 		})
 	end,
@@ -222,6 +232,7 @@ return {
 			-- addons
 			"smjonas/inc-rename.nvim",
 			"jose-elias-alvarez/typescript.nvim",
+			"RRethy/vim-illuminate",
 			-- cmp
 			"hrsh7th/nvim-cmp",
 			"hrsh7th/cmp-path",
