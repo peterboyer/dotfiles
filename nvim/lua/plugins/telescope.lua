@@ -1,6 +1,7 @@
 local keymap = function()
 	local telescope = require("telescope.builtin")
 	vim.keymap.set("n", "<leader>b", telescope.buffers)
+	vim.keymap.set("n", "<leader>B", telescope.git_status)
 	vim.keymap.set("n", "<leader>f", telescope.live_grep)
 	vim.keymap.set("n", "<leader>g", telescope.help_tags)
 	vim.keymap.set("n", "<leader>o", telescope.oldfiles)
