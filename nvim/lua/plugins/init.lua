@@ -13,6 +13,8 @@ return {
 	{ "cohama/lexima.vim" },
 	-- add/change/delete surrounding brackets/quotes/tags
 	{ "tpope/vim-surround" },
+	-- auto update html/xml/jsx tag pairs
+	{ "andrewradev/tagalong.vim" },
 	-- git tooling (blame)
 	{ "tpope/vim-fugitive" },
 	-- fs tooling (rename buffer and file)
