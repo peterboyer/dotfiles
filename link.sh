@@ -6,11 +6,12 @@ main() {
 	link $HOME/_dotfiles/nvim                           $HOME/.config/@
 	link $HOME/_dotfiles/kitty                          $HOME/.config/@
 
+	link $HOME/_dotfiles/fonts.conf                     $HOME/.config/fontconfig/@
+
 	link $HOME/_zone/ssh                                $HOME/.@
 	link $HOME/_zone/_dotfiles.private/gphoto           $HOME/.@
 	link $HOME/_zone/_dotfiles.private/obs/basic        $HOME/.config/obs-studio/@
-	link $HOME/_zone/fonts/BerkeleyMono                 $HOME/.config/fonts/@
-	link $HOME/_dotfiles/fonts.conf                     $HOME/.config/fontconfig/@
+	link $HOME/_zone/fonts/active                       $HOME/.local/share/fonts
 }
 
 # link <src> <dest> [--sudo]
