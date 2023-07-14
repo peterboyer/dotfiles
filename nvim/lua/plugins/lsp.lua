@@ -46,16 +46,18 @@ local keys = {
 				{ "n", "gl", vim.diagnostic.open_float },
 				{ "n", "gL", fn.toggle },
 				{ "n", "gQ", vim.diagnostic.setqflist },
-				{ "n", "[d", fn.goto_prev },
-				{ "n", "]d", fn.goto_next },
+				{ "n", "[d", vim.diagnostic.goto_prev },
+				{ "n", "[D", fn.goto_prev_center },
+				{ "n", "]d", vim.diagnostic.goto_next },
+				{ "n", "]D", fn.goto_next_center },
 			}
 		end
 		return map({
-			goto_prev = function()
+			goto_prev_center = function()
 				vim.diagnostic.goto_prev()
 				vim.cmd('execute "normal zz"')
 			end,
-			goto_next = function()
+			goto_next_center = function()
 				vim.diagnostic.goto_next()
 				vim.cmd('execute "normal zz"')
 			end,
