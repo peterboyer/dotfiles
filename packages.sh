@@ -41,7 +41,7 @@ fi
 	# sudo mkdir -p $LAZYGIT_DIR
 	# sudo chown -R $USER:$USER $LAZYGIT_DIR
 	# cd "$LAZYGIT_DIR"
-	# curl -L https://github.com/jesseduffield/lazygit/releases/download/v0.37.0/lazygit_0.37.0_Linux_x86_64.tar.gz | tar -xz
+	# curl -L https://github.com/jesseduffield/lazygit/releases/download/v0.39.1/lazygit_0.39.1_Linux_x86_64.tar.gz | tar -xz
 	# sudo ln -s -t /usr/bin /usr/share/lazygit-bin/lazygit
 # )
 
