@@ -21,3 +21,6 @@ return {
 		end,
 	},
 }
+
+-- disable sorting directories to top (remove lines 394-398)
+-- https://github.com/stevearc/oil.nvim/blob/8f7807946a67b5f1a515946f82251e33651bae29/lua/oil/view.lua#L393
