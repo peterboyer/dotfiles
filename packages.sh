@@ -90,6 +90,9 @@ fi
 # == fly ==
 # curl -L https://fly.io/install.sh | sh
 
+# == blender ==
+# sudo zypper install blender
+
 exit
 
 PACKAGES=(
