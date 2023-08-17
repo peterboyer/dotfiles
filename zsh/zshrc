@@ -69,3 +69,7 @@ function ddc() {
 function ddui() {
 	docker image ls | grep '<none>' | awk '{print $3}' | xargs docker rmi -f
 }
+
+function envload() {
+	export $(grep -v '^#' $1 | xargs -0)
+}
