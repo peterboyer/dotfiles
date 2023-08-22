@@ -9,6 +9,9 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 	mkdir $ZSH_CACHE_DIR
 fi
 
+# == lazygit ==
+alias lg="lazygit"
+
 # == nvm ==
 export NVM_DIR="/usr/share/nvm-git"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

@@ -55,8 +55,6 @@ alias vim="nvim"
 
 alias todo="nvim ~/_zone/todo.txt"
 
-alias lg="lazygit"
-
 alias yarnx="yarn $@ && git config --unset core.hooksPath && echo hooks uninstalled"
 
 # == docker ==
