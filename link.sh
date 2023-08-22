@@ -5,6 +5,7 @@ main() {
 	link $HOME/_dotfiles/tmux/tmux.conf                 $HOME/.@
 	link $HOME/_dotfiles/nvim                           $HOME/.config/@
 	link $HOME/_dotfiles/kitty                          $HOME/.config/@
+	link $HOME/_dotfiles/lazygit                        $HOME/.config/@
 
 	link $HOME/_dotfiles/fonts.conf                     $HOME/.config/fontconfig/@
 

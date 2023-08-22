@@ -1,0 +1,4 @@
+customCommands:
+  - key: 'U'
+    context: 'global'
+    command: 'git remote prune origin'
