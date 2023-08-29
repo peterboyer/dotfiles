@@ -22,8 +22,6 @@ return {
 	{ "tpope/vim-surround" },
 	-- git tooling (blame)
 	{ "tpope/vim-fugitive" },
-	-- fs tooling (rename buffer and file)
-	{ "tpope/vim-eunuch" },
 	-- ripgrep into quickfix (:Rg <string|pattern>)
 	{ "jremmen/vim-ripgrep" },
 	-- delete buffers without messing the layout
