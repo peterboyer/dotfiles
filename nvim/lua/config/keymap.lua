@@ -22,6 +22,13 @@ vim.keymap.set("n", "<C-y>", "5<C-y>")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
+-- fast quickfix next/prev item
+vim.keymap.set("n", "m", "<cmd>:cnext<cr>")
+vim.keymap.set("n", "M", "<cmd>:cprev<cr>")
+-- + centered variant
+vim.keymap.set("n", "gm", "<cmd>cnext<cr>zz")
+vim.keymap.set("n", "gM", "<cmd>cprev<cr>zz")
+
 -- visual move lines
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
@@ -34,14 +41,6 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 -- make current file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>")
-
--- quickfix next/prev + centered
-vim.keymap.set("n", "<A-j>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<A-k>", "<cmd>cprev<CR>zz")
-
--- fast quickfix next/prev item
-vim.keymap.set("n", "m", "<cmd>:cnext<cr>")
-vim.keymap.set("n", "M", "<cmd>:cprev<cr>")
 
 -- toggle spellcheck
 vim.keymap.set("n", "gc", function()
