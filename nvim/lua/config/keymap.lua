@@ -9,8 +9,6 @@ vim.keymap.set("n", "<leader>%", ":e %:h/")
 -- fix gq to format correctly
 vim.keymap.set("v", "gq", "gw")
 
--- close all buffers
-vim.keymap.set("n", "<leader>Q", ":Bdelete menu<CR>")
 
 -- cursor up/down 5 lines
 vim.keymap.set("", "<C-j>", "5j")
