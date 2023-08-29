@@ -17,16 +17,9 @@ vim.keymap.set("", "<C-k>", "5k")
 vim.keymap.set("n", "<C-e>", "5<C-e>")
 vim.keymap.set("n", "<C-y>", "5<C-y>")
 
--- centered cursor on search
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-
 -- fast quickfix next/prev item
 vim.keymap.set("n", "m", "<cmd>:cnext<cr>")
 vim.keymap.set("n", "M", "<cmd>:cprev<cr>")
--- + centered variant
-vim.keymap.set("n", "gm", "<cmd>cnext<cr>zz")
-vim.keymap.set("n", "gM", "<cmd>cprev<cr>zz")
 
 -- visual move lines
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")

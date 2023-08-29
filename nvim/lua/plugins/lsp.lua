@@ -4,9 +4,9 @@ local keys = {
 			return {
 				{ "n", "K", vim.lsp.buf.hover },
 				{ "n", "gd", vim.lsp.buf.definition },
-				{ "n", "gD", vim.lsp.buf.declaration },
+				{ "n", "gD", vim.lsp.buf.type_definition },
 				{ "n", "gi", vim.lsp.buf.implementation },
-				{ "n", "go", vim.lsp.buf.type_definition },
+				{ "n", "go", vim.lsp.buf.declaration },
 				{ "n", "gr", vim.lsp.buf.references },
 				{ "n", "gs", vim.lsp.buf.signature_help },
 				{ "n", "gn", fn.goto_next_reference },
@@ -47,20 +47,10 @@ local keys = {
 				{ "n", "gL", fn.toggle },
 				{ "n", "gQ", vim.diagnostic.setqflist },
 				{ "n", "[d", vim.diagnostic.goto_prev },
-				{ "n", "[D", fn.goto_prev_center },
 				{ "n", "]d", vim.diagnostic.goto_next },
-				{ "n", "]D", fn.goto_next_center },
 			}
 		end
 		return map({
-			goto_prev_center = function()
-				vim.diagnostic.goto_prev()
-				vim.cmd('execute "normal zz"')
-			end,
-			goto_next_center = function()
-				vim.diagnostic.goto_next()
-				vim.cmd('execute "normal zz"')
-			end,
 			toggle = function()
 				local current_buffer = 0
 				if vim.diagnostic.is_disabled() then
