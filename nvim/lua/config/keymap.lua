@@ -3,9 +3,6 @@ vim.g.mapleader = " "
 -- consistent C-c/Esc behavour
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
--- prompt new file in same dir as current buffer
-vim.keymap.set("n", "<leader>%", ":e %:h/")
-
 -- fix gq to format correctly
 vim.keymap.set("v", "gq", "gw")
 
