@@ -24,8 +24,6 @@ return {
 	{ "tpope/vim-fugitive" },
 	-- ripgrep into quickfix (:Rg <string|pattern>)
 	{ "jremmen/vim-ripgrep" },
-	-- delete buffers without messing the layout
-	{ "moll/vim-bbye", enabled = false },
 	-- delete hidden buffers
 	{ "asheq/close-buffers.vim" },
 }
