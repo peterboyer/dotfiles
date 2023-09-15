@@ -103,7 +103,7 @@ local config = function()
 			completeopt = "menu,menuone,noinsert",
 		},
 		sources = cmp.config.sources({
-			{ name = "nvim_lsp" },
+			{ name = "nvim_lsp", priority = 100 },
 			{ name = "luasnip" },
 			{ name = "path" },
 			{ name = "buffer", keyword_length = 3 },
