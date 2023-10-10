@@ -45,7 +45,7 @@ alias cfgzsh="(cd ~ && nvim .zshrc)"
 alias cfggit="(cd ~ && nvim .gitconfig)"
 alias cfgvim="(cd ~/.config/nvim && nvim .)"
 
-alias ls="exa"
+alias ls="eza"
 alias l="ls -l"
 alias la="ls -la"
 

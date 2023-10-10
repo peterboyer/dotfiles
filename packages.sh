@@ -16,7 +16,7 @@ fi
 	# sudo git clone https://github.com/ohmyzsh/ohmyzsh.git "$OMZ_DIR"
 	# sudo chown -R $USER:$USER $OMZ_DIR
 # )
-# sudo zypper install exa
+# sudo zypper install eza
 # sudo zypper install tmux
 # sudo zypper install fzf
 # sudo zypper install htop
