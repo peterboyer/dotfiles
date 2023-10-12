@@ -34,6 +34,9 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- make current file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<cr>")
 
+-- yank current filepath to clipboard
+vim.keymap.set("n", "<leader>^", '<cmd>:let @+ = expand("%")<cr>')
+
 -- toggle spellcheck
 vim.keymap.set("n", "gc", function()
 	vim.o.spell = not vim.o.spell
