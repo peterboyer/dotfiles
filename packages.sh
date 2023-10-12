@@ -60,6 +60,7 @@ fi
 	# source $NVM_DIR/nvm.sh
 	# nvm install --lts
 	# npm install -g yarn
+	# npm install -g pnpm
 # ) && \. "$NVM_DIR/nvm.sh"
 
 # == brave ==
