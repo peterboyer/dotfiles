@@ -10,8 +10,8 @@ local keymap = function()
 	vim.cmd([[
 	augroup dap_float
 		autocmd!
-		autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<CR>
-		autocmd FileType dap-float nnoremap <buffer><silent> <C-c> <cmd>close!<CR>
+		autocmd FileType dap-float nnoremap <buffer><silent> q <cmd>close!<cr>
+		autocmd FileType dap-float nnoremap <buffer><silent> <C-c> <cmd>close!<cr>
 		" prevent nested hover instances
 		autocmd FileType dap-float nnoremap <buffer><silent> <C-p> <nop>
 	augroup end

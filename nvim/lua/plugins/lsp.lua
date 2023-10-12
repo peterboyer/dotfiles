@@ -13,7 +13,7 @@ local keys = {
 				{ "n", "gN", fn.goto_prev_reference },
 				{ "n", "gf", fn.format },
 				{ "n", "<leader>rn", fn.rename, { expr = true } },
-				{ "n", "<leader>RN", ":TypescriptRenameFile<CR>" },
+				{ "n", "<leader>RN", ":TypescriptRenameFile<cr>" },
 				{ { "n", "v" }, "<leader>ca", vim.lsp.buf.code_action },
 				{ "n", "<leader>wa", vim.lsp.buf.add_workspace_folder },
 				{ "n", "<leader>wr", vim.lsp.buf.remove_workspace_folder },
