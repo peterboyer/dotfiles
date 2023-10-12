@@ -152,6 +152,7 @@ local config = function()
 	lspconfig.yamlls.setup(setup_opts)
 	lspconfig.dockerls.setup(setup_opts)
 	lspconfig.docker_compose_language_service.setup(setup_opts)
+	lspconfig.pylsp.setup(setup_opts)
 
 	local null_ls = require("null-ls")
 	null_ls.setup({
@@ -240,7 +241,11 @@ return {
 		"j-hui/fidget.nvim",
 		branch = "legacy",
 		config = function()
-			require("fidget").setup()
+			require("fidget").setup({
+				sources = {
+					pylsp = { ignore = true },
+				},
+			})
 		end,
 	},
 	{
