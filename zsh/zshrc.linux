@@ -37,17 +37,6 @@ _iphone_mount() {
 alias iphone-mount="_iphone_mount"
 alias iphone-umount="fusermount -u /run/media/iphone"
 
-function deport() {
-	TARGET_PORT=$1
-	TARGET_PID="$(lsof -i:$TARGET_PORT -t)"
-	if [[ -z "$TARGET_PID" ]]; then
-		echo "no process on port $TARGET_PORT"
-	else
-		echo $TARGET_PID | xargs kill
-		echo $TARGET_PID | xargs echo
-	fi
-}
-
 # == gphoto2-webcam ==
 # alias dslr-mount="sudo modprobe v4l2loopback exclusive_caps=1 max_buffers=2"
 # alias dslr-unmount="sudo rmmod v4l2loopback"
