@@ -169,7 +169,17 @@ local config = function()
 	lspconfig.yamlls.setup(setup_opts)
 	lspconfig.dockerls.setup(setup_opts)
 	lspconfig.docker_compose_language_service.setup(setup_opts)
-	lspconfig.pylsp.setup(setup_opts)
+	lspconfig.pylsp.setup({
+		capabilities = setup_opts.capabilities,
+		settings = {
+			pylsp = {
+				plugins = { pycodestyle = {
+					ignore = { "W191", "W391" },
+					maxLineLength = 100,
+				} },
+			},
+		},
+	})
 
 	local null_ls = require("null-ls")
 	null_ls.setup({
