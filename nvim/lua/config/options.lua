@@ -46,7 +46,7 @@ vim.o.splitbelow = true
 
 -- folding
 vim.o.foldenable = true
-vim.o.foldmethod = "syntax"
+vim.o.foldmethod = "indent"
 vim.o.foldlevelstart = 99
 
 -- whitespace
