@@ -102,8 +102,25 @@ local config = function()
 			-- https://github.com/hrsh7th/nvim-cmp/issues/209#issuecomment-921635222
 			completeopt = "menu,menuone,noinsert",
 		},
+		sorting = {
+			comparators = {
+				function(entry1)
+					if entry1.source.name ~= "nvim_lsp" then
+						return false
+					end
+					return nil
+				end,
+				cmp.config.compare.offset,
+				cmp.config.compare.exact,
+				cmp.config.compare.score,
+				cmp.config.compare.kind,
+				cmp.config.compare.sort_text,
+				cmp.config.compare.length,
+				cmp.config.compare.order,
+			},
+		},
 		sources = cmp.config.sources({
-			{ name = "nvim_lsp", priority = 100 },
+			{ name = "nvim_lsp" },
 			{ name = "luasnip" },
 			{ name = "path" },
 			{ name = "buffer", keyword_length = 3 },
