@@ -22,6 +22,7 @@ vim.keymap.set("n", "m", "<cmd>:cnext<cr>")
 vim.keymap.set("n", "M", "<cmd>:cprev<cr>")
 
 -- fast quickfix filter out test files
+vim.cmd([[ packadd cfilter ]])
 vim.keymap.set("n", "<leader>m", "<cmd>:Cfilter! \\.\\(test\\|spec\\)\\.<cr>")
 
 -- visual move lines

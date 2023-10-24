@@ -57,6 +57,3 @@ vim.o.listchars = table.concat({
 	"trail:∙",
 	-- "eol:↵",
 }, ",")
-
--- quickfix plugins
-vim.cmd([[ packadd cfilter ]])
