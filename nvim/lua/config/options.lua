@@ -60,6 +60,3 @@ vim.o.listchars = table.concat({
 
 -- quickfix plugins
 vim.cmd([[ packadd cfilter ]])
-
--- filetype
-vim.g.python_recommended_style = 0
