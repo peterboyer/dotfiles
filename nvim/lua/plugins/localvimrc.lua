@@ -3,7 +3,5 @@ vim.cmd([[
 ]])
 
 return {
-	{
-		"embear/vim-localvimrc",
-	},
+	{ "embear/vim-localvimrc" },
 }
