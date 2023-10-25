@@ -15,6 +15,7 @@ local keys = {
 				{ "n", "<leader>rn", fn.rename, { expr = true } },
 				{ "n", "<leader>RN", ":TypescriptRenameFile<cr>" },
 				{ { "n", "v" }, "<leader>ca", vim.lsp.buf.code_action },
+				{ { "n", "v" }, "<leader>cx", fn.autofix },
 				{ "n", "<leader>wa", vim.lsp.buf.add_workspace_folder },
 				{ "n", "<leader>wr", vim.lsp.buf.remove_workspace_folder },
 				{ "n", "<leader>wl", fn.list_workspace_folders },
@@ -31,6 +32,32 @@ local keys = {
 			end,
 			rename = function()
 				return ":IncRename " .. vim.fn.expand("<cword>")
+			end,
+			autofix = function()
+				-- save cursor position
+				local prevcursor = vim.api.nvim_win_get_cursor(0)
+				-- goto to first line
+				vim.api.nvim_win_set_cursor(0, { 1, 0 })
+				-- add listener for when code action is applied to the buffer
+				vim.api.nvim_create_augroup("CodeActionChange", { clear = true })
+				vim.api.nvim_create_autocmd("TextChanged", {
+					group = "CodeActionChange",
+					callback = function()
+						-- remove listener for code action change
+						vim.api.nvim_clear_autocmds({ group = "CodeActionChange" })
+						-- save changes
+						vim.api.nvim_command("write")
+					end,
+				})
+				-- run fix all auto-fixable code action
+				vim.lsp.buf.code_action({
+					filter = function(action)
+						return string.find(action.title, "auto.fixable") ~= nil
+					end,
+					apply = true,
+				})
+				-- reset cursor
+				vim.api.nvim_win_set_cursor(0, prevcursor)
 			end,
 			format = function()
 				vim.lsp.buf.format({ async = true })
