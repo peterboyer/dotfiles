@@ -6,14 +6,6 @@ return {
 			"kana/vim-textobj-user",
 		},
 	},
-	{
-		"airblade/vim-gitgutter",
-		config = function()
-			vim.cmd([[
-				let g:gitgutter_floating_window_options["border"] = "rounded"
-			]])
-		end,
-	},
 	-- toggle quickfix/locationlist
 	{ "milkypostman/vim-togglelist" },
 	-- auto closing bracket/quotes
