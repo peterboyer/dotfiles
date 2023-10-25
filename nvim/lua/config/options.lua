@@ -25,18 +25,6 @@ vim.o.scrolloff = 8
 vim.o.tabstop = 2
 vim.o.shiftwidth = 0
 
--- tabs/spaces switcher
-vim.cmd([[
-function! Tabs(width=2)
-	set noexpandtab | let &tabstop=a:width | set shiftwidth=0
-endfunction
-command! -nargs=* Tabs call Tabs(<f-args>)
-function! Spaces(width=2)
-	set expandtab | let &tabstop=a:width | set shiftwidth=0
-endfunction
-command! -nargs=* Spaces call Spaces(<f-args>)
-]])
-
 -- search
 vim.o.ignorecase = true
 
@@ -57,3 +45,15 @@ vim.o.listchars = table.concat({
 	"trail:∙",
 	-- "eol:↵",
 }, ",")
+
+-- tabs/spaces switcher
+vim.cmd([[
+function! Tabs(width=2)
+	set noexpandtab | let &tabstop=a:width | set shiftwidth=0
+endfunction
+command! -nargs=* Tabs call Tabs(<f-args>)
+function! Spaces(width=2)
+	set expandtab | let &tabstop=a:width | set shiftwidth=0
+endfunction
+command! -nargs=* Spaces call Spaces(<f-args>)
+]])
