@@ -46,6 +46,11 @@ vim.o.listchars = table.concat({
 	-- "eol:↵",
 }, ",")
 
+-- statusline
+-- https://shapeshed.com/vim-statuslines/
+-- https://www.reddit.com/r/neovim/comments/tz6p7i/how_can_we_set_color_for_each_part_of_statusline/
+vim.o.statusline = table.concat({ "▲", " ", "%F", " ", "%1*%m%*", "%=", "%l:%c", " ", "(%p%%)" }, "")
+
 -- tabs/spaces switcher
 vim.cmd([[
 function! Tabs(width=2)
