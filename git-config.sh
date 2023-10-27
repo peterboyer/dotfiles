@@ -35,6 +35,8 @@ cat << EOF > ~/.gitconfig
 	defaultBranch = main
 [pull]
 	rebase = true
+[push]
+	autoSetupRemote = true
 EOF
 
 if [[ "$@" =~ "--lfs" ]]; then
