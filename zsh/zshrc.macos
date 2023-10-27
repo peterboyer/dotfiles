@@ -9,13 +9,12 @@ alias lg="XDG_CONFIG_HOME=$HOME/.config lazygit"
 
 # == nvm ==
 export NVM_DIR="$HOME/.nvm"
-NVM_DEFAULT="v18"
-NVM_DEFAULT_VERSION="$(ls -l $NVM_DIR/versions/node | grep $NVM_DEFAULT | awk '{ print $7 }')"
-if [[ -n "$NVM_DEFAULT_VERSION" ]]; then
-	# add default version to path
-	PATH="$NVM_DIR/versions/node/$NVM_DEFAULT_VERSION/bin:$PATH"
+NVM_DEFAULT_VERSION="v18*"
+NVM_DEFAULT_PATH="$(find $HOME/.nvm/versions/node -name $NVM_DEFAULT_VERSION | tail -n 1)"
+if [[ -n "$NVM_DEFAULT_PATH" ]]; then
+	export PATH="$NVM_DEFAULT_PATH/bin:$PATH"
 else
-	echo "warning(nvm): NVM_DEFAULT=$NVM_DEFAULT -> node version not installed!"
+	echo "warning(nvm): NVM_DEFAULT_VERSION=$NVM_DEFAULT_VERSION -> node version not installed!"
 fi
 
 # lazy load nvm (because it's so slow to init...)
