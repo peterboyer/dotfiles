@@ -1,18 +1,25 @@
 #!/bin/bash
 
+UNAME="$(uname)"
+
 main() {
 	link $HOME/_dotfiles/zsh/zshrc                      $HOME/.@
 	link $HOME/_dotfiles/tmux/tmux.conf                 $HOME/.@
 	link $HOME/_dotfiles/nvim                           $HOME/.config/@
-	link $HOME/_dotfiles/kitty                          $HOME/.config/@
 	link $HOME/_dotfiles/lazygit                        $HOME/.config/@
 
+	if [[ $UNAME == "Linux" ]]; then
+	link $HOME/_dotfiles/kitty                          $HOME/.config/@
 	link $HOME/_dotfiles/fonts.conf                     $HOME/.config/fontconfig/@
+	fi
 
 	link $HOME/_zone/ssh                                $HOME/.@
+
+	if [[ $UNAME == "Linux" ]]; then
 	link $HOME/_zone/_dotfiles.private/gphoto           $HOME/.@
 	link $HOME/_zone/_dotfiles.private/obs/basic        $HOME/.config/obs-studio/@
 	link $HOME/_zone/fonts/active                       $HOME/.local/share/fonts
+	fi
 }
 
 # link <src> <dest> [--sudo]
