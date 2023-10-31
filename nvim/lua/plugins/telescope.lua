@@ -25,6 +25,7 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 		config = function()
+			local action_state = require("telescope.actions.state")
 			require("telescope").setup({
 				defaults = {
 					path_display = { truncate = 3 },
@@ -40,6 +41,15 @@ return {
 						mappings = {
 							i = {
 								["<c-d>"] = "delete_buffer",
+								["<c-x>"] = function(prompt_bufnr)
+									-- Based on "delete_buffer" + { force = true }
+									-- https://github.com/nvim-telescope/telescope.nvim/blob/4522d7e3ea75ffddabdc39957168a8a7060b5df0/lua/telescope/actions/init.lua#L1176
+									local current_picker = action_state.get_current_picker(prompt_bufnr)
+									current_picker:delete_selection(function(selection)
+										local ok = pcall(vim.api.nvim_buf_delete, selection.bufnr, { force = true })
+										return ok
+									end)
+								end,
 							},
 						},
 					},
