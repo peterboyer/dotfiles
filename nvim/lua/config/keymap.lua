@@ -17,13 +17,16 @@ vim.keymap.set("", "<C-k>", "5k")
 vim.keymap.set("n", "<C-e>", "5<C-e>")
 vim.keymap.set("n", "<C-y>", "5<C-y>")
 
+-- fast next modified buffer
+vim.keymap.set("n", "<leader>m", "<cmd>:bmodified<cr>")
+
 -- fast quickfix next/prev item
 vim.keymap.set("n", "m", "<cmd>:cnext<cr>")
 vim.keymap.set("n", "M", "<cmd>:cprev<cr>")
 
 -- fast quickfix filter out test files
 vim.cmd([[ packadd cfilter ]])
-vim.keymap.set("n", "<leader>m", "<cmd>:Cfilter! \\.\\(test\\|spec\\)\\.<cr>")
+vim.keymap.set("n", "<leader>M", "<cmd>:Cfilter! \\.\\(test\\|spec\\)\\.<cr>")
 
 -- visual move lines
 vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
