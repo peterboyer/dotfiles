@@ -34,6 +34,8 @@ local keys = {
 				return ":IncRename " .. vim.fn.expand("<cword>")
 			end,
 			autofix = function()
+				-- pre-save to avoid outdated cycle* errors
+				vim.api.nvim_command("write")
 				-- save cursor position
 				local prevcursor = vim.api.nvim_win_get_cursor(0)
 				-- goto to first line
