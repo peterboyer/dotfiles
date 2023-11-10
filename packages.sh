@@ -84,6 +84,9 @@ fi
 # == discord ==
 # flatpak install com.discordapp.Discord
 
+# == signal ==
+# flatpak install org.signal.Signal
+
 # == obs-studio ==
 # sudo zypper install gphoto2-webcam
 # flatpak install com.obsproject.Studio
