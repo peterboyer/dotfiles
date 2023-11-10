@@ -1,5 +1,4 @@
 return {
-	{ "nvim-tree/nvim-web-devicons" },
 	{
 		"kana/vim-textobj-line",
 		dependencies = {
