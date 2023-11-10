@@ -14,6 +14,4 @@ return {
 	{ "tpope/vim-surround" },
 	-- git tooling (blame)
 	{ "tpope/vim-fugitive" },
-	-- ripgrep into quickfix (:Rg <string|pattern>)
-	{ "jremmen/vim-ripgrep" },
 }
