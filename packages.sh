@@ -23,6 +23,7 @@ fi
 
 # == general ==
 # sudo zypper install git
+# sudo zypper install jq
 # sudo zypper install neofetch
 # sudo zypper install ranger
 # sudo zypper install colorpicker
@@ -78,18 +79,15 @@ fi
 # == flatpak ==
 # sudo zypper install flatpak
 
-# == spotify ==
 # flatpak install com.spotify.Client
-
-# == discord ==
 # flatpak install com.discordapp.Discord
-
-# == signal ==
 # flatpak install org.signal.Signal
+# flatpak install io.typora.Typora
+# flatpak install org.audacityteam.Audacity
+# flatpak install org.godotengine.Godot
 
-# == obs-studio ==
-# sudo zypper install gphoto2-webcam
 # flatpak install com.obsproject.Studio
+# sudo zypper install gphoto2-webcam
 
 # == fly ==
 # curl -L https://fly.io/install.sh | sh
