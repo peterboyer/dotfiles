@@ -13,12 +13,11 @@ main() {
 	link $HOME/_dotfiles/fonts.conf                     $HOME/.config/fontconfig/@
 	fi
 
-	link $HOME/_zone/ssh                                $HOME/.@
-
 	if [[ $UNAME == "Linux" ]]; then
-	link $HOME/_zone/_dotfiles.private/gphoto           $HOME/.@
-	link $HOME/_zone/_dotfiles.private/obs/basic        $HOME/.config/obs-studio/@
 	link $HOME/_zone/fonts/active                       $HOME/.local/share/fonts
+	link $HOME/_zone/_dotfiles.untracked/ssh            $HOME/.@
+	link $HOME/_zone/_dotfiles.untracked/gphoto         $HOME/.@
+	link $HOME/_zone/_dotfiles.untracked/obs/basic      $HOME/.config/obs-studio/@
 	fi
 }
 
