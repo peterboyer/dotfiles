@@ -52,6 +52,11 @@ fi
 # sudo zypper install gcc-c++ # for treesitter
 # sudo zypper install ripgrep # for telescope
 
+# install pipx
+# nvim -> oil -> trash-put (via. trash-cli, installed via pipx)
+# sudo zypper install python311-pipx
+# pipx install trash-cli
+
 # == node/npm/yarn ==
 # export NVM_DIR="/usr/share/nvm-git" && (
 	# sudo git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
