@@ -62,3 +62,11 @@ function! Spaces(width=2)
 endfunction
 command! -nargs=* Spaces call Spaces(<f-args>)
 ]])
+
+-- :W "noautocmd write" shortcut
+vim.cmd([[
+function! W()
+	noautocmd write
+endfunction
+command! W call W()
+]])
