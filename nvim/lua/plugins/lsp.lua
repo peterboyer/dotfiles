@@ -155,9 +155,13 @@ local config = function()
 			{ name = "buffer", keyword_length = 3 },
 		}),
 		window = {
-			completion = cmp.config.window.bordered(),
+			completion = cmp.config.window.bordered({
+				winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:Visual,Search:None",
+			}),
 			documentation = cmp.config.window.bordered({
-				{ max_height = 15, max_width = 60 },
+				winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:Visual,Search:None",
+				max_height = 15,
+				max_width = 60,
 			}),
 		},
 		formatting = {
@@ -225,10 +229,10 @@ local config = function()
 	require("illuminate").configure({ providers = { "lsp" }, under_cursor = false })
 
 	-- ui
+	vim.diagnostic.config({ float = { border = "rounded" } })
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 	vim.lsp.handlers["textDocument/signatureHelp"] =
 		vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-	vim.diagnostic.config({ float = { border = "rounded" } })
 
 	-- lsp
 	local keys_buffer = keys.buffer()

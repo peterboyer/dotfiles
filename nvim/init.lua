@@ -17,5 +17,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {
 	change_detection = { notify = false },
-	ui = { border = "rounded" },
+	ui = {
+		border = "rounded",
+		winhighlight = "Normal:Pmenu,FloatBorder:Pmenu",
+	},
 })
