@@ -10,7 +10,7 @@ return {
 		"stevearc/oil.nvim",
 		config = function()
 			require("oil").setup({
-				delete_to_trash = true,
+				delete_to_trash = vim.loop.os_uname().sysname == "Linux",
 				view_options = {
 					show_hidden = true,
 					sort = {
