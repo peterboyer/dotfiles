@@ -44,7 +44,7 @@ call s:HL('BufferAttribute', s:White, s:Red, s:None)
 
 " Cursor
 call s:HL('Cursor', s:Black, s:Yellow, s:None)
-call s:HL('CursorLine', s:None, s:None, 'underdotted')
+call s:HL('CursorLine', s:None, s:Gray, s:None)
 call s:HL('CursorColumn', s:Yellow, s:None, s:None)
 
 " Selection
