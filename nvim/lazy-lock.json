@@ -27,7 +27,7 @@
   "trim.nvim": { "branch": "master", "commit": "2df124c2c2844d3143091ebd3ae8b49bbe06bc5e" },
   "typescript.nvim": { "branch": "main", "commit": "de304087e6e49981fde01af8ccc5b21e8519306f" },
   "vim-fugitive": { "branch": "master", "commit": "43f18ab9155c853a84ded560c6104e6300ad41da" },
-  "vim-gitgutter": { "branch": "master", "commit": "2ee95686c5944f99b42dd04fec005b30497006de" },
+  "vim-gitgutter": { "branch": "main", "commit": "2ee95686c5944f99b42dd04fec005b30497006de" },
   "vim-illuminate": { "branch": "master", "commit": "a2907275a6899c570d16e95b9db5fd921c167502" },
   "vim-localvimrc": { "branch": "master", "commit": "ebb73832e6795967e5a52db3636a37282871b218" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
