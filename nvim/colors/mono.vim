@@ -22,10 +22,6 @@ let s:White = '15'
 let s:Gray = '7'
 let s:DarkGray = '8'
 
-let s:Ruler = '234'
-let s:Cursor = '234'
-let s:Whitespace = '237'
-
 let s:Red = '1'
 let s:BrightRed = '9'
 let s:Green = '2'
@@ -38,6 +34,11 @@ let s:Magenta = '5'
 let s:BrightMagenta = '13'
 let s:Cyan = '6'
 let s:BrightCyan = '14'
+
+let s:Ruler = '234'
+let s:Cursor = '234'
+let s:Whitespace = '237'
+let s:Float = '238'
 
 " Base
 call s:HL('Normal', s:White, s:None, s:None)
@@ -59,15 +60,15 @@ call s:HL('LineNr', s:DarkGray, s:None, s:None)
 call s:HL('ColorColumn', s:None, s:Ruler, s:None)
 
 " Selection
-call s:HL('Visual', s:Black, s:Green, s:None)
+call s:HL('Visual', s:Black, s:Yellow, s:None)
 
 " Search/Matches
 call s:HL('Search', s:Black, s:Yellow, s:None)
-call s:HL('MatchParen', s:Black, s:Yellow, s:None)
+call s:HL('MatchParen', s:Black, s:Cyan, s:None)
 
 " Float
 call s:HL('Float', s:None, s:None, s:None)
-call s:HL('NormalFloat', s:White, s:Black, s:None)
+call s:HL('NormalFloat', s:White, s:Float, s:None)
 hi link FloatBorder NormalFloat
 
 " Telescope
@@ -88,7 +89,7 @@ call s:HL('WarningMsg', s:Black, s:Green, s:None)
 call s:HL('DiagnosticUnnecessary', s:Green, s:None, s:None)
 
 " Popup Menu
-call s:HL('Pmenu', s:White, s:DarkGray, s:None)
+call s:HL('Pmenu', s:White, s:Float, s:None)
 call s:HL('PmenuSel', s:Black, s:Green, s:None)
 
 " Markup
@@ -121,7 +122,7 @@ call s:HL('SpecialKey', s:None, s:None, s:None)
 call s:HL('Statement', s:None, s:None, s:None)
 call s:HL('StorageClass', s:None, s:None, s:None)
 call s:HL('String', s:None, s:None, s:None)
-call s:HL('Tag', s:Cyan, s:None, s:None)
+call s:HL('Tag', s:BrightBlue, s:None, s:None)
 call s:HL('Title', s:None, s:None, 'bold')
 call s:HL('Type', s:None, s:None, s:None)
 
