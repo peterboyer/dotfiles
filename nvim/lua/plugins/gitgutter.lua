@@ -1,5 +1,5 @@
 -- @workaround
--- Config must happen _before_ the plugin is initialised.
+-- All `sign_*` options must be set _before_ the plugin is initialised.
 vim.cmd([[
 	let g:gitgutter_sign_added                   = '█'
 	let g:gitgutter_sign_modified                = '█'
@@ -16,6 +16,10 @@ return {
 			vim.cmd([[
 				let g:gitgutter_floating_window_options["border"] = "rounded"
 			]])
+			-- @workaround
+			-- Marks not updated on buffer write.
+			-- https://github.com/airblade/vim-gitgutter/issues/526
+			vim.cmd("autocmd BufWritePost * GitGutter")
 		end,
 	},
 }
