@@ -15,6 +15,7 @@ let s:None = 'NONE'
 
 let s:Black = '0'
 let s:Gray = '8'
+let s:GrayLight = 'darkgray'
 let s:White = '15'
 
 let s:Red = '1'
@@ -32,10 +33,7 @@ endfunction
 call s:HL('Normal', s:White, s:None, s:None)
 call s:HL('NormalNC', s:Blue, s:None, s:None)
 call s:HL('VertSplit', s:None, s:None, s:None)
-
-" Float
-call s:HL('NormalFloat', s:White, s:Gray, s:None)
-call s:HL('FloatBorder', s:White, s:Gray, s:None)
+call s:HL('Whitespace', s:GrayLight, s:None, s:None)
 
 " Status
 call s:HL('StatusLine', s:Black, s:Yellow, s:None)
@@ -43,34 +41,38 @@ call s:HL('StatusLineNC', s:Yellow, s:Gray, s:None)
 call s:HL('BufferAttribute', s:White, s:Red, s:None)
 
 " Cursor
-call s:HL('Cursor', s:Black, s:Yellow, s:None)
+call s:HL('Cursor', s:None, s:None, s:None)
 call s:HL('CursorLine', s:None, s:Gray, s:None)
-call s:HL('CursorColumn', s:Yellow, s:None, s:None)
+call s:HL('CursorColumn', s:None, s:None, s:None)
+call s:HL('CursorLineNr', s:White, s:Gray, s:None)
+call s:HL('LineNr', s:GrayLight, s:None, s:None)
 
 " Selection
-call s:HL('Visual', s:Black, s:Green, s:None)
+call s:HL('Visual', s:Black, s:Yellow, s:None)
+
+" Search/Matches
+call s:HL('Search', s:Red, s:Yellow, s:None)
+call s:HL('IncSearch', s:Black, s:Yellow, s:None)
+call s:HL('MatchParen', s:Black, s:Yellow, s:None)
+
+" Ruler
+call s:HL('ColorColumn', s:None, s:Gray, s:None)
+
+" Float
+call s:HL('NormalFloat', s:White, s:Gray, s:None)
+call s:HL('FloatBorder', s:White, s:Gray, s:None)
 
 " Telescope
 " https://github.com/nvim-telescope/telescope.nvim/blob/master/plugin/telescope.lua#L11
 hi link TelescopeNormal NormalFloat
 hi link TelescopeResultsComment BufferAttribute
 
-" Gutter/Line Numbers
-call s:HL('LineNr', s:Gray, s:None, s:None)
-call s:HL('CursorLineNr', s:Yellow, s:Black, s:None)
+" Gutter
 call s:HL('FoldColumn', s:None, s:Black, s:None)
 call s:HL('SignColumn', s:None, s:Black, s:None)
 call s:HL('GitGutterAdd', s:Green, s:None, s:None)
 call s:HL('GitGutterChange', s:Yellow, s:None, s:None)
 call s:HL('GitGutterDelete', s:Red, s:None, s:None)
-
-" Ruler
-call s:HL('ColorColumn', s:None, s:Gray, s:None)
-
-" Search/Matches
-call s:HL('Search', s:Red, s:Yellow, s:None)
-call s:HL('IncSearch', s:Black, s:Yellow, s:None)
-call s:HL('MatchParen', s:Black, s:Green, 'bold')
 
 " Diagnostics
 call s:HL('Float', s:None, s:None, s:None)
@@ -87,7 +89,6 @@ call s:HL('Todo', s:None, s:Green, 'bold')
 call s:HL('Folded', s:Yellow, s:Gray, s:None)
 call s:HL('NonText', s:Gray, s:None, s:None)
 call s:HL('Underlined', s:None, s:None, 'underline')
-call s:HL('Whitespace', s:Black, s:None, s:None)
 
 " Spelling
 call s:HL('SpellBad', s:Red, s:None, 'italic,undercurl')
