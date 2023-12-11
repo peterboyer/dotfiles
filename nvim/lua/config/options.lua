@@ -8,7 +8,7 @@ vim.o.colorcolumn = "80"
 
 vim.o.signcolumn = "yes"
 vim.o.number = true
-vim.o.relativenumber = true
+vim.o.relativenumber = false
 vim.cmd("autocmd TermOpen * setlocal nonu nornu")
 
 -- wrap
