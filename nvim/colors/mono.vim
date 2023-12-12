@@ -16,6 +16,7 @@ function! s:HL(group, fg, bg, attr)
 endfunction
 
 let s:None = 'NONE'
+
 let s:Black = '0'
 let s:White = '15'
 
