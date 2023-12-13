@@ -86,16 +86,16 @@ call s:HL('GitGutterDelete', s:Red, s:None, s:None)
 
 " Diagnostics
 call s:HL('ErrorMsg', s:Black, s:Red, s:None)
-call s:HL('WarningMsg', s:Black, s:Green, s:None)
-call s:HL('DiagnosticUnnecessary', s:Green, s:None, s:None)
+call s:HL('WarningMsg', s:Black, s:Yellow, s:None)
+call s:HL('DiagnosticUnnecessary', s:Yellow, s:None, s:None)
 
 " Popup Menu
 call s:HL('Pmenu', s:White, s:Float, s:None)
-call s:HL('PmenuSel', s:Black, s:Green, s:None)
+call s:HL('PmenuSel', s:Black, s:Yellow, s:None)
 
 " Markup
-call s:HL('Todo', s:None, s:Green, 'bold')
-call s:HL('Folded', s:Green, s:DarkGray, s:None)
+call s:HL('Todo', s:None, s:Yellow, 'bold')
+call s:HL('Folded', s:None, s:Ruler, s:None)
 call s:HL('NonText', s:DarkGray, s:None, s:None)
 call s:HL('Underlined', s:None, s:None, 'underline')
 
@@ -128,19 +128,7 @@ call s:HL('Title', s:None, s:None, 'bold')
 call s:HL('Type', s:None, s:None, s:None)
 
 " Diff
+call s:HL('DiffText', s:None, s:None, s:None)
 call s:HL('DiffAdd', s:None, s:Green, s:None)
-call s:HL('DiffChange', s:None, s:Green, s:None)
+call s:HL('DiffChange', s:None, s:Yellow, s:None)
 call s:HL('DiffDelete', s:None, s:Red, s:None)
-call s:HL('DiffText', s:DarkGray, s:Blue, s:None)
-
-if &diff
- call s:HL('DiffAdd', s:None, s:Green, s:None)
- call s:HL('DiffChange', s:None, s:Green, s:None)
- call s:HL('DiffDelete', s:Green, s:Red, s:None)
- call s:HL('DiffText', s:DarkGray, s:Blue, s:None)
-else
- call s:HL('DiffAdd', s:Green, s:None, s:None)
- call s:HL('DiffChange', s:Green, s:None, s:None)
- call s:HL('DiffDelete', s:Green, s:None, s:None)
- call s:HL('DiffText', s:None, s:Blue, s:None)
-endif
