@@ -6,6 +6,9 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 	mkdir $ZSH_CACHE_DIR
 fi
 
+# == path ==
+PATH=/usr/sbin:$PATH
+
 # == lazygit ==
 alias lg="lazygit"
 
