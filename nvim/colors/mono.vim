@@ -64,7 +64,7 @@ call s:HL('ColorColumn', s:_, s:Ruler, s:_)
 call s:HL('Visual', s:Black, s:Yellow, s:_)
 
 " Search/Matches
-call s:HL('Search', s:Black, s:Yellow, s:_)
+call s:HL('Search', s:Black, s:Green, s:_)
 call s:HL('MatchParen', s:Black, s:Cyan, s:_)
 
 " Float
