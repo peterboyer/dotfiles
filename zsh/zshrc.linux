@@ -26,6 +26,8 @@ update_nvm () {
 }
 
 # == ios ==
+alias iphone-mount="_iphone_mount"
+alias iphone-umount="fusermount -u /run/media/iphone"
 _iphone_mount() {
 	if [[ ! -d /run/media/iphone ]]; then
 		sudo mkdir -p /run/media/iphone
@@ -33,6 +35,3 @@ _iphone_mount() {
 	fi
 	ifuse /run/media/iphone
 }
-
-alias iphone-mount="_iphone_mount"
-alias iphone-umount="fusermount -u /run/media/iphone"
