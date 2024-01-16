@@ -13,6 +13,10 @@
 #   yarn install
 #   PORT=3000 yarn dev
 #
+# Example:
+#   # Enter the container without running a script.
+#   yarn shell
+#
 # Config:
 # - Add a .nodeboxrc file with the Docker image name you would like to use.
 # // .nodeboxrc
