@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+# Sandbox all project-related commands within a Docker container.
+# - Isolates your machine from supply-chain attacks.
+#   - All lifecycle scripts run inside container.
+#   - All node/runtime code runs inside container.
+#   - Only expose port if PORT is specified.
+#
+# Usage: nodebox [npm|yarn|...] [args...]
+#
+# Example:
+#   alias yarn="nodebox yarn"
+#   yarn install
+#   PORT=3000 yarn dev
+#
+# Config:
+# - Add a .nodeboxrc file with the Docker image name you would like to use.
+#
+# Example:
+#   // .nodeboxrc
+#   node:20
+
+cmdtarget="${1:?required}"
+
+image="node:20"
+imagerc=".nodeboxrc"
+
+# https://unix.stackexchange.com/a/22215
+imagedir=$(pwd)
+while [[ "$imagedir" != "" && ! -e "$imagedir/$imagerc" ]]; do
+	imagedir=${imagedir%/*}
+done
+
+if [[ -n "$imagedir" ]]; then
+	image="$(cat $imagedir/$imagerc)"
+fi
+
+echo "nodebox($image)"
+
+user="$(id --user)"
+
+cmd="/usr/local/bin/$cmdtarget ${@:2}"
+if [[ "$2" == "shell" ]]; then
+	cmd="exec sh"
+fi
+
+ARGS=(
+	"--rm"
+	"--tty"
+	"--interactive"
+	"--volume" "$PWD/..:/mnt"
+	"--workdir" "/mnt/$(basename $PWD)"
+	"--init"
+	"--user" "$user:$user"
+)
+
+if [[ -n "$PORT" ]]; then
+	ARGS+=(
+		"--env" "PORT=$PORT"
+		"--publish" "$PORT:$PORT"
+	)
+fi
+
+docker run ${ARGS[@]} $image /bin/sh -c "sh -c \"$cmd\""

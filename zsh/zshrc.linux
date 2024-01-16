@@ -25,6 +25,10 @@ _nvm_update () {
 	) && \. "$NVM_DIR/nvm.sh"
 }
 
+# nodebox
+alias npm="$HOME/_dotfiles/zsh/nodebox npm"
+alias yarn="$HOME/_dotfiles/zsh/nodebox yarn"
+
 # == ios ==
 alias iphone-mount="_iphone_mount"
 alias iphone-umount="fusermount -u /run/media/iphone"
