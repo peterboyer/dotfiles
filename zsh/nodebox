@@ -15,10 +15,15 @@
 #
 # Config:
 # - Add a .nodeboxrc file with the Docker image name you would like to use.
+# // .nodeboxrc
+# node:20
 #
-# Example:
-#   // .nodeboxrc
-#   node:20
+# - Add ports you wish to expose as newline delimited PORT=XXXX instructions.
+#
+# // .nodeboxrc
+# node:20
+# PORT=3000
+# PORT=5000
 
 cmdtarget="${1:?required}"
 
@@ -32,7 +37,8 @@ while [[ "$imagedir" != "" && ! -e "$imagedir/$imagerc" ]]; do
 done
 
 if [[ -n "$imagedir" ]]; then
-	image="$(cat $imagedir/$imagerc)"
+	image="$(cat $imagedir/$imagerc | head -n 1)"
+	ports=$(cat $imagedir/$imagerc | grep PORT= | sed 's/PORT=//')
 fi
 
 echo "nodebox($image)"
@@ -44,7 +50,7 @@ if [[ "$2" == "shell" ]]; then
 	cmd="exec sh"
 fi
 
-ARGS=(
+args=(
 	"--rm"
 	"--tty"
 	"--interactive"
@@ -54,11 +60,10 @@ ARGS=(
 	"--user" "$user:$user"
 )
 
-if [[ -n "$PORT" ]]; then
-	ARGS+=(
-		"--env" "PORT=$PORT"
-		"--publish" "$PORT:$PORT"
-	)
-fi
+IFS=$'\n' ports=(${ports})
+for port in ${ports[@]}
+do
+	args+=("--publish" "$port:$port")
+done
 
-docker run ${ARGS[@]} $image /bin/sh -c "sh -c \"$cmd\""
+docker run ${args[@]} $image /bin/sh -c "sh -c \"$cmd\""
