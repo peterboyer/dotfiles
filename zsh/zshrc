@@ -29,10 +29,6 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 export PATH="$HOME/.local/bin:$PATH"
 
-# flyctl
-export FLYCTL_INSTALL="$HOME/.fly"
-export PATH="$FLYCTL_INSTALL/bin:$PATH"
-
 bindkey -s "^a" "tmux a\n"
 bindkey -s "^f" "$HOME/_dotfiles/tmux-sessioniser.sh\n"
 
@@ -53,9 +49,9 @@ alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 
-alias todo="nvim ~/_zone/todo.txt"
+alias lg="lazygit"
 
-alias yarnx="yarn $@ && git config --unset core.hooksPath && echo hooks uninstalled"
+alias todo="nvim ~/_zone/todo.txt"
 
 function deport() {
 	port=$1
