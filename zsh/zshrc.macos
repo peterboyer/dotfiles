@@ -39,6 +39,3 @@ autoload -U add-zsh-hook
 apply-node-env
 # check current dir on change
 add-zsh-hook chpwd apply-node-env
-
-# workaround for macOS Sonoma's timezone
-alias slack="TZ=Australia/Sydney open -b com.tinyspeck.slackmacgap"
