@@ -36,23 +36,3 @@ _iphone_mount() {
 
 alias iphone-mount="_iphone_mount"
 alias iphone-umount="fusermount -u /run/media/iphone"
-
-# == gphoto2-webcam ==
-# alias dslr-mount="sudo modprobe v4l2loopback exclusive_caps=1 max_buffers=2"
-# alias dslr-unmount="sudo rmmod v4l2loopback"
-
-# alias dslr-ls="ls /dev/video*"
-# alias dslr-gls="gphoto2 --abilities"
-
-# function dslr_stream() {
-	# # use first arg
-	# TARGET="$1"
-	# # if first arg empty, default to last device
-	# if [[ -z "$1" ]]; then
-		# TARGET=$(ls -1 /dev/video* | awk 'BEGIN{ RS = "" ; FS = "\n" }{print $NF}')
-		# echo $TARGET
-	# fi
-	# # gphoto output | stream to encoder | stream to device
-	# gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 $TARGET
-# }
-# alias dslr-stream="dslr_stream"
