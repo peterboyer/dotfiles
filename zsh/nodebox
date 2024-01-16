@@ -66,4 +66,8 @@ do
 	args+=("--publish" "$port:$port")
 done
 
-docker run ${args[@]} $image /bin/sh -c "sh -c \"$cmd\""
+if [[ -n "$DEBUG" ]]; then
+	debug="echo"
+fi
+
+$debug docker run ${args[@]} $image /bin/sh -c "sh -c \"$cmd\""
