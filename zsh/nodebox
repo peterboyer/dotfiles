@@ -28,6 +28,12 @@
 # node:20
 # PORT=3000
 # PORT=5000
+#
+# - Add optional matcher to only expose port if string is found in args.
+# // .nodeboxrc
+# node:20
+# PORT=3000 web
+# PORT=5000 api
 
 cmdtarget="${1:?required}"
 
@@ -42,10 +48,8 @@ done
 
 if [[ -n "$imagedir" ]]; then
 	image="$(cat $imagedir/$imagerc | head -n 1)"
-	ports=$(cat $imagedir/$imagerc | grep PORT= | sed 's/PORT=//')
+	ports=$(cat $imagedir/$imagerc | grep PORT=)
 fi
-
-echo "nodebox($image)"
 
 user="$(id --user)"
 
@@ -67,8 +71,18 @@ args=(
 IFS=$'\n' ports=(${ports})
 for port in ${ports[@]}
 do
-	args+=("--publish" "$port:$port")
+	matcher="$(echo $port | awk '{print$2}')"
+	port="$(echo $port | awk '{print$1}' | sed 's/PORT=//')"
+	if [[ -z "$matcher" ]]; then
+		args+=("--publish" "$port:$port")
+		report="$report[$port]"
+	elif [[ "${@:2}" =~ "$matcher" ]]; then
+		args+=("--publish" "$port:$port")
+		report="$report[$port]"
+	fi
 done
+
+echo "nodebox($image)$report"
 
 if [[ -n "$DEBUG" ]]; then
 	debug="echo"
