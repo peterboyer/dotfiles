@@ -215,15 +215,6 @@ local config = function()
 		},
 	})
 
-	local null_ls = require("null-ls")
-	null_ls.setup({
-		sources = {
-			null_ls.builtins.formatting.eslint_d,
-			null_ls.builtins.formatting.stylua,
-		},
-	})
-	require("mason-null-ls").setup({ automatic_installation = true })
-
 	-- addons
 	require("inc_rename").setup()
 	require("typescript").setup({ go_to_source_definition = { fallback = true } })
@@ -286,10 +277,6 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-			-- null-ls
-			"jose-elias-alvarez/null-ls.nvim",
-			"jay-babu/mason-null-ls.nvim",
-			"nvim-lua/plenary.nvim",
 			-- addons
 			"smjonas/inc-rename.nvim",
 			"jose-elias-alvarez/typescript.nvim",
