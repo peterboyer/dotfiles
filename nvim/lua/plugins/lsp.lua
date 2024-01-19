@@ -188,7 +188,11 @@ local config = function()
 	})
 
 	require("mason").setup({ ui = { border = "rounded" } })
-	require("mason-lspconfig").setup({ automatic_installation = true })
+	require("mason-lspconfig").setup({
+		automatic_installation = {
+			exclude = { "quick_lint_js" },
+		},
+	})
 
 	local lspconfig = require("lspconfig")
 	local setup_opts = { capabilities = require("cmp_nvim_lsp").default_capabilities() }
@@ -203,6 +207,18 @@ local config = function()
 	lspconfig.yamlls.setup(setup_opts)
 	lspconfig.dockerls.setup(setup_opts)
 	lspconfig.docker_compose_language_service.setup(setup_opts)
+	lspconfig.quick_lint_js.setup({
+		capabilities = setup_opts.capabilities,
+		cmd = { "./node_modules/.bin/quick-lint-js", "--lsp-server" },
+		filetypes = {
+			"javascript",
+			"javascriptreact",
+			"javascript.jsx",
+			"typescript",
+			"typescriptreact",
+			"typescript.tsx",
+		},
+	})
 	lspconfig.pylsp.setup({
 		capabilities = setup_opts.capabilities,
 		settings = {
