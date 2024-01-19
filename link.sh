@@ -17,7 +17,7 @@ main() {
 	link $HOME/_zone/fonts/active                       $HOME/.local/share/fonts
 	link $HOME/_zone/_dotfiles.untracked/ssh            $HOME/.@
 	link $HOME/_zone/_dotfiles.untracked/gphoto         $HOME/.@
-	link $HOME/_zone/_dotfiles.untracked/obs/basic      $HOME/.config/obs-studio/@
+	link $HOME/_zone/_dotfiles.untracked/obs/basic      $HOME/.var/obs-studio/@
 	fi
 }
 
