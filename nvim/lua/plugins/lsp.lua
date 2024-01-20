@@ -207,18 +207,7 @@ local config = function()
 	lspconfig.yamlls.setup(setup_opts)
 	lspconfig.dockerls.setup(setup_opts)
 	lspconfig.docker_compose_language_service.setup(setup_opts)
-	lspconfig.quick_lint_js.setup({
-		capabilities = setup_opts.capabilities,
-		cmd = { "./node_modules/.bin/quick-lint-js", "--lsp-server" },
-		filetypes = {
-			"javascript",
-			"javascriptreact",
-			"javascript.jsx",
-			"typescript",
-			"typescriptreact",
-			"typescript.tsx",
-		},
-	})
+
 	lspconfig.pylsp.setup({
 		capabilities = setup_opts.capabilities,
 		settings = {
@@ -230,6 +219,22 @@ local config = function()
 			},
 		},
 	})
+
+	local quick_lint_js_bin = "./node_modules/.bin/quick-lint-js"
+	if vim.fn.executable(quick_lint_js_bin) ~= 0 then
+		lspconfig.quick_lint_js.setup({
+			capabilities = setup_opts.capabilities,
+			cmd = { quick_lint_js_bin, "--lsp-server" },
+			filetypes = {
+				"javascript",
+				"javascriptreact",
+				"javascript.jsx",
+				"typescript",
+				"typescriptreact",
+				"typescript.tsx",
+			},
+		})
+	end
 
 	-- addons
 	require("inc_rename").setup()
