@@ -1,11 +1,5 @@
 export EDITOR=nvim
 
-export UNAME="$(uname)"
-if [[ $UNAME != "Linux" && $UNAME != "Darwin" ]]; then
-	echo "abort: unknown UNAME: $UNAME"
-	exit 1
-fi
-
 if [[ $UNAME == "Linux" ]]; then
 	export ZSH="/usr/share/oh-my-zsh-git"
 	export UPDATE_ZSH_DAYS=7
