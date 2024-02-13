@@ -1,4 +1,5 @@
-export EDITOR=nvim
+# use nvim if available, fallback to vim
+export EDITOR=$(which nvim &>/dev/null && echo "nvim" || echo "vim")
 
 if [[ $UNAME == "Linux" ]]; then
 	export ZSH="/usr/share/oh-my-zsh-git"
@@ -46,11 +47,10 @@ alias la="ls -la"
 
 alias v="nvim"
 alias vi="nvim"
-alias vim="nvim"
 
 alias lg="lazygit"
 
-alias todo="nvim ~/_zone/todo.txt"
+alias todo="$EDITOR ~/_zone/todo.txt"
 
 function deport() {
 	port=$1
