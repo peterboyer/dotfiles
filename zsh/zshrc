@@ -20,16 +20,19 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 plugins=(
 	git
 	fzf
-	# fzf (https://github.com/junegunn/fzf)
-	# CTRL-T (search files from pwd)
-	# CTRL-R (search bash history)
-	# ALT-C (search dirs, cd into them)
+		# (https://github.com/junegunn/fzf)
+		# CTRL-T (search files from pwd)
+		# CTRL-R (search bash history)
+		# ALT-C (search dirs, cd into them)
 )
 
 source $ZSH/oh-my-zsh.sh
+
 export PATH="$HOME/.local/bin:$PATH"
 
+# CTRL-A (attach to tmux)
 bindkey -s "^a" "tmux a\n"
+# CTRL-F (attach to tmux session via tmux-sessioniser)
 bindkey -s "^f" "$HOME/_dotfiles/tmux-sessioniser.sh\n"
 
 alias cdx="cd ~/_dev"
@@ -52,6 +55,47 @@ alias lg="lazygit"
 
 alias todo="$EDITOR ~/_zone/todo.txt"
 
+# g_it f_uzzy clean
+# Multi-select untracked files/folders to delete.
+# usage: gfclean
+function gfclean() {
+	git clean -xdn | fzf -m | awk '{print$3}' | xargs rm -rf
+}
+
+# g_it f_uzzy check_out file
+# Checkout a specific file from a specific branch.
+# usage: gfcheckfile [<REF>]
+# - REF: a branch name or commit
+function gfcheckfile() {
+	ref=${1:-$(git branch --format='%(refname:short)' | fzf)}
+	git diff-tree -r --no-commit-id --name-only $ref | fzf -m | xargs git checkout --
+}
+
+# d_ocker f_uzzy clean c_ontainers
+# Multi-select running containers to force remove.
+# usage: dfcleanc
+function dfcleanc() {
+	docker ps | tail -n +2 | fzf -m | awk '{print$1}' | xargs docker rm -f
+}
+
+# d_ocker f_uzzy clean i_mages
+# Multi-select images to force remove.
+# usage: dfcleani
+function dfcleani() {
+	docker images | tail -n +2 | fzf -m | awk '{print$1}' | xargs docker rmi -f
+}
+
+# Loads environment variables from a given FILE into the current shell.
+# usage: envload <FILE>
+# - FILE: path to target file to load.
+function envload() {
+	export $(grep -v '^#' $1 | xargs -0)
+}
+
+# Kills any process that is using a given PORT.
+# usage: deport <PORT> [<FILTER>]
+# - PORT: numeric port to target (e.g. 3000)
+# - FILTER: (optional) grep filter to target processes by name
 function deport() {
 	port=$1
 	filter=$2
@@ -68,21 +112,6 @@ function deport() {
 	pids="$(echo $matches | awk '{print$2}')"
 	echo $pids | xargs kill
 	echo $matches
-}
-
-# == docker ==
-# docker-destroy-containers
-function ddc() {
-	docker ps -aq | xargs docker rm -f
-}
-
-# docker-destroy-untagged-images
-function ddui() {
-	docker image ls | grep '<none>' | awk '{print $3}' | xargs docker rmi -f
-}
-
-function envload() {
-	export $(grep -v '^#' $1 | xargs -0)
 }
 
 if [[ $UNAME == "Linux" ]]; then
