@@ -59,7 +59,7 @@ alias todo="$EDITOR ~/_zone/todo.txt"
 # Multi-select untracked files/folders to delete.
 # usage: gfclean
 function gfclean() {
-	git clean -xdn | fzf -m | awk '{print$3}' | xargs rm -rf
+	git clean -xdn | awk '{print$3}' | fzf -m | xargs rm -rf
 }
 
 # g_it f_uzzy check_out file
