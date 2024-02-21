@@ -95,7 +95,7 @@ call s:HL('PmenuSel', s:Black, s:Yellow, s:_)
 
 " Markup
 call s:HL('Todo', s:_, s:Yellow, 'bold')
-call s:HL('Folded', s:_, s:Ruler, s:_)
+call s:HL('Folded', s:DarkGray, s:Ruler, s:_)
 call s:HL('NonText', s:DarkGray, s:_, s:_)
 call s:HL('Underlined', s:_, s:_, 'underline')
 
