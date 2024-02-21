@@ -28,6 +28,7 @@ fi
 # sudo zypper install ranger
 # sudo zypper install colorpicker
 # sudo zypper install pdfarranger
+# sudo zypper install peek
 
 # == docker ==
 # sudo zypper install docker
