@@ -62,8 +62,8 @@ args=(
 	"--rm"
 	"--tty"
 	"--interactive"
-	"--volume" "$PWD/..:/mnt"
-	"--workdir" "/mnt/$(basename $PWD)"
+	"--volume" "$PWD:/mnt"
+	"--workdir" "/mnt"
 	"--init"
 	"--user" "$user:$user"
 )
