@@ -71,3 +71,12 @@ function! W()
 endfunction
 command! W call W()
 ]])
+
+-- chat
+vim.cmd([[
+function! Chat(message)
+	silent execute "!curl --silent http://localhost:4111/chat --data" "\"" escape(a:message, '!"') "\""
+	echo ""
+endfunction
+command! -nargs=+ Chat call Chat(<q-args>)
+]])
