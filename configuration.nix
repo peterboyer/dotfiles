@@ -50,6 +50,7 @@
 		vim
 		htop
 		killall
+		xclip
 	];
 
 	users.users = {
