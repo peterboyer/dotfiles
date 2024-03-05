@@ -1,3 +1,0 @@
-#!/bin/sh
-export XENV=1
-${@:1} &
