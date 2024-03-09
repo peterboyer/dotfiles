@@ -1,0 +1,31 @@
+export NVM_DIR="~/.nvm"
+NVM_DEFAULT_VERSION="v18*"
+NVM_DEFAULT_PATH="$(find ~/.nvm/versions/node -name $NVM_DEFAULT_VERSION | tail -n 1)"
+if [[ -n "$NVM_DEFAULT_PATH" ]]; then
+	export PATH="$NVM_DEFAULT_PATH/bin:$PATH"
+else
+	echo "warning(nvm): NVM_DEFAULT_VERSION=$NVM_DEFAULT_VERSION -> node version not installed!"
+fi
+
+# lazy load nvm (because it's very slow to init...)
+lazy_load_nvm() {
+	unset -f nvm
+	[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+	# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+}
+nvm() {
+	lazy_load_nvm
+	nvm $@
+}
+
+apply-node-env() {
+	if [[ -f .nvmrc && -r .nvmrc ]]; then
+		nvm use
+	fi
+}
+autoload -U add-zsh-hook
+
+# check current dir
+apply-node-env
+# check current dir on change
+add-zsh-hook chpwd apply-node-env

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Checkout a specific file from a specific branch.
+# usage: $0 [<REF>]
+# - REF: a branch name or commit
+
+ref=${1:-$(git branch --format='%(refname:short)' | fzf)}
+git diff-tree -r --no-commit-id --name-only $ref | fzf -m | xargs git checkout --

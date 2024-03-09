@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Loads environment variables from a given FILE into the current shell.
+# usage: $0 <FILE>
+
+export $(grep -v '^#' $1 | xargs -0)

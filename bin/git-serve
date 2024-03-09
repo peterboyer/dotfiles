@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [[ ! -d "${GIT_SERVE_DIR:?GIT_SERVE_DIR not set!}" ]]; then
+	echo "error: $GIT_SERVE_DIR is not a directory"
+	exit 1
+fi
+
+docker run \
+	--rm \
+	-p 8080:80 \
+	-v $GIT_SERVE_DIR:/var/lib/git \
+	cirocosta/gitserver-http:formatting

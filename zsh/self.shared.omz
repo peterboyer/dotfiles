@@ -1,0 +1,26 @@
+zstyle ':omz:update' mode auto
+zstyle ':omz:update' frequency 7
+
+export ZSH_CACHE_DIR=~/.cache/oh-my-zsh
+[[ ! -d $ZSH_CACHE_DIR ]] && mkdir $ZSH_CACHE_DIR
+
+# https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="eastwood"
+
+# https://github.com/ohmyzsh/ohmyzsh/wiki/Settings#completion_waiting_dots
+COMPLETION_WAITING_DOTS="true"
+
+# https://github.com/ohmyzsh/ohmyzsh/wiki/Settings#disable_untracked_files_dirty
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# https://github.com/ohmyzsh/ohmyzsh/wiki/Settings#plugins
+plugins=(
+	git
+	fzf
+		# (https://github.com/junegunn/fzf)
+		# CTRL-T (search files from pwd)
+		# CTRL-R (search bash history)
+		# ALT-C (search dirs, cd into them)
+)
+
+source $ZSH/oh-my-zsh.sh

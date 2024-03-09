@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Multi-select images to force remove.
+# usage: $0
+
+docker images | tail -n +2 | fzf -m | awk '{print$1}' | xargs docker rmi -f

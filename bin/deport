@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Kills any process that is using a given PORT.
+# usage: $0 <PORT> [<FILTER>]
+# - PORT: numeric port to target (e.g. 3000)
+# - FILTER: (optional) grep filter to target processes by name
+
+port=$1
+filter=$2
+# get processes using port, discard first line of output
+matches="$(lsof -i:$port | tail -n +2)"
+# optionally filter process names with grep
+if [[ -n "$filter" ]]; then
+	matches="$(echo $matches | grep $filter)"
+fi
+if [[ -z "$matches" ]]; then
+	echo no matches
+	return
+fi
+pids="$(echo $matches | awk '{print$2}')"
+echo $pids | xargs kill
+echo $matches

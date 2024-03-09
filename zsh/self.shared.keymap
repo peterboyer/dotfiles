@@ -1,0 +1,4 @@
+# CTRL-A (attach to tmux)
+bindkey -s "^a" "tmux a\n"
+# CTRL-F (attach to tmux session via tmux-sessioniser)
+bindkey -s "^f" "tmux-sessioniser\n"

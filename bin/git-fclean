@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Multi-select untracked files/folders to delete.
+# usage: $0
+
+git clean -xdn | awk '{print$3}' | fzf -m | xargs rm -rf

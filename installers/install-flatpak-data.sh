@@ -4,8 +4,8 @@ UNAME="$(uname)"
 
 main() {
 	if [[ $UNAME == "Linux" ]]; then
-	backup $HOME/_zone/_dotfiles.private/signal $HOME/.var/app/org.signal.Signal/config/Signal/.
-	backup $HOME/_zone/_dotfiles.private/obs $HOME/.var/app/com.obsproject.Studio/config/obs-studio/basic/.
+	backup ~/_zone/_dotfiles.private/signal ~/.var/app/org.signal.Signal/config/Signal/.
+	backup ~/_zone/_dotfiles.private/obs ~/.var/app/com.obsproject.Studio/config/obs-studio/basic/.
 	fi
 }
 

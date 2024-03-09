@@ -1,35 +1,9 @@
-# == lazygit ==
-alias lg="XDG_CONFIG_HOME=$HOME/.config lazygit"
+export ZSH="~/.oh-my-zsh"
 
-# == nvm ==
-export NVM_DIR="$HOME/.nvm"
-NVM_DEFAULT_VERSION="v18*"
-NVM_DEFAULT_PATH="$(find $HOME/.nvm/versions/node -name $NVM_DEFAULT_VERSION | tail -n 1)"
-if [[ -n "$NVM_DEFAULT_PATH" ]]; then
-	export PATH="$NVM_DEFAULT_PATH/bin:$PATH"
-else
-	echo "warning(nvm): NVM_DEFAULT_VERSION=$NVM_DEFAULT_VERSION -> node version not installed!"
-fi
+export XDG_CONFIG_HOME=~/.config
+export XDG_CACHE_HOME=~/.cache
+export XDG_DATA_HOME=~/.local/share
+export XDG_STATE_HOME=~/.local/state
 
-# lazy load nvm (because it's very slow to init...)
-lazy_load_nvm() {
-	unset -f nvm
-	[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-	# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-}
-nvm() {
-	lazy_load_nvm
-	nvm $@
-}
-
-apply-node-env() {
-	if [[ -f .nvmrc && -r .nvmrc ]]; then
-		nvm use
-	fi
-}
-autoload -U add-zsh-hook
-
-# check current dir
-apply-node-env
-# check current dir on change
-add-zsh-hook chpwd apply-node-env
+source ~/_/dotfiles/zsh/self.shared
+source ~/_/dotfiles/zsh/zshrc.macos.nvm

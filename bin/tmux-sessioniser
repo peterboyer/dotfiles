@@ -1,8 +1,9 @@
 #!/usr/bin/env zsh
 
-dirs="$(find ~/_dev -mindepth 1 -maxdepth 1 -type d)"
-dirs+="\n$HOME/_dotfiles"
+# usage: $0 [<NAME>]
+# - NAME: name of existing session
 
+dirs=${TMUX_SESSIONISER_DIRS:-$HOME}
 selected=${1:-$(echo $dirs | fzf)}
 selected=${selected:?no target}
 

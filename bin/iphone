@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# usage: $0 mount|unmount
+
+if [[ "$1" == "mount" ]]; then
+	if [[ ! -d /run/media/iphone ]]; then
+		sudo mkdir -p /run/media/iphone
+		sudo chown -R $USER /run/media/iphone
+	fi
+	ifuse /run/media/iphone
+elif [[ "$1" == "unmount" ]]; then
+	fusermount -u /run/media/iphone
+else
+	echo "fatal: invalid command: $1"
+fi
