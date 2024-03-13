@@ -56,8 +56,17 @@
 	users.users.${user} = {
 		shell = pkgs.zsh;
 		isNormalUser = true;
-		extraGroups = [ "networkmanager" "wheel" "docker" ];
+		extraGroups = [ "networkmanager" "wheel" ];
 	};
+
+	virtualisation.docker = {
+		enable = true;
+		rootless = {
+			enable = true;
+			setSocketVariable = true;
+		};
+	};
+	users.extraGroups.docker.members = [ "${user}" ];
 
 	fonts = {
 		packages = with pkgs; [
