@@ -59,13 +59,7 @@
 		extraGroups = [ "networkmanager" "wheel" ];
 	};
 
-	virtualisation.docker = {
-		enable = true;
-		rootless = {
-			enable = true;
-			setSocketVariable = true;
-		};
-	};
+	virtualisation.docker.enable = true;
 	users.extraGroups.docker.members = [ "${user}" ];
 
 	fonts = {
