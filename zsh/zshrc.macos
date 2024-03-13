@@ -5,5 +5,8 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
+export TMUX_SESSIONISER_DIRS="$(find $HOME/_/dev -mindepth 1 -maxdepth 1 -type d)"
+TMUX_SESSIONISER_DIRS+="\n$HOME/_/dotfiles"
+
 source $HOME/_/dotfiles/zsh/self.shared
 source $HOME/_/dotfiles/zsh/zshrc.macos.nvm
