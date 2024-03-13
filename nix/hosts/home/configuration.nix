@@ -1,6 +1,10 @@
-{ config, pkgs, inputs, ... }:
+{ user, pkgs, ... }:
 
 {
+	imports = [
+		/etc/nixos/hardware-configuration.nix
+	];
+
 	system.stateVersion = "23.11";
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 	nixpkgs.config.allowUnfree = true;
@@ -44,6 +48,30 @@
 	  pulse.enable = true;
 	};
 
+	environment.shells = with pkgs; [ zsh ];
+	users.defaultUserShell = pkgs.zsh;
+	programs.zsh.enable = true;
+	programs.zsh.ohMyZsh.enable = true;
+
+	users.users.${user} = {
+		shell = pkgs.zsh;
+		isNormalUser = true;
+		extraGroups = [ "networkmanager" "wheel" "docker" ];
+	};
+
+	fonts = {
+		packages = with pkgs; [
+			# import ../../modules/fonts/berkeley-mono.nix
+			# (nerdfonts.override { fonts = [ "Berkeley Mono" ]; })
+		];
+		fontconfig = {
+			defaultFonts = {
+				emoji = [ "OpenMoji Color" ];
+				# monospace = [ "Berkeley Mono" ];
+			};
+		};
+	};
+
 	environment.systemPackages = with pkgs; [
 		git
 		gcc
@@ -52,12 +80,4 @@
 		killall
 		xclip
 	];
-
-	users.users = {
-		self = {
-			isNormalUser = true;
-			description = "Self";
-			extraGroups = [ "networkmanager" "wheel" ];
-		};
-	};
 }
