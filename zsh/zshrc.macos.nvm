@@ -1,5 +1,5 @@
 export NVM_DIR="$HOME/.nvm"
-NVM_DEFAULT_VERSION="v18*"
+NVM_DEFAULT_VERSION="v20*"
 NVM_DEFAULT_PATH="$(find $HOME/.nvm/versions/node -name $NVM_DEFAULT_VERSION | tail -n 1)"
 if [[ -n "$NVM_DEFAULT_PATH" ]]; then
 	export PATH="$NVM_DEFAULT_PATH/bin:$PATH"
