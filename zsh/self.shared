@@ -1,8 +1,8 @@
 # nvim, fallback to vim
 export EDITOR=$(which nvim &>/dev/null && echo "nvim" || echo "vim")
 
-export PATH="~/_/dotfiles/bin:$PATH"
+export PATH="$HOME/_/dotfiles/bin:$PATH"
 
-source ~/_/dotfiles/zsh/self.shared.alias
-source ~/_/dotfiles/zsh/self.shared.keymap
-source ~/_/dotfiles/zsh/self.shared.omz
+source $HOME/_/dotfiles/zsh/self.shared.alias
+source $HOME/_/dotfiles/zsh/self.shared.keymap
+source $HOME/_/dotfiles/zsh/self.shared.omz

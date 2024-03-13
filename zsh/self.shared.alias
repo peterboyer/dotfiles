@@ -1,6 +1,6 @@
-alias cd_="cd ~/_"
-alias cdv="cd ~/_/dev"
-alias cdd="cd ~/_/dotfiles"
+alias cd_="cd $HOME/_"
+alias cdv="cd $HOME/_/dev"
+alias cdd="cd $HOME/_/dotfiles"
 
 alias ls="eza"
 alias l="ls -l"
@@ -9,8 +9,8 @@ alias la="ls -la"
 alias v="$EDITOR"
 alias vi="$EDITOR"
 alias nvim="$EDITOR"
-alias cfg="(cd ~/_/dotfiles && $EDITOR)"
+alias cfg="(cd $HOME/_/dotfiles && $EDITOR)"
 
 alias lg="lazygit"
 
-alias todo="$EDITOR ~/_/todo.txt"
+alias todo="$EDITOR $HOME/_/todo.txt"
