@@ -12,5 +12,3 @@ alias nvim="$EDITOR"
 alias cfg="(cd $HOME/_/dotfiles && $EDITOR)"
 
 alias lg="lazygit"
-
-alias todo="$EDITOR $HOME/_/todo.txt"
