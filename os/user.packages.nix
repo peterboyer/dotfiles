@@ -28,4 +28,5 @@ with pkgs; [
 
 	discord
 	slack
+	signal-desktop
 ]
