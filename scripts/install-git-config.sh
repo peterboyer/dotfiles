@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [[ "$@" =~ "--help" ]]; then
   echo "usage: [<options>]"
