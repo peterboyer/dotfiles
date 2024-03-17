@@ -3,6 +3,11 @@
 		nixpkgs = {
 			url = "github:nixos/nixpkgs/nixos-23.11";
 		};
+
+		# mypkgs = {
+		#   url = "./modules/mypkgs";
+		#   inputs.nixpkgs.follows = "nixpkgs";
+		# };
 	};
 
 	outputs = { self, nixpkgs, ... }@inputs: {

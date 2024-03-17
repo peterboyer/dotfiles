@@ -20,6 +20,7 @@
 		};
 		packages = [
 			pkgs.openmoji-color
+			# inputs.mypkgs.berkeley-mono # wip
 		];
 	};
 }
