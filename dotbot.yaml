@@ -22,3 +22,5 @@
     ~/.config/lazygit: ./lazygit
     # kitty
     ~/.config/kitty: ./kitty
+    # ssh
+    ~/.ssh: ../dotfiles.untracked/ssh
