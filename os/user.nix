@@ -1,4 +1,4 @@
-{ user, pkgs, ... }:
+{ user, inputs, pkgs, ... }:
 
 {
 	users.users.${user} = with pkgs; {
@@ -12,15 +12,14 @@
 	users.extraGroups.docker.members = [ "${user}" ];
 
 	fonts = {
-		packages = with pkgs; [
-			# import ../../modules/fonts/berkeley-mono.nix
-			# (nerdfonts.override { fonts = [ "Berkeley Mono" ]; })
-		];
 		fontconfig = {
 			defaultFonts = {
 				emoji = [ "OpenMoji Color" ];
-				# monospace = [ "Berkeley Mono" ];
+				monospace = [ "BerkeleyMono Nerd Font Mono" ]; # linked by dotbot
 			};
 		};
+		packages = [
+			pkgs.openmoji-color
+		];
 	};
 }

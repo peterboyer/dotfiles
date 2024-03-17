@@ -5,15 +5,11 @@
 		};
 	};
 
-	outputs = { self, nixpkgs, ... }@inputs: let
-		system = "x86_64-linux";
-		pkgs = nixpkgs.legacyPackages.${system};
-	in {
+	outputs = { self, nixpkgs, ... }@inputs: {
 		nixosConfigurations.home = let
 			user = "self";
 			host = "self";
 		in nixpkgs.lib.nixosSystem {
-			inherit system;
 			specialArgs = {
 				inherit host;
 				inherit user;

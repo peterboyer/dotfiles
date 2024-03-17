@@ -24,3 +24,6 @@
     ~/.config/kitty: ./kitty
     # ssh
     ~/.ssh: ../dotfiles.untracked/ssh
+
+    # fonts
+    ~/.local/share/fonts/berkeley-mono: ../fonts/berkeley-mono

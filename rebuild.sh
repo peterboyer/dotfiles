@@ -3,6 +3,8 @@
 # usage: $0 <TARGET> [...]
 # - TARGET: "home" or "work"
 
+set -euo pipefail
+
 if [ "$1" == "home" ]; then
 	sudo nixos-rebuild switch --flake ./os#home --impure
 	dotbot -c ./dotbot.yaml

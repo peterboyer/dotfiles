@@ -1,6 +1,11 @@
 { host, pkgs, ... }:
 
 {
+	nixpkgs.config.allowUnfree = true;
+
+	system.stateVersion = "23.11";
+	nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
 	networking.hostName = host;
 	networking.networkmanager.enable = true;
 
@@ -44,8 +49,4 @@
 
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
-
-	system.stateVersion = "23.11";
-	nix.settings.experimental-features = [ "nix-command" "flakes" ];
-	nixpkgs.config.allowUnfree = true;
 }
