@@ -4,8 +4,7 @@
 
 - `./os`, system-specific config.
 - `./bin`, assorted utils and helpers.
-- `./scripts`, uncommon scripts.
-- `...`, applications config.
+- `./...`, applications config.
 
 ## Usage
 
