@@ -1,2 +1,3 @@
 brew "mas"
 brew "dotbot"
+brew "fnm"

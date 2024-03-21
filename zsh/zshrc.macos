@@ -9,4 +9,6 @@ export TMUX_SESSIONISER_DIRS="$(find $HOME/_/dev -mindepth 1 -maxdepth 1 -type d
 TMUX_SESSIONISER_DIRS+="\n$HOME/_/dotfiles"
 
 source $HOME/_/dotfiles/zsh/self.shared
-source $HOME/_/dotfiles/zsh/zshrc.macos.nvm
+
+# fnm, node/npm/yarn/etc.
+eval "$(fnm env --use-on-cd)"
