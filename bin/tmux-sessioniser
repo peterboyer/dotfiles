@@ -3,14 +3,20 @@
 # usage: $0 [<NAME>]
 # - NAME: name of existing session
 
-dirs=${TMUX_SESSIONISER_DIRS:-$HOME}
-selected=${1:-$(echo $dirs | fzf)}
-selected=${selected:?no target}
+dir=${1:-$(echo ${TMUX_SESSIONISER_DIRS:-$HOME} | fzf)}
+dirCode=$?
+if [[ $dirCode == 130 ]]; then
+	# 130 is fzf's exit status when interrupted.
+	exit
+elif [[ -z $dir ]]; then
+	echo "Error: No Target."
+	exit
+fi
 
-name=$(basename "$selected" | tr . _)
+name=$(basename "$dir" | tr . _)
 
 if ! tmux has-session -t=$name 2> /dev/null; then
-	tmux new-session -d -s $name -c $selected
+	tmux new-session -d -s $name -c $dir
 fi
 
 if [[ -z $TMUX ]]; then
