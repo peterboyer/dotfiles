@@ -1,12 +1,9 @@
 pkgs:
 
 with pkgs; [
-	dotbot
-
-	# zsh
-	zsh
 	eza
 	fzf
+
 	# git
 	git
 	# tmux
@@ -21,12 +18,25 @@ with pkgs; [
 	# kitty
 	kitty
 
+	jq
+	calc
+	cmatrix
+	dotbot
+	neofetch
+	dive
+	slides
+
 	firefox
 	brave
-
-	pdfarranger
-
 	discord
 	slack
 	signal-desktop
+	vlc
+	flameshot
+	peek
+	colorpicker
+	pdfarranger
+	audacity
+	blender
+	obs-studio
 ]
