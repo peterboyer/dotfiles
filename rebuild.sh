@@ -5,12 +5,14 @@
 
 set -euo pipefail
 
-if [ "$1" == "home" ]; then
+TARGET="${1:?Missing target argument.}"
+
+if [ "$TARGET" == "home" ]; then
 	sudo nixos-rebuild switch --flake ./os#home --impure
 	dotbot -c ./dotbot.yaml
-elif [ "$1" == "work" ]; then
+elif [ "$TARGET" == "work" ]; then
 	brew bundle install --file=./os/user.packages.brewfile
 	dotbot -c ./dotbot.yaml
 else
-	echo "Error: Missing target argument."
+	echo "Error: Invalid target."
 fi

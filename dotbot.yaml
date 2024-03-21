@@ -11,7 +11,12 @@
 
 - link:
     # zsh
-    ~/.zshrc: ./zsh/zshrc
+    ~/.zshrc:
+      if: '[ `uname` = Linux ]'
+      path: ./zsh/zshrc
+    ~/.zshrc:
+      if: '[ `uname` = Darwin ]'
+      path: ./zsh/zshrc.macos
     # git
     ~/.gitconfig: ./git/gitconfig
     # tmux

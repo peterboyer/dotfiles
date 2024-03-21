@@ -3,6 +3,6 @@ export EDITOR=$(which nvim &>/dev/null && echo "nvim" || echo "vim")
 
 export PATH="$HOME/_/dotfiles/bin:$PATH"
 
+source $HOME/_/dotfiles/zsh/self.shared.omz
 source $HOME/_/dotfiles/zsh/self.shared.alias
 source $HOME/_/dotfiles/zsh/self.shared.keymap
-source $HOME/_/dotfiles/zsh/self.shared.omz
