@@ -31,6 +31,7 @@ with pkgs; [
 	discord
 	slack
 	signal-desktop
+	spotify
 	vlc
 	flameshot
 	peek
