@@ -48,7 +48,7 @@ done
 
 if [[ -n "$imagedir" ]]; then
 	image="$(cat $imagedir/$imagerc | head -n 1)"
-	ports=$(cat $imagedir/$imagerc | grep PORT=)
+	portdefs=$(cat $imagedir/$imagerc | grep PORT=)
 fi
 
 user="$(id --user)"
@@ -68,15 +68,15 @@ args=(
 	"--user" "$user:$user"
 )
 
-IFS=$'\n' ports=(${ports})
-for port in ${ports[@]}
+IFS=$'\n' portdefs=(${portdefs})
+for portdef in ${portdefs[@]}
 do
-	matcher="$(echo $port | awk '{print$2}')"
-	port="$(echo $port | awk '{print$1}' | sed 's/PORT=//')"
+	port="$(echo $portdef | awk '{print$1}' | sed 's/PORT=//')"
+	matcher="$(cut -d ' ' -f2- <<< $portdef)"
 	if [[ -z "$matcher" ]]; then
 		args+=("--publish" "$port:$port")
 		report="$report[$port]"
-	elif [[ "${@:2}" =~ "$matcher" ]]; then
+	elif [[ "${@}" =~ "$matcher" ]]; then
 		args+=("--publish" "$port:$port")
 		report="$report[$port]"
 	fi
