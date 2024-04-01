@@ -72,11 +72,14 @@ IFS=$'\n' portdefs=(${portdefs})
 for portdef in ${portdefs[@]}
 do
 	port="$(echo $portdef | awk '{print$1}' | sed 's/PORT=//')"
-	matcher="$(cut -d ' ' -f2- <<< $portdef)"
-	if [[ -z "$matcher" ]]; then
-		args+=("--publish" "$port:$port")
-		report="$report[$port]"
-	elif [[ "${@}" =~ "$matcher" ]]; then
+	if [[ "$portdef" =~ " " ]]; then
+		matcher="$(cut -d ' ' -f2- <<< $portdef)"
+		echo \"$matcher\"
+		if [[ "${@}" =~ "$matcher" ]]; then
+			args+=("--publish" "$port:$port")
+			report="$report[$port]"
+		fi
+	else
 		args+=("--publish" "$port:$port")
 		report="$report[$port]"
 	fi
