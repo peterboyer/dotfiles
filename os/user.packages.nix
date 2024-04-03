@@ -41,4 +41,6 @@ with pkgs; [
 	blender
 	obs-studio
 	remmina
+	libimobiledevice
+	usbmuxd
 ]
