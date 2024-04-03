@@ -40,4 +40,5 @@ with pkgs; [
 	audacity
 	blender
 	obs-studio
+	remmina
 ]
