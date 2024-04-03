@@ -1,3 +1,6 @@
 brew "mas"
 brew "dotbot"
+
 brew "fnm"
+
+cask "keepingyouawake"

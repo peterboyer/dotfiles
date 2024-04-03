@@ -153,12 +153,20 @@
           }
         }
       }
+    },
+    "cask": {
+      "keepingyouawake": {
+        "version": "1.6.5",
+        "options": {
+          "full_name": "keepingyouawake"
+        }
+      }
     }
   },
   "system": {
     "macos": {
       "sonoma": {
-        "HOMEBREW_VERSION": "4.2.14",
+        "HOMEBREW_VERSION": "4.2.16",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.1.0.0.1.1700200546",
