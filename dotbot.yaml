@@ -11,17 +11,21 @@
 
 # zsh
 - link:
-    ~/.zshrc:
-      if: '[ `uname` = Linux ]'
-      path: ./zsh/zshrc
+    ~/.zshrc: ./zsh/zshrc
 - link:
     ~/.zshrc:
       if: '[ `uname` = Darwin ]'
       path: ./zsh/zshrc.macos
 
+# git
 - link:
-    # git
     ~/.gitconfig: ./git/gitconfig
+- link:
+    ~/.gitconfig:
+      if: '[ "$DOTBOT_ENV" = work ]'
+      path: ../dotfiles.untracked/git/gitconfig
+
+- link:
     # tmux
     ~/.tmux.conf: ./tmux/tmux.conf
     # nvim
@@ -34,6 +38,10 @@
     ~/.ssh: ../dotfiles.untracked/ssh
 
     # fonts
-    ~/.local/share/fonts/berkeley-mono: ../fonts/berkeley-mono
+    ~/.local/share/fonts/berkeley-mono:
+      if: '[ "$DOTBOT_ENV" = home ]'
+      path: ../fonts/berkeley-mono
     # signal
-    ~/.config/Signal: ../dotfiles.untracked/signal
+    ~/.config/Signal:
+      if: '[ "$DOTBOT_ENV" = home ]'
+      path: ../dotfiles.untracked/signal

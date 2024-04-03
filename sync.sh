@@ -12,4 +12,5 @@ elif [ "$TARGET" == "work" ]; then
 	brew bundle install --file=./os/user.packages.brewfile
 fi
 
+export DOTBOT_ENV="$TARGET"
 dotbot -c ./dotbot.yaml
