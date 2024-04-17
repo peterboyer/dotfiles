@@ -74,7 +74,6 @@ do
 	port="$(echo $portdef | awk '{print$1}' | sed 's/PORT=//')"
 	if [[ "$portdef" =~ " " ]]; then
 		matcher="$(cut -d ' ' -f2- <<< $portdef)"
-		echo \"$matcher\"
 		if [[ "${@}" =~ "$matcher" ]]; then
 			args+=("--publish" "$port:$port")
 			report="$report[$port]"
