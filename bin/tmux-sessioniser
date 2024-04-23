@@ -4,13 +4,15 @@
 # - NAME: name of existing session
 
 dir=${1:-$(echo ${TMUX_SESSIONISER_DIRS:-$HOME} | fzf)}
-dirCode=$?
-if [[ $dirCode == 130 ]]; then
-	# 130 is fzf's exit status when interrupted.
-	exit
+dir_code=$?
+if [[ $dir_code != 0 ]]; then
+	exit $dir_code
 elif [[ -z $dir ]]; then
-	echo "Error: No Target."
-	exit
+	echo "fatal: no target"
+	exit 1
+elif [[ ! -d $dir ]]; then
+	echo "fatal: invalid target: $dir"
+	exit 2
 fi
 
 name=$(basename "$dir" | tr . _)
