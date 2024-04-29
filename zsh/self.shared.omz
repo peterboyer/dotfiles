@@ -24,3 +24,8 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# add SSH_* info to prompt
+if [[ -n "$SSH_CLIENT" ]]; then
+	PS1="${PS1::-6}$fg[magenta](ssh)$reset_color%B$%b "
+fi

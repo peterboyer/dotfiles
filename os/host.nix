@@ -1,4 +1,4 @@
-{ host, pkgs, ... }:
+{ host, user, pkgs, ... }:
 
 {
 	nixpkgs.config.allowUnfree = true;
@@ -20,7 +20,25 @@
 	services.xserver.displayManager.sddm.enable = true;
 	services.xserver.desktopManager.plasma5.enable = true;
 
-	services.openssh.enable = true;
+	services.openssh = {
+		enable = true;
+		ports = [ 23 ];
+		settings = {
+			PasswordAuthentication = false;
+			AllowUsers = [ user ];
+			UseDns = true;
+			X11Forwarding = false;
+			PermitRootLogin = "no";
+		};
+		authorizedKeysFiles = [
+			"/home/${user}/.ssh/authorized_keys"
+		];
+	};
+	services.endlessh = {
+		enable = true;
+		port = 22;
+	};
+
 	services.printing.enable = true;
 	hardware.bluetooth.enable = true;
 

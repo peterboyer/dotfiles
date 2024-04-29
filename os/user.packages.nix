@@ -25,6 +25,7 @@ with pkgs; [
 	neofetch
 	dive
 	slides
+	ngrok
 
 	firefox
 	brave

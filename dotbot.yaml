@@ -36,6 +36,8 @@
     ~/.config/kitty: ./kitty
     # ssh
     ~/.ssh: ../dotfiles.untracked/ssh
+    # ngrok
+    ~/.config/ngrok: ../dotfiles.untracked/ngrok
 
     # fonts
     ~/.local/share/fonts/berkeley-mono:
