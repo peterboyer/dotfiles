@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 export GIT_SERVE_DIR="$HOME/_/mirrors"
 
 source $HOME/_/dotfiles/zsh/self.shared

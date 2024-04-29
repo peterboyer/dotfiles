@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 alias _="cd $HOME/_"
 alias dev="cd $HOME/_/dev"
 alias dot="cd $HOME/_/dotfiles"

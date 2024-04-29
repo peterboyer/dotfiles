@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # nvim, fallback to vim
 export EDITOR=$(which nvim &>/dev/null && echo "nvim" || echo "vim")
 
