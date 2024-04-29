@@ -14,7 +14,7 @@ with pkgs; [
 	trash-cli
 	nodejs_21
 	# lazygit
-	lazygit
+	unstable.lazygit
 	# kitty
 	kitty
 

@@ -1,4 +1,4 @@
-{ user, inputs, pkgs, ... }:
+{ user, pkgs, ... }:
 
 {
 	users.users.${user} = with pkgs; {
