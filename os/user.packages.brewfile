@@ -1,6 +1,21 @@
 brew "mas"
-brew "dotbot"
 
+brew "eza"
+brew "fzf"
+brew "openssh"
+
+brew "git"
+brew "tmux"
+brew "neovim"
+brew "ripgrep"
+brew "trash-cli"
 brew "fnm"
+brew "lazygit"
+cask "kitty"
+
+brew "jq"
+brew "calc"
+brew "slides"
+brew "dotbot"
 
 cask "keepingyouawake"

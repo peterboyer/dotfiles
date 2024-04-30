@@ -4,18 +4,13 @@ with pkgs; [
 	eza
 	fzf
 
-	# git
 	git
-	# tmux
 	tmux
-	# nvim
 	neovim
 	ripgrep
 	trash-cli
 	nodejs_21
-	# lazygit
 	unstable.lazygit
-	# kitty
 	kitty
 
 	jq
