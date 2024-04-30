@@ -36,9 +36,11 @@
     ~/.config/kitty: ./kitty
     # ssh
     ~/.ssh: ../dotfiles.untracked/ssh
-    # ngrok
-    ~/.config/ngrok: ../dotfiles.untracked/ngrok
 
+    # ngrok
+    ~/.config/ngrok:
+      if: '[ "$DOTBOT_ENV" = home ]'
+      path: ../dotfiles.untracked/ngrok
     # fonts
     ~/.local/share/fonts/berkeley-mono:
       if: '[ "$DOTBOT_ENV" = home ]'
