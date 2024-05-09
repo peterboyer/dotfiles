@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+# Usage: ./git-redate <HASH> [<TIMESTAMP>]
+
+HASH="$1"
+TIMESTAMP="$2"
+
+if [[ -z "$HASH" ]]; then
+	echo "fatal: missing commit hash argument"
+	exit 1
+fi
+
+if [[ -z "$EDITOR" ]]; then
+	echo "fatal: undefined variable: EDTIOR"
+	exit 1
+fi
+
+redate_file=".redate_file"
+if [[ -e "$redate_file" ]]; then
+	echo "fatal: $redate_file already exists"
+	echo "help: are you performing multiple redates in the same repo?"
+	echo "help: otherwise, delete $redate_file and try again"
+	exit 1
+fi
+
+commit_hash="$(git log $HASH -n 1 --format=oneline | awk '{print$1}')"
+commit_timestamp="$(git log $commit_hash -n 1 --format=fuller --date=iso-strict | tail -n +3 | head -n 1 | awk '{print$2}')"
+
+if [[ -n $TIMESTAMP ]]; then
+	commit_timestamp_new="$TIMESTAMP"
+else
+	trap "rm $redate_file;" EXIT
+	echo "$commit_timestamp" > $redate_file
+	redate_file_birth="$(stat $redate_file | grep Birth | awk '{print$3}')"
+	$EDITOR $redate_file
+	redate_file_change="$(stat $redate_file | grep Change | awk '{print$3}')"
+
+	if [[ "$redate_file_birth" == "$redate_file_change" ]]; then
+		echo "aborted: no changes detected for timestamp in $redate_file"
+		exit 2
+	fi
+
+	commit_timestamp_new="$(cat $redate_file)"
+fi
+
+echo "changing timestamp to $commit_timestamp_new (from $commit_timestamp)"
+
+export FILTER_BRANCH_SQUELCH_WARNING=1
+git filter-branch -f --env-filter "\
+	if [[ \$GIT_COMMIT == $commit_hash ]]; then \
+			export GIT_AUTHOR_DATE=\"$commit_timestamp_new\"; \
+			export GIT_COMMITTER_DATE=\"$commit_timestamp_new\"; \
+	fi \
+"
