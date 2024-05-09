@@ -18,4 +18,5 @@ brew "calc"
 brew "slides"
 brew "dotbot"
 
+cask "pika"
 cask "keepingyouawake"

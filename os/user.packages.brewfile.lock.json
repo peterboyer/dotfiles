@@ -709,6 +709,12 @@
         "options": {
           "full_name": "kitty"
         }
+      },
+      "pika": {
+        "version": "0.0.16",
+        "options": {
+          "full_name": "pika"
+        }
       }
     }
   },
@@ -720,7 +726,7 @@
         "Homebrew/homebrew-core": "api",
         "CLT": "15.3.0.0.1.1708646388",
         "Xcode": "15.1",
-        "macOS": "14.3"
+        "macOS": "14.4.1"
       }
     }
   }
