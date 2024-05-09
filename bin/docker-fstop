@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Multi-select running containers to stop.
+# usage: $0
+
+docker ps | tail -n +2 | fzf -m | awk '{print$1}' | xargs docker stop
