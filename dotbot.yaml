@@ -9,26 +9,15 @@
     ~/.config:
       force: true
 
-# zsh
-- link:
-    ~/.zshrc: ./zsh/zshrc
-- link:
-    ~/.zshrc:
-      if: '[ `uname` = Darwin ]'
-      path: ./zsh/zshrc.macos
-
 # git
 - link:
+    # zsh
+    ~/.zshrc: ./zsh/zshrc
+    # git
     ~/.gitconfig: ./git/gitconfig
-- link:
-    ~/.gitconfig:
-      if: '[ "$DOTBOT_ENV" = work ]'
-      path: ../dotfiles.untracked/git/gitconfig
-
-- link:
     # tmux
     ~/.tmux.conf: ./tmux/tmux.conf
-    # nvim
+    # neovim
     ~/.config/nvim: ./nvim
     # lazygit
     ~/.config/lazygit: ./lazygit
@@ -36,16 +25,3 @@
     ~/.config/kitty: ./kitty
     # ssh
     ~/.ssh: ../dotfiles.untracked/ssh
-
-    # ngrok
-    ~/.config/ngrok:
-      if: '[ "$DOTBOT_ENV" = home ]'
-      path: ../dotfiles.untracked/ngrok
-    # fonts
-    ~/.local/share/fonts/berkeley-mono:
-      if: '[ "$DOTBOT_ENV" = home ]'
-      path: ../fonts/berkeley-mono
-    # signal
-    ~/.config/Signal:
-      if: '[ "$DOTBOT_ENV" = home ]'
-      path: ../dotfiles.untracked/signal
