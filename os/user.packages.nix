@@ -22,6 +22,8 @@ with pkgs; [
 	slides
 	ngrok
 
+	monolith
+
 	firefox
 	brave
 	discord
