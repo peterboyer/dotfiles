@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+SHA="$(git log -n 1 --pretty=oneline | awk '{print$1}')"
+echo $SHA
+echo $SHA | xclip -selection clipboard
