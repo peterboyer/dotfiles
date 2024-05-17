@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+nixpkgs_sha="$( \
+	cat $HOME/_/dotfiles/os/flake.lock \
+		| jq '.nodes.nixpkgs.locked.rev' \
+		| xargs echo \
+	)"
+
+nix search nixpkgs/$nixpkgs_sha $1
