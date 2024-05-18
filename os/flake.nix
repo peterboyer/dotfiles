@@ -8,7 +8,7 @@
 		};
 	};
 
-	outputs = { self, nixpkgs, nixpkgs-unstable }: let
+	outputs = { nixpkgs, nixpkgs-unstable, ... }: let
 		system = "x86_64-linux";
 		overlay-unstable = final: prev: {
 			unstable = import nixpkgs-unstable {

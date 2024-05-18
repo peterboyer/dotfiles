@@ -4,12 +4,12 @@ with pkgs; [
 	eza
 	fzf
 
-	git
 	tmux
 	neovim
 	ripgrep
 	trash-cli
 	nodejs_21
+	cargo
 	unstable.lazygit
 	kitty
 

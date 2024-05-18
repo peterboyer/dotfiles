@@ -207,6 +207,7 @@ local config = function()
 	lspconfig.yamlls.setup(setup_opts)
 	lspconfig.dockerls.setup(setup_opts)
 	lspconfig.docker_compose_language_service.setup(setup_opts)
+	lspconfig.rnix.setup(setup_opts)
 
 	lspconfig.pylsp.setup({
 		capabilities = setup_opts.capabilities,
