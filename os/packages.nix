@@ -54,6 +54,7 @@ with pkgs;
 		blender
 		obs-studio
 		remmina
+		moonlight-qt
 
 		custom.youtube-dl
 	];
