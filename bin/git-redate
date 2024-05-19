@@ -51,4 +51,4 @@ git filter-branch -f --env-filter "\
 			export GIT_AUTHOR_DATE=\"$commit_timestamp_new\"; \
 			export GIT_COMMITTER_DATE=\"$commit_timestamp_new\"; \
 	fi \
-"
+" $commit_hash~..HEAD
