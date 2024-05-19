@@ -1,11 +1,11 @@
 { user, pkgs, ... }:
-
+let packages = (import ./packages.nix) pkgs; in
 {
-	users.users.${user} = with pkgs; {
-		shell = zsh;
+	users.users.${user} = {
+		shell = packages.shell;
 		isNormalUser = true;
 		extraGroups = [ "networkmanager" "wheel" ];
-		packages = (import ./user.packages.nix) pkgs;
+		packages = packages.user;
 	};
 
 	virtualisation.docker.enable = true;

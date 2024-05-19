@@ -1,5 +1,5 @@
 { host, user, pkgs, ... }:
-
+let packages = (import ./packages.nix) pkgs; in
 {
 	nixpkgs.config.allowUnfree = true;
 
@@ -9,8 +9,8 @@
 	networking.hostName = host;
 	networking.networkmanager.enable = true;
 
-	environment.shells = with pkgs; [ zsh ];
-	environment.systemPackages = (import ./host.packages.nix) pkgs;
+	environment.shells = with pkgs; [ packages.shell ];
+	environment.systemPackages = packages.sys;
 	programs.zsh.enable = true;
 	programs.zsh.ohMyZsh.enable = true;
 
