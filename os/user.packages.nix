@@ -1,6 +1,7 @@
 pkgs:
-
-with pkgs; [
+let custom = pkgs.custom pkgs; in
+with pkgs;
+[
 	eza
 	fzf
 
@@ -39,4 +40,6 @@ with pkgs; [
 	blender
 	obs-studio
 	remmina
+
+	custom.youtube-dl
 ]

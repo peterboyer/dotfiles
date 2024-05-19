@@ -16,6 +16,11 @@
 				config.allowUnfree = true;
 			};
 		};
+		overlay-custom = final: prev: {
+			custom = pkgs: {
+				youtube-dl = (import ../pkgs/youtube-dl { inherit pkgs; });
+			};
+		};
 	in {
 		nixosConfigurations.home = let
 			user = "self";
@@ -28,7 +33,7 @@
 			};
 			modules = [
 				# pkgs.unstable => nixpkgs-unstable
-				({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
+				({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable overlay-custom ]; })
 				./host.nix
 				./user.nix
 				/etc/nixos/hardware-configuration.nix
