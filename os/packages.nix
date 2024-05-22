@@ -27,6 +27,7 @@ with pkgs;
 		cargo
 		unstable.lazygit
 		kitty
+		sshfs
 
 		jq
 		calc
