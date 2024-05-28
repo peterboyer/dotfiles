@@ -37,6 +37,7 @@ with pkgs;
 		dive
 		slides
 		ngrok
+		nebula
 
 		monolith
 
