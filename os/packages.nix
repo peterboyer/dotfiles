@@ -13,6 +13,7 @@ with pkgs;
 		unzip
 		xclip
 		killall
+		envsubst
 	];
 
 	user = [
