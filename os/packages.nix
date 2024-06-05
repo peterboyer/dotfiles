@@ -40,6 +40,7 @@ with pkgs;
 		slides
 		ngrok
 		nebula
+		imagemagick
 
 		monolith
 

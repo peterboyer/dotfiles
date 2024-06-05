@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+magick mogrify -resize '10%' *.jpg
