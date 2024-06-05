@@ -59,6 +59,7 @@ with pkgs;
 		obs-studio
 		remmina
 		moonlight-qt
+		typora
 
 		custom.youtube-dl
 	];
