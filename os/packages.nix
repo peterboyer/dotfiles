@@ -32,6 +32,7 @@ with pkgs;
 
 		jq
 		calc
+		qrencode
 		cmatrix
 		dotbot
 		neofetch
