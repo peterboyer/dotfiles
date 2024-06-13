@@ -2,9 +2,9 @@
 set -eo pipefail
 
 # usage: . <target> [<flags>]
-# - <target>      "home" or "work"
+# - <target>: "home" or "work"
 # - --skip-install: skips installing os/packages
-# - --skip-link:    skips linking dotfiles
+# - --skip-dotfiles: skips installing dotfiles
 
 target=${1:?}
 
@@ -15,9 +15,9 @@ if [[ "$@" =~ "--skip-install" ]]; then
 	g_cond_install=false
 fi
 
-g_cond_link=true
-if [[ "$@" =~ "--skip-link" ]]; then
-	g_cond_link=false
+g_cond_dotfiles=true
+if [[ "$@" =~ "--skip-dotfiles" ]]; then
+	g_cond_dotfiles=false
 fi
 
 if [[ "$target" == "home" ]]; then

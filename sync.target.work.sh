@@ -25,8 +25,8 @@ else
 	log skip
 fi
 
-log set link
-if $g_cond_link; then
+log set dotfiles
+if $g_cond_dotfiles; then
 	log task
 	dotbot -c ./dotbot.yaml
 	dotbot -c ./dotbot.work.yaml
