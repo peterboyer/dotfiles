@@ -1,31 +1,46 @@
 # dotfiles
 
+- [NixOS](https://nixos.org/) (without home-manager).
+- [dotbot](https://github.com/anishathalye/dotbot).
+- [kitty](https://sw.kovidgoyal.net/kitty/) + [zsh](https://www.zsh.org/)
+  [neovim](https://neovim.io/) + [tmux](https://github.com/tmux/tmux).
+
 ## Structure
 
-- `./os`, system-specific config.
-- `./bin`, assorted utils and helpers.
-- `./...`, applications config.
+- `./os`,	NixOS + MacOS/Dariwn config.
+- `./bin`,	assorted helper bash scripts.
+- `./*`,	applications config.
 
 ## Usage
 
-### Configure System & Link Dotfiles
+### `home`
 
-Synchronise OS specific packages and configuration.
+Rebuilds NixOS configuration and installs packages.
 
 ```
 ./sync.sh home
+```
+
+### `work`
+
+Automatically installs homebrew/oh-my-zsh/etc and then install packages.
+
+```
 ./sync.sh work
 ```
 
-- `home` uses NixOS (Linux).
-    - Opted to not use `home-manager`, no real need so far.
-- `work` uses MacOS (Darwin).
-    - Using `homebrew` to install packages with a "Brewfile".
+### `--skip-install`
 
-### Only Link Dotfiles
-
-Only link dotfiles with `dotbot` (if already installed).
+Skips installing os/packages.
 
 ```
-./sync.sh
+./sync.sh home --skip-install
+```
+
+### `--skip-link`
+
+Skips linking dotfiles.
+
+```
+./sync.sh home --skip-link
 ```
