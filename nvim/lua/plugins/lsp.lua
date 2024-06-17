@@ -207,7 +207,10 @@ local config = function()
 	lspconfig.yamlls.setup(setup_opts)
 	lspconfig.dockerls.setup(setup_opts)
 	lspconfig.docker_compose_language_service.setup(setup_opts)
-	lspconfig.rnix.setup(setup_opts)
+
+	if vim.fn.executable("cargo") ~= 0 then
+		lspconfig.rnix.setup(setup_opts)
+	end
 
 	lspconfig.pylsp.setup({
 		capabilities = setup_opts.capabilities,
