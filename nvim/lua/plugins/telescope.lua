@@ -5,7 +5,7 @@ local keymap = function()
 	vim.keymap.set("n", "<leader>B", telescope.git_status)
 	vim.keymap.set("n", "<leader>f", telescope.live_grep)
 	vim.keymap.set("n", "<leader>F", function()
-		telescope.live_grep({ cwd = utils.buffer_dir() })
+		telescope.live_grep({ file_ignore_patterns = { "%.test%.tsx?", "%.spec%.tsx?" } })
 	end)
 	vim.keymap.set("n", "<leader>g", telescope.help_tags)
 	vim.keymap.set("n", "<leader>o", telescope.oldfiles)
@@ -32,7 +32,7 @@ return {
 					file_ignore_patterns = {
 						"%.git/",
 						"%.yarn/",
-						"%node_modules/",
+						"node_modules/",
 					},
 				},
 				pickers = {
