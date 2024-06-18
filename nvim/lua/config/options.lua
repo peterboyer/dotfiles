@@ -1,6 +1,6 @@
 vim.cmd("colorscheme mono")
 
-vim.o.mouse = false
+vim.o.mouse = ""
 vim.o.guicursor = ""
 vim.o.cursorline = true
 vim.o.colorcolumn = "80"
