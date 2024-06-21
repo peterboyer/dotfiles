@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+script_dir=$(dirname -- "$(readlink -f -- "$0")")
+dotfiles_dir=$script_dir/..
+
+source $script_dir/log.sh
+
+log set install.homebrew
+if [[ ! $@ =~ "--no-install" && -z $(command -v brew) ]]; then
+	log task
+
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+	log done
+else
+	log skip
+fi
+
+log set install.oh-my-zsh
+if [[ ! $@ =~ "--no-install" && ! -d ~/.oh-my-zsh ]]; then
+	log task
+
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+	log done
+else
+	log skip
+fi
+
+log set install.brewfile
+if [[ ! $@ =~ "--no-install" ]]; then
+	log task
+
+	brew bundle install --file=$script_dir/_work_/homebrew/brewfile
+
+	log done
+else
+	log skip
+fi
+
+log set dotfiles
+if [[ ! $@ =~ "--no-dotfiles" ]]; then
+	log task
+
+	dotbot -c $dotfiles_dir/dotbot.yaml
+	dotbot -c $dotfiles_dir/dotbot.work.yaml
+
+	log done
+else
+	log skip
+fi

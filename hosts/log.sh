@@ -10,7 +10,7 @@ function log() {
 	else
 
 		local tag=$command
-		local message="$target.$log_label"
+		local message=$log_label
 
 		if [[ $command == "task" ]]; then
 			echo -e "[$fg_cyan****$fg_reset] $message"

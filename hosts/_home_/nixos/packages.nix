@@ -1,19 +1,18 @@
-pkgs:
-let custom = pkgs.custom pkgs; in
+{ pkgs, pkgs-unstable, pkgs-custom, ... }:
 with pkgs;
 {
-	shell = zsh;
-
-	sys = [
+	system = [
 		gcc
 		vim
 		git
 		wget
 		htop
+		sshfs
 		unzip
 		xclip
 		killall
 		envsubst
+		neofetch
 	];
 
 	user = [
@@ -26,16 +25,14 @@ with pkgs;
 		trash-cli
 		nodejs_21
 		cargo
-		unstable.lazygit
+		pkgs-unstable.lazygit
 		kitty
-		sshfs
 
 		jq
 		calc
 		qrencode
 		cmatrix
 		dotbot
-		neofetch
 		dive
 		slides
 		ngrok
@@ -62,6 +59,6 @@ with pkgs;
 		moonlight-qt
 		typora
 
-		custom.youtube-dl
+		pkgs-custom.youtube-dl
 	];
 }

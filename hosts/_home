@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+sroot=$(dirname -- "$(readlink -f -- "$0")")
+droot=$sroot/..
+
+source $sroot/log.sh
+
+log set install.nixos
+if [[ ! $@ =~ "--no-install" ]]; then
+	log task
+
+	if [[ ! -h /etc/nixos ]]; then
+		sudo rm -rf /etc/nixos
+		sudo ln -sf $sroot/_home_/nixos /etc/nixos
+	fi
+
+	# [Flake not accessible through symlink](https://github.com/NixOS/nix/issues/8013)
+	sudo nixos-rebuild switch --flake "$(readlink -f /etc/nixos)#default" --show-trace
+
+	log done
+else
+	log skip
+fi
+
+log set dotfiles
+if [[ ! $@ =~ "--no-dotfiles" ]]; then
+	log task
+
+	dotbot -c $droot/dotbot.yaml
+	dotbot -c $droot/dotbot.home.yaml
+
+	log done
+else
+	log skip
+fi
