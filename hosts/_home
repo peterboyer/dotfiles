@@ -2,10 +2,11 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-sroot=$(dirname -- "$(readlink -f -- "$0")")
-droot=$sroot/..
+script_dir=$(dirname -- "$(readlink -f -- "$0")")
+dotfiles_dir=$script_dir/..
+nixos_dir=$(readlink -f /etc/nixos)
 
-source $sroot/log.sh
+source $script_dir/log.sh
 
 log set install.nixos
 if [[ ! $@ =~ "--no-install" ]]; then
@@ -13,11 +14,15 @@ if [[ ! $@ =~ "--no-install" ]]; then
 
 	if [[ ! -h /etc/nixos ]]; then
 		sudo rm -rf /etc/nixos
-		sudo ln -sf $sroot/_home_/nixos /etc/nixos
+		sudo ln -sf $script_dir/_home_/nixos /etc/nixos
+	fi
+
+	if [[ $@ =~ "--update" ]]; then
+		nix flake update $nixos_dir
 	fi
 
 	# [Flake not accessible through symlink](https://github.com/NixOS/nix/issues/8013)
-	sudo nixos-rebuild switch --flake "$(readlink -f /etc/nixos)#default" --show-trace
+	sudo nixos-rebuild switch --flake "$nixos_dir#default" --show-trace
 
 	log done
 else
@@ -28,8 +33,8 @@ log set dotfiles
 if [[ ! $@ =~ "--no-dotfiles" ]]; then
 	log task
 
-	dotbot -c $droot/dotbot.yaml
-	dotbot -c $droot/dotbot.home.yaml
+	dotbot -c $dotfiles_dir/dotbot.yaml
+	dotbot -c $dotfiles_dir/dotbot.home.yaml
 
 	log done
 else
