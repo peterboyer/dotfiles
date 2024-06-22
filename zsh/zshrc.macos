@@ -11,3 +11,6 @@ source $HOME/_/dotfiles/zsh/self.shared
 
 # fnm, node/npm/yarn/etc.
 eval "$(fnm env --use-on-cd)"
+
+# disable homebrew auto-updates
+export HOMEBREW_NO_AUTO_UPDATE=1
