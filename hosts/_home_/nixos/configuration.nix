@@ -25,10 +25,10 @@ in
 	};
 
 	services.xserver.enable = true;
+	services.displayManager.sddm.enable = true;
+	services.xserver.desktopManager.plasma5.enable = true;
 	services.xserver.xkb.layout = "us";
 	services.xserver.xkb.options = "terminate:ctrl_alt_bksp,caps:ctrl_modifier";
-	services.xserver.displayManager.sddm.enable = true;
-	services.xserver.desktopManager.plasma5.enable = true;
 
 	services.printing.enable = true;
 	hardware.bluetooth.enable = true;

@@ -23,7 +23,7 @@ with pkgs;
 		neovim
 		ripgrep
 		trash-cli
-		nodejs_21
+		nodejs_22
 		cargo
 		pkgs-unstable.lazygit
 		kitty
