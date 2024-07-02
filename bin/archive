@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Takes a target PDF file (via the File > Open With ... menu) and then copies it
+# to a target destination folder based on its contents.
+
+file=${1:?}
+
+type=""
+if [[ -n $(pdfgrep 'ELECTRICITY:' $file) ]]; then
+	type="electricity"
+elif [[ -n $(pdfgrep 'UTILITY THERMAL ENERGY:' $file) ]]; then
+	type="thermal"
+else
+	echo "error: unrecognised format"
+	exit 2
+fi
+
+home_name=$(ls $HOME/_/home | grep -v 'archived')
+home_path="$HOME/_/home/$home_name"
+
+if [[ $type == "electricity" || $type == "thermal" ]]; then
+	# 01 Jul 2024
+	date=$(pdfgrep -A 1 'Issue date:' $file | tail -n 1 | xargs echo)
+
+	if [[ -z $date ]]; then
+		echo "error: cannot extract date"
+		exit 3
+	fi
+
+	date_formatted=$(date '+%Y-%m-%d' -d $date)
+
+	cp $file $home_path/bills-energy/$date_formatted-$type.pdf
+else
+	echo "error: unhandled"
+	exit 4
+fi

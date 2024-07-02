@@ -38,6 +38,7 @@ with pkgs;
 		ngrok
 		nebula
 		imagemagick
+		pdfgrep
 
 		monolith
 
