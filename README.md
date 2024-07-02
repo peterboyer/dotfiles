@@ -7,8 +7,9 @@
 
 ## Structure
 
-- `/os`, NixOS + MacOS/Dariwn config.
+- `/hosts/*`, NixOS + MacOS/Dariwn config.
 - `/bin`, assorted helper bash scripts.
+- `/dotbot.*`, dotfiles config.
 - `/*`, applications config.
 
 ## Usage
@@ -18,7 +19,7 @@
 Rebuilds NixOS configuration and installs packages.
 
 ```
-./sync home
+./hosts/_home
 ```
 
 ### `work`
@@ -26,21 +27,23 @@ Rebuilds NixOS configuration and installs packages.
 Automatically installs homebrew/oh-my-zsh/etc and then install packages.
 
 ```
-./sync work
+./hosts/_work
 ```
 
-### `--skip-install`
+---
+
+### `--no-install`
 
 Skips installing os/packages.
 
 ```
-./sync home --skip-install
+./sync home --no-install
 ```
 
-### `--skip-dotfiles`
+### `--no-dotfiles`
 
 Skips installing dotfiles.
 
 ```
-./sync home --skip-dotfiles
+./sync home --no-dotfiles
 ```
