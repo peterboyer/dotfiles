@@ -12,6 +12,8 @@ if [[ -n $(pdfgrep 'ELECTRICITY:' $file) ]]; then
 	type="electricity"
 elif [[ -n $(pdfgrep 'UTILITY THERMAL ENERGY:' $file) ]]; then
 	type="thermal"
+elif [[ -n $(pdfgrep 'Notice of Levies Due' $file) ]]; then
+	type="strata"
 else
 	echo "error: unrecognised format"
 	exit 2
@@ -20,18 +22,32 @@ fi
 home_name=$(ls $HOME/_/home | grep -v 'archived')
 home_path="$HOME/_/home/$home_name"
 
-if [[ $type == "electricity" || $type == "thermal" ]]; then
-	# 01 Jul 2024
-	date=$(pdfgrep -A 1 'Issue date:' $file | tail -n 1 | xargs echo)
-
+function parse_date() {
+	date=$1
 	if [[ -z $date ]]; then
-		echo "error: cannot extract date"
+		echo "error: could not parse date"
 		exit 3
 	fi
+	echo $(date '+%Y-%m-%d' -d $date)
+}
 
-	date_formatted=$(date '+%Y-%m-%d' -d $date)
-
-	cp $file $home_path/bills-energy/$date_formatted-$type.pdf
+if [[ $type == "electricity" || $type == "thermal" ]]; then
+	# 01 Jul 2024
+	date=$(parse_date $(\
+		pdfgrep -A 1 'Issue date:' $file \
+		| tail -n 1 \
+		| xargs echo \
+	))
+	cp $file "${home_path}/bills-energy/${date}-${type}.pdf"
+elif [[ $type == "strata" ]]; then
+	# 01/06/2024
+	date=$(parse_date $(\
+		pdfgrep 'Issued' $file \
+		| xargs echo \
+		| awk '{ print $2 }' \
+		| awk -F '/' '{ print $3 "-" $2 "-" $1 }' \
+	))
+	cp $file "${home_path}/bills-strata/${date}-strata-quarterly.pdf"
 else
 	echo "error: unhandled"
 	exit 4
