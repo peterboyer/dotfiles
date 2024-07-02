@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# usage:
+# sync <target_dir> [--yes]
+# --yes => confirm and perform the sync (otherwise dry run)
+
+# example:
+# cd ~/_zone OR (`cdz`)
+# ./sync /run/media/backup-drive/
+
+# output example: (--itemize-changes)
+# | .d...p..... todo/             | . | nothing to do
+# | >f...p..... todo/todo.txt     | > | to copy to target
+# | *deleting   foo               | * | to delete from target
+
+source_dir="."
+target_dir=${1:?}
+
+if [[ ! -e $target_dir ]]; then
+	echo "error: TARGET_DIR \"$target_dir\" does not exist"
+	exit 1
+elif [[ ! -d $target_dir ]]; then
+	echo "error: TARGET_DIR \"$target_dir\" is not a directory"
+	exit 1
+elif [[ ! -w $target_dir ]]; then
+	echo "error: TARGET_DIR \"$target_dir\" is not writable"
+	exit 1
+fi
+
+rsync_args=(
+  "$source_dir"
+  "$target_dir"
+
+  # ! DANGER
+  "--delete-after"    # receiver deletes after transfer, not during
+
+  # metadata
+  "--recursive"       # recurse into directories
+  "--links"           # copy symlinks as symlinks
+  "--executability"   # preserve executability
+  "--times"           # preserve modification times
+  "--one-file-system" # don't cross filesystem boundaries
+
+  # output
+  "--itemize-changes" # output a change-summary for all updates
+
+  # exclude fs/files
+  "--exclude=lost+found"
+
+  # exclude .nosync dirs/files
+  "--exclude=*.nosync"
+
+  # exclude trashes
+  "--exclude=/.Trashes"
+  "--exclude=/.Trash-1000"
+
+  # exclude macOS clutter
+  "--exclude=/.DS_Store"
+  "--exclude=/.Spotlight-V100"
+  "--exclude=/.DocumentRevisions-V100"
+  "--exclude=/.fseventsd"
+  "--exclude=/.TemporaryItems"
+  "--exclude=/.HFS+ Private Directory Data"
+  "--exclude=/.com.apple.timemachine.supported"
+  "--exclude=/.com.apple.timemachine.donotpresent"
+  "--exclude=/.journal"
+  "--exclude=/.journal_info_block"
+
+  # exclude development leftovers
+  "--exclude=dist"
+  "--exclude=build"
+  "--exclude=node_modules"
+  "--exclude=Pods"
+  "--exclude=venv"
+  "--exclude=*.pyc"
+  "--exclude=__pycache__"
+)
+
+if [[ ! ${@} =~ "--yes" ]]; then
+  rsync_args+=("--dry-run")
+fi
+
+# echo rsync ${rsync_args[@]}
+rsync ${rsync_args[@]} | grep --color -E '^[>*]'
