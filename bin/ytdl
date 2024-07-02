@@ -2,7 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-output_dir=~/_/youtube
+output_dir=~/Downloads
 
 format="bestvideo[ext=webm]+bestaudio"
 format="$format/bestvideo[ext=mp4]+bestaudio"
