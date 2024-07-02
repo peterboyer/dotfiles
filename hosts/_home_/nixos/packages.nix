@@ -13,6 +13,10 @@ with pkgs;
 		killall
 		envsubst
 		neofetch
+
+		# https://www.qualys.com/2024/07/01/cve-2024-6387/regresshion.txt
+		# https://discourse.nixos.org/t/security-advisory-openssh-cve-2024-6387-regresshion-update-your-servers-asap/48220
+		pkgs-unstable.openssh
 	];
 
 	user = [
