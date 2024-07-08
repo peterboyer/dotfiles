@@ -63,6 +63,7 @@ with pkgs;
 		remmina
 		moonlight-qt
 		typora
+		gparted
 
 		pkgs-custom.youtube-dl
 	];
