@@ -13,6 +13,7 @@ with pkgs;
 		killall
 		envsubst
 		neofetch
+		usbimager
 		appimage-run
 
 		# https://www.qualys.com/2024/07/01/cve-2024-6387/regresshion.txt
