@@ -10,8 +10,8 @@ pkgs.stdenv.mkDerivation rec {
 
 	src = pkgs.fetchgit {
 		url = "https://github.com/ytdl-org/youtube-dl";
-		rev = "a08f2b7e4567cdc50c0614ee0a4ffdff49b8b6e6";
-		sha256 = "sha256-gbTB3FsMEmA6+Np418yRUXk+1jZUFenCPdu765vb49s=";
+		rev = "16f5bbc464602773e61eeafef51d1dbc47987bb4";
+		sha256 = "sha256-WmtAxtD1wnEX5rxspWE6YQ147usCgDZ5TtAxbAj/6E4=";
 	};
 
 	buildInputs = [
