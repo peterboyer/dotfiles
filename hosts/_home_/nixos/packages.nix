@@ -45,6 +45,7 @@ with pkgs;
 		nebula
 		imagemagick
 		pdfgrep
+		rar
 
 		monolith
 
