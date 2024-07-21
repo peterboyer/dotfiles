@@ -58,7 +58,7 @@ with pkgs;
 		vlc
 		flameshot
 		peek
-		colorpicker
+		gimp
 		pdfarranger
 		audacity
 		blender
