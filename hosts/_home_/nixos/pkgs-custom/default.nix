@@ -1,3 +1,3 @@
 pkgs: {
-	youtube-dl = (import ./youtube-dl { inherit pkgs; });
+	youtube-dl = pkgs.callPackage ./youtube-dl {};
 }
