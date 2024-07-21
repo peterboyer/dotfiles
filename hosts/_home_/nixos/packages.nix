@@ -67,8 +67,8 @@ with pkgs;
 		moonlight-qt
 		typora
 		gparted
-		godot_4
 
+		pkgs-custom.godot
 		pkgs-custom.youtube-dl
 	];
 }
