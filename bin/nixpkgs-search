@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 nixpkgs_sha="$( \
-	cat $HOME/_/dotfiles/os/flake.lock \
+	cat $HOME/_/dotfiles/hosts/_home_/nixos/flake.lock \
 		| jq '.nodes.nixpkgs.locked.rev' \
 		| xargs echo \
 	)"
