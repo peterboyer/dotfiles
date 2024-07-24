@@ -46,6 +46,7 @@ with pkgs;
 		imagemagick
 		pdfgrep
 		rar
+		p7zip
 
 		monolith
 
