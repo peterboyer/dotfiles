@@ -47,6 +47,7 @@ with pkgs;
 		pdfgrep
 		rar
 		p7zip
+		ffmpeg
 
 		monolith
 
