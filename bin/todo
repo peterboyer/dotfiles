@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
 
-$EDITOR $HOME/_/todo.txt
+files=($HOME/_/todo.txt)
+if [[ -e $HOME/_/todo.dates.txt ]]; then
+	files+=($HOME/_/todo.dates.txt)
+fi
+
+$EDITOR -O ${files[@]}
