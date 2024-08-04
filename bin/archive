@@ -2,6 +2,11 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+ERROR_UNKNOWN_FILE=1
+ERROR_UNHANDLED_FILE=2
+ERROR_DATE_CODE=4
+ERROR_DATE_EMPTY=5
+
 # Takes a target PDF file (via the File > Open With ... menu) and then copies it
 # to a target destination folder based on its contents.
 
@@ -14,41 +19,66 @@ elif [[ -n $(pdfgrep 'UTILITY THERMAL ENERGY:' $file) ]]; then
 	type="thermal"
 elif [[ -n $(pdfgrep 'Notice of Levies Due' $file) ]]; then
 	type="strata"
+elif [[ -n $(pdfgrep 'Property Location and Description' $file) ]]; then
+	type="council-rates"
 else
 	echo "error: unrecognised format"
-	exit 2
+	exit $ERROR_UNKNOWN_FILE
 fi
 
 home_name=$(ls $HOME/_/home | grep -v 'archived')
 home_path="$HOME/_/home/$home_name"
 
-function parse_date() {
+function iso_from_dd_mmm_yyyy() {
 	date=$1
-	if [[ -z $date ]]; then
-		echo "error: could not parse date"
-		exit 3
+	date_iso=$(date '+%Y-%m-%d' -d $date)
+	echo $date_iso
+}
+
+function iso_from_dd_mm_yyyy() {
+	date=$1
+	date_iso=$(echo $date | awk -F '/' '{ print $3 "-" $2 "-" $1 }')
+	echo $date_iso
+}
+
+function assert_date() {
+	code=$1
+	date=$2
+	if [[ $code != 0 ]]; then
+		echo "error: failed to extract date"
+		exit $ERROR_DATE_CODE
 	fi
-	echo $(date '+%Y-%m-%d' -d $date)
+	if [[ -z $date ]]; then
+		echo "error: extracted date is empty"
+		exit $ERROR_DATE_EMPTY
+	fi
 }
 
 if [[ $type == "electricity" || $type == "thermal" ]]; then
 	# 01 Jul 2024
-	date=$(parse_date $(\
-		pdfgrep -A 1 'Issue date:' $file \
-		| tail -n 1 \
-		| xargs echo \
-	))
+	set +e
+	date=$(pdfgrep -A 1 'Issue date:' $file | tail -n 1 | xargs echo)
+	assert_date $? $date
+	set -e
+	date=$(iso_from_dd_mmm_yyyy $date)
 	cp $file "${home_path}/bills-energy/${date}-${type}.pdf"
 elif [[ $type == "strata" ]]; then
 	# 01/06/2024
-	date=$(parse_date $(\
-		pdfgrep 'Issued' $file \
-		| xargs echo \
-		| awk '{ print $2 }' \
-		| awk -F '/' '{ print $3 "-" $2 "-" $1 }' \
-	))
+	set +e
+	date=$(pdfgrep 'Issued' $file | xargs echo | awk '{ print $2 }')
+	assert_date $? $date
+	set -e
+	date=$(iso_from_dd_mm_yyyy $date)
 	cp $file "${home_path}/bills-strata/${date}-strata-quarterly.pdf"
+elif [[ $type == "council-rates" ]]; then
+	# 01/06/2024
+	set +e
+	date=$(pdfgrep -A 2 'Issue Date' $file | tail -n 1 | awk '{ print $5 }')
+	assert_date $? $date
+	set -e
+	date=$(iso_from_dd_mm_yyyy $date)
+	cp $file "${home_path}/bills-council/${date}-${type}.pdf"
 else
 	echo "error: unhandled"
-	exit 4
+	exit $ERROR_UNHANDLED_FILE
 fi
