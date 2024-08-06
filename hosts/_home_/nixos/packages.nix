@@ -69,6 +69,7 @@ with pkgs;
 		moonlight-qt
 		typora
 		gparted
+		libreoffice
 
 		pkgs-custom.godot
 		pkgs-custom.youtube-dl
