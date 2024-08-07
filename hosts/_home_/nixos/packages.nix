@@ -70,6 +70,7 @@ with pkgs;
 		typora
 		gparted
 		libreoffice
+		wireshark
 
 		pkgs-custom.godot
 		pkgs-custom.youtube-dl

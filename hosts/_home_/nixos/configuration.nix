@@ -19,7 +19,7 @@ in
 		defaultUserShell = pkgs.zsh;
 		users.${user} = {
 			isNormalUser = true;
-			extraGroups = [ "wheel" "networkmanager" "docker" ];
+			extraGroups = [ "wheel" "networkmanager" "docker" "wireshark" ];
 			packages = packages.user;
 		};
 	};
@@ -47,6 +47,8 @@ in
 			"/home/${user}/.ssh/authorized_keys"
 		];
 	};
+
+	programs.wireshark.enable = true;
 
 	fonts = {
 		fontconfig = {
