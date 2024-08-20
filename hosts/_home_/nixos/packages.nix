@@ -71,6 +71,7 @@ with pkgs;
 		gparted
 		libreoffice
 		wireshark
+		telegram-desktop
 
 		pkgs-custom.godot
 		pkgs-custom.youtube-dl
