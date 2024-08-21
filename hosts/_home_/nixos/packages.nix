@@ -73,6 +73,8 @@ with pkgs;
 		wireshark
 		telegram-desktop
 
+		android-tools
+
 		pkgs-custom.godot
 		pkgs-custom.youtube-dl
 	];
