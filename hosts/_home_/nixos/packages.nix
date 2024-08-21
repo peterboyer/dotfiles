@@ -72,6 +72,7 @@ with pkgs;
 		libreoffice
 		wireshark
 		telegram-desktop
+		ventoy
 
 		android-tools
 
