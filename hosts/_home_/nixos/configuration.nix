@@ -22,6 +22,8 @@ in
 			extraGroups = [ "wheel" "networkmanager" "docker" "wireshark" ];
 			packages = packages.user;
 		};
+		users.guest = { isSystemUser = true; group = "guest"; };
+		groups.guest = {};
 	};
 
 	services.displayManager.sddm.enable = true;
@@ -49,6 +51,32 @@ in
 	};
 
 	programs.wireshark.enable = true;
+
+	# https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html
+	services.samba = {
+		enable = true;
+		openFirewall = true;
+		shares = {
+			share = {
+				"path" = "/home/${user}/_/share";
+				"write list" = user;
+				"read only" = "no";
+				"guest ok" = "yes";
+				"force user" = user;
+				"create mask" = "0770";
+				"directory mask" = "0770";
+				# @workaround iOS/macOS "File name too long" error.
+				"vfs objects" = "catia fruit streams_xattr";
+			};
+		};
+		extraConfig = ''
+			security = user
+			server role = standalone
+			map to guest = never
+			disable netbios = yes
+			server smb encrypt = required
+		'';
+	};
 
 	fonts = {
 		fontconfig = {
