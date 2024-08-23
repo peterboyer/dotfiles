@@ -45,3 +45,6 @@ vim.keymap.set("n", "<leader>^", '<cmd>:let @+ = expand("%")<cr>')
 vim.keymap.set("n", "gc", function()
 	vim.o.spell = not vim.o.spell
 end)
+
+-- search word under cursor without moving
+vim.keymap.set("n", "*", [[:let @/ = "\\<<C-r><C-w>\\>"<cr>:set hlsearch<cr>]])
