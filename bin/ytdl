@@ -52,12 +52,19 @@ for url in "${urls[@]}"; do
 
 	while $retry; do
 
+		# @workaround
+		# adds --user-agent to fix: "403: Forbidden" error.
+		# https://github.com/ytdl-org/youtube-dl/issues/32905#issuecomment-2282923081
+
 		set +e
 		youtube-dl \
 			$url \
 			-f $format \
 			-o "$output_dir/%(channel)s-%(upload_date)s-%(title)s-%(id)s.%(ext)s" \
-			--restrict-filenames
+			--restrict-filenames \
+			-x \
+			--verbose \
+			--user-agent "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.6533.103 Mobile Safari/537.36"
 		status=$?
 		set -e
 
