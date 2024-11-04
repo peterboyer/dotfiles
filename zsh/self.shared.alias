@@ -6,8 +6,8 @@ alias dot="cd $HOME/_/dotfiles"
 alias cfg="(cd $HOME/_/dotfiles && $EDITOR)"
 
 alias ls="eza"
-alias l="ls -l"
-alias la="ls -la"
+alias l="eza -la"
+alias la="eza -la"
 
 alias v="nvim"
 alias vi="nvim"
