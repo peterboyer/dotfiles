@@ -14,3 +14,6 @@ eval "$(fnm env --use-on-cd)"
 
 # disable homebrew auto-updates
 export HOMEBREW_NO_AUTO_UPDATE=1
+
+# nx, use local nx
+alias nx="npm exec nx"
