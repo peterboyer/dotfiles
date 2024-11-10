@@ -7,7 +7,7 @@
 			url = "github:nixos/nixpkgs/nixos-unstable";
 		};
 		nixpkgs-pinned = {
-			url = "github:nixos/nixpkgs/12bf09802d77264e441f48e25459c10c93eada2e";
+			url = "github:nixos/nixpkgs/83fb6c028368e465cd19bb127b86f971a5e41ebc";
 		};
 	};
 
