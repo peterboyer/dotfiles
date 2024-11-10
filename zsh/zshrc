@@ -6,4 +6,5 @@ source $HOME/_/dotfiles/zsh/self.shared
 
 # nodebox, node/npm/yarn/etc.
 alias npm="nodebox npm"
+alias npx="nodebox npx"
 alias yarn="nodebox yarn"
