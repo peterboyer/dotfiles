@@ -68,6 +68,12 @@ args=(
 	"--user" "$user:$user"
 )
 
+if [[ -n "$PORT" ]]; then
+	port=$PORT
+	args+=("--publish" "$port:$port")
+	report="$report[$port]"
+fi
+
 IFS=$'\n' portdefs=(${portdefs})
 for portdef in ${portdefs[@]}
 do
