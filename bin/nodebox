@@ -35,9 +35,14 @@
 # PORT=3000 web
 # PORT=5000 api
 
+if [[ "$UNSAFE" == '1' ]]; then
+	${@}
+	exit
+fi
+
 cmdtarget="${1:?required}"
 
-image="node:20"
+image="${IMAGE:-node:20}"
 imagerc=".nodeboxrc"
 
 # https://unix.stackexchange.com/a/22215
