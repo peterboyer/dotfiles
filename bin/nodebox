@@ -63,6 +63,7 @@ args=(
 	"--tty"
 	"--interactive"
 	"--volume" "$PWD:/mnt"
+	"--volume" "$HOME/.npm:/home/node/.npm"
 	"--workdir" "/mnt"
 	"--init"
 	"--user" "$user:$user"
