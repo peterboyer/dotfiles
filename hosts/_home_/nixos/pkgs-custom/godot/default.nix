@@ -44,13 +44,13 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "godot4";
-  version = "4.3.0";
-  commitHash = "e25f3c0d38d457b15a63720240736f564ce0501b";
+  version = "4.4.0-dev4";
+  commitHash = "36e6207bb48fafd43b98a458d0c461ad982b4e68";
 
   src = fetchgit {
     url = "https://github.com/godotengine/godot";
     rev = commitHash;
-    sha256 = "sha256-93bjEGkz9cRLpX4uTxWVmBU6kKzz+blwW7uzd4YHpSI=";
+    sha256 = "sha256-AHzTiO+vItA0p42HtMgHg55V0vhOP+aIDTncPVFie70=";
   };
 
   nativeBuildInputs = [
