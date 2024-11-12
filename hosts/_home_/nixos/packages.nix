@@ -30,7 +30,7 @@ with pkgs;
 		ripgrep
 		trash-cli
 		nodejs_22
-		cargo
+		rustup
 		pkgs-unstable.lazygit
 		kitty
 
