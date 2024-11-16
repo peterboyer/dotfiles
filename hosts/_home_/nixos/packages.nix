@@ -64,7 +64,6 @@ with pkgs;
 		pdfarranger
 		audacity
 		blender
-		obs-studio
 		remmina
 		moonlight-qt
 		typora
@@ -73,6 +72,12 @@ with pkgs;
 		wireshark
 		telegram-desktop
 		ventoy
+
+		(pkgs.wrapOBS {
+			plugins = with pkgs.obs-studio-plugins; [
+				obs-backgroundremoval
+			];
+		})
 
 		android-tools
 
