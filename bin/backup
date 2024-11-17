@@ -2,35 +2,51 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# usage:
-# sync <target_dir> [--yes]
-# --yes => confirm and perform the sync (otherwise dry run)
+target_dir=${1:-}
 
-# example:
-# cd ~/_zone OR (`cdz`)
-# ./sync /run/media/backup-drive/
+if [[ -z "$target_dir" ]]; then
+	cat << EOM
+Use rsync to backup the current directory to the given target directory.
 
-# output example: (--itemize-changes)
-# | .d...p..... todo/             | . | nothing to do
-# | >f...p..... todo/todo.txt     | > | to copy to target
-# | *deleting   foo               | * | to delete from target
+Usage:
+	backup <target_dir> [options]
 
-source_dir="."
-target_dir=${1:?}
+Options:
+	--yes        Confirm and execute the backup, otherwise does a dry-run.
+	--restore    Skips check for source directory to not be "~/_".
 
-if [[ ! -e $target_dir ]]; then
-	echo "error: TARGET_DIR \"$target_dir\" does not exist"
+Example:
+	backup /run/media/[user]/flash-drive
+
+	[output]*****************    [prefix]************
+	.d...p..... todo/            . nothing to do
+	>f...p..... todo/todo.txt    > copy to target
+	*deleting   foo              * delete from target
+EOM
+	exit
+elif [[ ! -e $target_dir ]]; then
+	echo "error: \"$target_dir\" does not exist"
 	exit 1
 elif [[ ! -d $target_dir ]]; then
-	echo "error: TARGET_DIR \"$target_dir\" is not a directory"
+	echo "error: \"$target_dir\" is not a directory"
 	exit 1
 elif [[ ! -w $target_dir ]]; then
-	echo "error: TARGET_DIR \"$target_dir\" is not writable"
+	echo "error: \"$target_dir\" is not writable"
 	exit 1
 fi
 
+source_dir="$PWD"
+source_dir_default="$HOME/_"
+
+if [[ $source_dir != $source_dir_default && ! ${@} =~ "--restore" ]]; then
+	echo "error: current directory is not default source: \"$source_dir_default\""
+	echo "       1. cd to \"$source_dir_default\" to continue,"
+	echo "       2. or, use --restore to bypass with current directory as source."
+	exit 2
+fi
+
 rsync_args=(
-  "$source_dir"
+  "$source_dir/."
   "$target_dir"
 
   # ! DANGER
