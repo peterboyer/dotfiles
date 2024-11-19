@@ -14,6 +14,7 @@ Usage:
 Options:
 	--yes        Confirm and execute the backup, otherwise does a dry-run.
 	--restore    Skips check for source directory to not be "~/_".
+	--debug      Echos out rsync command and args instead of executing.
 
 Example:
 	backup /run/media/[user]/flash-drive
@@ -46,6 +47,7 @@ if [[ $source_dir != $source_dir_default && ! ${@} =~ "--restore" ]]; then
 fi
 
 rsync_args=(
+  "rsync"
   "$source_dir/."
   "$target_dir"
 
@@ -54,9 +56,9 @@ rsync_args=(
 
   # metadata
   "--recursive"       # recurse into directories
-  "--links"           # copy symlinks as symlinks
+  "--links"	      # copy symlinks as symlinks
   "--executability"   # preserve executability
-  "--times"           # preserve modification times
+  "--times"	      # preserve modification times
   "--one-file-system" # don't cross filesystem boundaries
 
   # output
@@ -95,8 +97,11 @@ rsync_args=(
 )
 
 if [[ ! ${@} =~ "--yes" ]]; then
-  rsync_args+=("--dry-run")
+	rsync_args+=("--dry-run")
 fi
 
-# echo rsync ${rsync_args[@]}
-rsync ${rsync_args[@]} | grep --color -E '^[>*]'
+if [[ ${@} =~ "--debug" ]]; then
+	echo ${rsync_args[@]}
+else
+	${rsync_args[@]} | grep --color -E '^[>*]'
+fi
