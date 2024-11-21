@@ -4,3 +4,6 @@
 bindkey -s "^a" "tmux a\n"
 # CTRL-F (attach to tmux session via tmux-sessioniser)
 bindkey -s "^f" "tmux-sessioniser\n"
+# ALT-LEFT/RIGHT (fix word stepping)
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
