@@ -3,7 +3,7 @@
 # nvim, fallback to vim
 export EDITOR=$(which nvim &>/dev/null && echo "nvim" || echo "vim")
 
-export PATH="$HOME/_/dotfiles/bin:$PATH"
+export PATH=~/_/dotfiles/bin:~/.local/bin:~/bin:$PATH
 
 export function tmux-sessioniser() {
 	dirs="$(find $HOME/_/dev -mindepth 1 -maxdepth 1 -type d)"
