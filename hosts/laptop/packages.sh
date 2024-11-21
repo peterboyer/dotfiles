@@ -67,12 +67,14 @@ done
 
 for name in "${coprs[@]}"; do
 	if [[ -z "$(dnf copr list | grep $name)" ]]; then
+		echo [copr] adding "$name" ...
 		sudo dnf copr enable -y $name
 	fi
 done
 
 for name in "${repos[@]}"; do
 	if [[ ! -e /etc/yum.repos.d/$(basename $name) ]]; then
+		echo [repo] adding "$name" ...
 		tmp=$(mktemp)
 		rm $tmp
 		mkdir -p $tmp
@@ -82,18 +84,22 @@ for name in "${repos[@]}"; do
 done
 
 for name in "${keys[@]}"; do
+	echo [key] adding "$name" ...
 	sudo rpm --import $name
 done
 
 if [[ ${#packages_remove[@]} != 0 ]]; then
+	echo [packages] removing "${packages_remove[@]}" ...
 	sudo dnf remove -y ${packages_remove[@]}
 fi
 
 if [[ ${#packages_install[@]} != 0 ]]; then
+	echo [packages] installing "${packages_install[@]}" ...
 	sudo dnf install -y ${packages_install[@]}
 fi
 
 for name in "${srcs[@]}"; do
+	echo [scripts] $name ...
 	$base/$name
 done
 
