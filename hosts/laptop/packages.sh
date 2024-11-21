@@ -3,7 +3,13 @@ set -euo pipefail
 IFS=$'\n\t'
 
 packages=(
+	btrfs-assistant
+		./packages/snapper.sh
+
 	git
+	zsh
+		./packages/oh-my-zsh.sh
+
 	eza
 	fzf
 	tmux
