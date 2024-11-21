@@ -10,6 +10,9 @@ packages=(
 	kitty
 	fastfetch
 
+	./packages/docker.sh
+		https://download.docker.com/linux/fedora/docker-ce.repo
+
 	neovim
 		ripgrep
 		./packages/fnm.sh
