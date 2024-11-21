@@ -47,53 +47,53 @@ if [[ $source_dir != $source_dir_default && ! ${@} =~ "--restore" ]]; then
 fi
 
 rsync_args=(
-  "rsync"
-  "$source_dir/."
-  "$target_dir"
+	"rsync"
+	"$source_dir/."
+	"$target_dir"
 
-  # ! DANGER
-  "--delete-after"    # receiver deletes after transfer, not during
+	# ! DANGER
+	"--delete-after"    # receiver deletes after transfer, not during
 
-  # metadata
-  "--recursive"       # recurse into directories
-  "--links"	      # copy symlinks as symlinks
-  "--executability"   # preserve executability
-  "--times"	      # preserve modification times
-  "--one-file-system" # don't cross filesystem boundaries
+	# metadata
+	"--recursive"       # recurse into directories
+	"--links"           # copy symlinks as symlinks
+	"--executability"   # preserve executability
+	"--times"           # preserve modification times
+	"--one-file-system" # don't cross filesystem boundaries
 
-  # output
-  "--itemize-changes" # output a change-summary for all updates
+	# output
+	"--itemize-changes" # output a change-summary for all updates
 
-  # exclude fs/files
-  "--exclude=lost+found"
+	# exclude fs/files
+	"--exclude=lost+found"
 
-  # exclude .nosync dirs/files
-  "--exclude=*.nosync"
+	# exclude .nosync dirs/files
+	"--exclude=*.nosync"
 
-  # exclude trashes
-  "--exclude=/.Trashes"
-  "--exclude=/.Trash-1000"
+	# exclude trashes
+	"--exclude=/.Trashes"
+	"--exclude=/.Trash-1000"
 
-  # exclude macOS clutter
-  "--exclude=.DS_Store"
-  "--exclude=/.Spotlight-V100"
-  "--exclude=/.DocumentRevisions-V100"
-  "--exclude=/.fseventsd"
-  "--exclude=/.TemporaryItems"
-  "--exclude=/.HFS+ Private Directory Data"
-  "--exclude=/.com.apple.timemachine.supported"
-  "--exclude=/.com.apple.timemachine.donotpresent"
-  "--exclude=/.journal"
-  "--exclude=/.journal_info_block"
+	# exclude macOS clutter
+	"--exclude=.DS_Store"
+	"--exclude=/.Spotlight-V100"
+	"--exclude=/.DocumentRevisions-V100"
+	"--exclude=/.fseventsd"
+	"--exclude=/.TemporaryItems"
+	"--exclude=/.HFS+ Private Directory Data"
+	"--exclude=/.com.apple.timemachine.supported"
+	"--exclude=/.com.apple.timemachine.donotpresent"
+	"--exclude=/.journal"
+	"--exclude=/.journal_info_block"
 
-  # exclude development leftovers
-  "--exclude=dist"
-  "--exclude=build"
-  "--exclude=node_modules"
-  "--exclude=Pods"
-  "--exclude=venv"
-  "--exclude=*.pyc"
-  "--exclude=__pycache__"
+	# exclude development leftovers
+	"--exclude=dist"
+	"--exclude=build"
+	"--exclude=node_modules"
+	"--exclude=Pods"
+	"--exclude=venv"
+	"--exclude=*.pyc"
+	"--exclude=__pycache__"
 )
 
 if [[ ! ${@} =~ "--yes" ]]; then
