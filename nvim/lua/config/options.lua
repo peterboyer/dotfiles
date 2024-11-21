@@ -1,3 +1,4 @@
+vim.o.termguicolors = false
 vim.cmd("colorscheme mono")
 
 vim.o.mouse = ""

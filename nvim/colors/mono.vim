@@ -1,15 +1,16 @@
-scriptencoding utf-8
-
 augroup ReloadTheme
   autocmd!
   autocmd BufWritePost mono.vim colorscheme mono
 augroup end
 
+source $VIMRUNTIME/colors/vim.lua
+let g:colors_name="mono"
+
+let s:t_Co = &t_Co
+
 hi clear
 syntax reset
-let g:colors_name="mono"
 set background=dark
-set t_Co=256
 
 function! s:HL(group, fg, bg, attr)
   exec "hi " . a:group . " ctermfg=" . a:fg . " ctermbg=" . a:bg . " cterm=" . a:attr
