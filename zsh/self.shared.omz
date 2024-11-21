@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-zstyle ':omz:update' mode auto
-zstyle ':omz:update' frequency 7
-
 export ZSH=~/.oh-my-zsh
 export ZSH_CACHE_DIR="$HOME/.cache/oh-my-zsh"
 [[ ! -d "$ZSH_CACHE_DIR" ]] && mkdir "$ZSH_CACHE_DIR"
+
+zstyle ':omz:update' mode auto
+zstyle ':omz:update' frequency 7
 
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="eastwood"
