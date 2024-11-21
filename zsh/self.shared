@@ -5,12 +5,12 @@ export EDITOR=$(which nvim &>/dev/null && echo "nvim" || echo "vim")
 
 export PATH=~/_/dotfiles/bin:~/.local/bin:~/bin:$PATH
 
-export function tmux-sessioniser() {
-	dirs="$(find $HOME/_/dev -mindepth 1 -maxdepth 1 -type d)"
-	dirs+="\n$HOME/_/dotfiles"
+export function tmux-sessioniser () {
+	dirs="$(find ~/_/dev -mindepth 1 -maxdepth 1 -type d)\n"
+	dirs+=~/_/dotfiles
 	TMUX_SESSIONISER_DIRS="$dirs" /usr/bin/env tmux-sessioniser
 }
 
-source $HOME/_/dotfiles/zsh/self.shared.omz
-source $HOME/_/dotfiles/zsh/self.shared.alias
-source $HOME/_/dotfiles/zsh/self.shared.keymap
+. ~/_/dotfiles/zsh/self.shared.omz
+. ~/_/dotfiles/zsh/self.shared.alias
+. ~/_/dotfiles/zsh/self.shared.keymap
