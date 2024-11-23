@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+_rst="\033[0m"
+_red="\033[31m"
+_green="\033[32m"
+_blue="\033[34m"
+_grey="\033[37m"
+
+if [[ ! -e $2 ]]; then
+	echo -e "[${_red}fail${_rst}] $1 => ${_red}$2${_rst}"
+	exit 1
+fi
+if [[ ${FORCE:-} != 'yes' && -e $1 ]]; then
+	echo -e "[${_grey}skip${_rst}] ${_grey}$1${_rst} => $2"
+	exit
+fi
+sudoexec=$(if [[ ${@} =~ "--sudo" ]]; then echo "sudo"; fi)
+$sudoexec rm -rf $1 || true
+$sudoexec mkdir -p $(dirname $1)
+(cd $(dirname $1) && $sudoexec ln -sf $2 $(basename $1))
+echo -e "[${_green}link${_rst}] ${_green}$1${_rst} => $2"

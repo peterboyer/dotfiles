@@ -31,7 +31,7 @@ packages=(
 		https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 )
 
-base=$(dirname $0)
+base=$(dirname $(readlink -f $0))
 packages_lock=()
 packages_lock_path=~/.local/state/packages.lock
 if [[ -r $packages_lock_path ]]; then
