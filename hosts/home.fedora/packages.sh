@@ -29,6 +29,8 @@ packages=(
 	brave-browser
 		https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 		https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+
+	flatpak:com.spotify.Client
 )
 
 base=$(dirname $(readlink -f $0))
@@ -44,12 +46,15 @@ for name in "${packages_lock[@]}"; do
 done
 
 coprs=()
+flatpaks=()
 repos=()
 keys=()
 srcs=()
 for name in "${packages[@]}"; do
 	if [[ $name == copr:* ]]; then
 		coprs+=(${name#copr:})
+	elif [[ $name == flatpak:* ]]; then
+		flatpaks+=(${name#flatpak:})
 	elif [[ $name == *.repo ]]; then
 		repos+=($name)
 	elif [[ $name == *.asc ]]; then
@@ -102,6 +107,11 @@ fi
 if [[ ${#packages_install[@]} != 0 ]]; then
 	echo [packages] installing "${packages_install[@]}" ...
 	sudo dnf install -y ${packages_install[@]}
+fi
+
+if [[ ${#flatpaks[@]} != 0 ]]; then
+	echo [flatpaks] installing "${flatpaks[@]}" ...
+	flatpak install -y ${flatpaks[@]}
 fi
 
 for name in "${srcs[@]}"; do
