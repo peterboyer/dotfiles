@@ -102,4 +102,8 @@ if [[ -n "$DEBUG" ]]; then
 	debug="echo"
 fi
 
+if [[ -n "$LOCAL" ]]; then
+	args+=("--network" "host")
+fi
+
 $debug docker run ${args[@]} $image /bin/sh -c "sh -c \"$cmd\""
