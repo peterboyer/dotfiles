@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 
-export GIT_SERVE_DIR=~/_/mirrors
-
 . ~/_/dotfiles/zsh/self.shared
 
-# fnm, node/npm/yarn/etc.
-eval "$(fnm env --use-on-cd)"
+export GIT_SERVE_DIR=~/_/mirrors
 
 # nodebox, node/npm/yarn/etc.
 alias npm="nodebox npm"

@@ -5,10 +5,9 @@ alias dev="cd $HOME/_/dev"
 alias dot="cd $HOME/_/dotfiles"
 alias cfg="(cd $HOME/_/dotfiles && $EDITOR)"
 
-alias ls="eza"
 alias l="eza -la"
-alias la="eza -la"
-
 alias v="nvim"
-alias vi="nvim"
 alias lg="lazygit"
+
+# nx, use local nx
+alias nx="npm exec nx"
