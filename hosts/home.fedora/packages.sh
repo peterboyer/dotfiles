@@ -13,6 +13,7 @@ packages=(
 	eza
 	fzf
 	tmux
+	htop
 	kitty
 	fastfetch
 
