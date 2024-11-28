@@ -32,6 +32,8 @@ packages=(
 		https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 
 	flatpak:com.spotify.Client
+
+	android-tools
 )
 
 base=$(dirname $(readlink -f $0))
