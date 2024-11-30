@@ -20,18 +20,18 @@
 # Config:
 # - Add a .nodeboxrc file with the Docker image name you would like to use.
 # // .nodeboxrc
-# node:23
+# node:22
 #
 # - Add ports you wish to expose as newline delimited PORT=XXXX instructions.
 #
 # // .nodeboxrc
-# node:23
+# node:22
 # PORT=3000
 # PORT=5000
 #
 # - Add optional matcher to only expose port if string is found in args.
 # // .nodeboxrc
-# node:23
+# node:22
 # PORT=3000 web
 # PORT=5000 api
 
@@ -42,7 +42,7 @@ fi
 
 cmdtarget="${1:?required}"
 
-image="${IMAGE:-node:23}"
+image="${IMAGE:-node:22}"
 imagerc=".nodeboxrc"
 
 # https://unix.stackexchange.com/a/22215
