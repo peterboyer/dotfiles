@@ -8,6 +8,9 @@ dotlink ~/.local/bin/host-packages  ~/_/dotfiles/hosts/home.fedora/packages.sh
 
 dotlink ~/.local/share/fonts/berkeley-mono ~/_/fonts/berkeley-mono
 
-dotlink ~/.config/Signal  ~/_/dotfiles.untracked/signal
+dotlink ~/.config/Signal ~/_/dotfiles.untracked/signal
+
+dotlink /etc/samba/smb.conf ~/_/dotfiles/samba/smb.conf --sudo --copy
+# sudo systemctl restart smb.service
 
 . ~/_/dotfiles/links.sh
