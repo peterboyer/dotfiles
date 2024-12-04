@@ -34,6 +34,9 @@ packages=(
 	flatpak:com.spotify.Client
 
 	android-tools
+
+	libheif-freeworld
+		https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 )
 
 base=$(dirname $(readlink -f $0))
