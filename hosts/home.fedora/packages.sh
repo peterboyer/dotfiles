@@ -33,6 +33,7 @@ packages=(
 
 	flatpak:com.spotify.Client
 
+	vlc
 	android-tools
 
 	libheif-freeworld
