@@ -32,7 +32,6 @@ return {
 					file_ignore_patterns = {
 						"%.git/",
 						"%.yarn/",
-						"node_modules/",
 					},
 				},
 				pickers = {
