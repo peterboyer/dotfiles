@@ -34,6 +34,8 @@ packages=(
 	flatpak:com.spotify.Client
 
 	vlc
+	godot
+	blender
 	android-tools
 
 	libheif-freeworld
