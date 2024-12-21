@@ -8,3 +8,4 @@ dotlink ~/.npmrc      ~/_/dotfiles.untracked/npm/npmrc
 dotlink ~/.yarnrc     ~/_/dotfiles.untracked/yarn/yarnrc
 
 . ~/_/dotfiles/links.sh
+dotlink ~/.config/ngrok/ngrok.yml ~/_/dotfiles.untracked/ngrok/ngrok.yml
