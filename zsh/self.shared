@@ -12,7 +12,7 @@ export function tmux-sessioniser () {
 }
 
 # fnm, node/npm/yarn/etc.
-eval "$(fnm env --use-on-cd)"
+eval "$(fnm env --use-on-cd --resolve-engines)"
 
 . ~/_/dotfiles/zsh/self.shared.omz
 . ~/_/dotfiles/zsh/self.shared.alias
