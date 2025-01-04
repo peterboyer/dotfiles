@@ -39,6 +39,7 @@ packages=(
 	android-tools
 	pdfarranger
 	gimp
+	telegram-desktop
 
 	libheif-freeworld
 		https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
