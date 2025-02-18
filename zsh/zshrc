@@ -8,3 +8,4 @@ export GIT_SERVE_DIR=~/_/mirrors
 alias npm="nodebox npm"
 alias npx="nodebox npx"
 alias yarn="nodebox yarn"
+alias pnpm="nodebox pnpm"
