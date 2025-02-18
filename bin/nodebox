@@ -42,9 +42,10 @@ fi
 
 cmdtarget="${1:?required}"
 
-image="${IMAGE:-node:22}"
+image="${IMAGE:-nodebox}"
 imagerc=".nodeboxrc"
 
+# find nearest nodeboxrc in parent folders
 # https://unix.stackexchange.com/a/22215
 imagedir=$(pwd)
 while [[ "$imagedir" != "" && ! -e "$imagedir/$imagerc" ]]; do
@@ -52,26 +53,48 @@ while [[ "$imagedir" != "" && ! -e "$imagedir/$imagerc" ]]; do
 done
 
 if [[ -n "$imagedir" ]]; then
-	image="$(cat $imagedir/$imagerc | head -n 1)"
+	imagedef="$(cat $imagedir/$imagerc | head -n 1)"
+	if [[ -n $imagedef && ! $imagedef =~ '=' ]]; then
+		image=$imagedef
+	fi
 	portdefs=$(cat $imagedir/$imagerc | grep PORT=)
+fi
+
+# build nodebox image as needed
+if [[ $image == "nodebox" && -z "$(docker images | grep nodebox)" ]]; then
+	dockerfile=$(mktemp)
+	cat <<- EOF > $dockerfile
+		FROM node:22-alpine
+		RUN npm -g install pnpm@10
+		USER node
+		RUN pnpm config set store-dir /.pnpm-store
+	EOF
+	docker build --file $dockerfile --tag nodebox .
+	rm $dockerfile
 fi
 
 user="$(id --user)"
 
 cmd="/usr/local/bin/$cmdtarget ${@:2}"
-if [[ "$2" == "shell" ]]; then
+if [[ $1 == "shell" ]]; then
 	cmd="exec sh"
 fi
+
+name=$(basename $PWD)
+
+mkdir -p ~/.npm
+mkdir -p ~/.local/share/pnpm/store
 
 args=(
 	"--rm"
 	"--tty"
 	"--interactive"
-	"--volume" "$PWD:/mnt"
+	"--workdir" "/.mnt/$name"
+	"--volume" "$PWD:/.mnt/$name"
 	"--volume" "$HOME/.npm:/home/node/.npm"
-	"--workdir" "/mnt"
+	"--volume" "$HOME/.local/share/pnpm/store:/.pnpm-store"
 	"--init"
-	"--user" "$user:$user"
+	"--user" "$user"
 )
 
 if [[ -n "$PORT" ]]; then
