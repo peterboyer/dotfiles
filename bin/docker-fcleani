@@ -3,4 +3,4 @@
 # Multi-select images to force remove.
 # usage: $0
 
-docker images | tail -n +2 | fzf -m | awk '{print$1}' | xargs docker rmi -f
+docker images | tail -n +2 | fzf -m | awk '{print$3}' | xargs docker rmi -f
