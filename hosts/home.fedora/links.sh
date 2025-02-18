@@ -7,6 +7,7 @@ dotlink ~/.local/bin/host-links     ~/_/dotfiles/hosts/home.fedora/links.sh
 dotlink ~/.local/bin/host-packages  ~/_/dotfiles/hosts/home.fedora/packages.sh
 
 dotlink ~/.local/share/fonts/berkeley-mono ~/_/fonts/berkeley-mono
+dotlink ~/.local/share/fonts/apple-fonts ~/_/fonts/apple-fonts
 
 dotlink ~/.config/Signal ~/_/dotfiles.untracked/signal
 
