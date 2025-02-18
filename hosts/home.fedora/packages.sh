@@ -32,6 +32,9 @@ packages=(
 		https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 
 	flatpak:com.spotify.Client
+	flatpak:rest.insomnia.Insomnia
+	flatpak:com.discordapp.Discord
+	flatpak:org.signal.Signal
 
 	vlc
 	godot
