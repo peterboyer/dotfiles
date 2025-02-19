@@ -1,0 +1,6 @@
+#!/bin/bash
+
+/etc/default/keyboard
+xrdb -merge -I$HOME ~/.xresources
+autorandr --change
+exec awesome
