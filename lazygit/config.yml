@@ -12,13 +12,15 @@ customCommands:
     context: 'global'
     command: 'git pull'
     subprocess: true
+  - key: <c-p>
+    description: "Prune"
+    context: localBranches
+    command: git remote prune origin
+    stream: true
+    loadingText: Pruning...
 
   - key: 'P'
     context: 'global'
     command: 'git push --force-with-lease'
     subprocess: true
 
-  - key: 'U'
-    context: 'global'
-    command: 'git remote prune origin'
-    subprocess: true
