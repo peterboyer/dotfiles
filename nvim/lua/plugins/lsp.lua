@@ -201,7 +201,19 @@ local config = function()
 	lspconfig.tsserver.setup(setup_opts)
 	lspconfig.jsonls.setup(setup_opts)
 	lspconfig.html.setup(setup_opts)
-	lspconfig.tailwindcss.setup(setup_opts)
+	lspconfig.tailwindcss.setup({
+		capabilities = setup_opts.capabilities,
+		settings = {
+			-- https://github.com/tailwindlabs/tailwindcss/discussions/7554#discussioncomment-4440751
+			tailwindCSS = {
+				experimental = {
+					classRegex = {
+						{ "(?:twMerge|twJoin)\\(([^\\);]*)[\\);]", "[`'\"]([^'\"`,;]*)[`'\"]?" },
+					},
+				},
+			},
+		},
+	})
 	lspconfig.marksman.setup(setup_opts)
 	lspconfig.bashls.setup(setup_opts)
 	lspconfig.yamlls.setup(setup_opts)
