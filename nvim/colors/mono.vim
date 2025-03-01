@@ -105,8 +105,9 @@ call s:HL('SpellLocal', s:_, s:_, 'undercurl')
 
 " Language
 let s:Comment = s:Green
-let s:Reserved = s:Purple
+let s:Reserved = s:Purple " Keywords/Operators/etc.
 let s:String = s:Grey
+let s:Tag = s:Teal " HTML/JSX
 
 call s:HL('Comment', s:Comment, s:_, s:_)
 call s:HL('Define', s:_, s:_, s:_)
@@ -126,7 +127,7 @@ call s:HL('SpecialKey', s:_, s:_, s:_)
 call s:HL('Statement', s:Reserved, s:_, s:_)
 call s:HL('StorageClass', s:_, s:_, s:_)
 call s:HL('String', s:String, s:_, s:_)
-call s:HL('Tag', s:_, s:_, s:_)
+call s:HL('Tag', s:Tag, s:_, s:_)
 call s:HL('Title', s:_, s:_, 'bold')
 call s:HL('Type', s:_, s:_, s:_)
 
