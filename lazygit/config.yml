@@ -8,10 +8,6 @@ gui:
   commandLogSize: 1
 
 customCommands:
-  - key: 'p'
-    context: 'global'
-    command: 'git pull'
-    subprocess: true
   - key: <c-p>
     description: "Prune"
     context: localBranches
@@ -19,8 +15,9 @@ customCommands:
     stream: true
     loadingText: Pruning...
 
-  - key: 'P'
-    context: 'global'
-    command: 'git push --force-with-lease'
-    subprocess: true
-
+  - key: <c-u>
+    description: "Unhook"
+    context: global
+    command: rm -r ./.git/hooks
+    stream: true
+    loadingText: Unhooking...
