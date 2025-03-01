@@ -26,14 +26,19 @@ fi
 commit_hash="$(git log $HASH -n 1 --format=oneline | awk '{print$1}')"
 commit_timestamp="$(git log $commit_hash -n 1 --format=fuller --date=iso-strict | tail -n +3 | head -n 1 | awk '{print$2}')"
 
+stat_args="-c '%z'"
+if [[ $(uname) == "Darwin" ]]; then
+	stat_args="-f '%Sm' -t '%F %H:%M:%S %z'"
+fi
+
 if [[ -n $TIMESTAMP ]]; then
 	commit_timestamp_new="$TIMESTAMP"
 else
 	trap "rm $redate_file;" EXIT
 	echo "$commit_timestamp" > $redate_file
-	redate_file_birth="$(stat $redate_file | grep Birth | awk '{print$3}')"
+	redate_file_birth="$(echo $stat_args $redate_file | xargs stat)"
 	$EDITOR $redate_file
-	redate_file_change="$(stat $redate_file | grep Change | awk '{print$3}')"
+	redate_file_change="$(echo $stat_args $redate_file | xargs stat)"
 
 	if [[ "$redate_file_birth" == "$redate_file_change" ]]; then
 		echo "aborted: no changes detected for timestamp in $redate_file"
