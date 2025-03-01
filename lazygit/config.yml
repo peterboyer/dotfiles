@@ -21,3 +21,11 @@ customCommands:
     command: rm -r ./.git/hooks
     stream: true
     loadingText: Unhooking...
+
+  - key: <c-r>
+    description: "Redate"
+    context: commits
+    command: git-redate {{.SelectedLocalCommit.Hash}}
+    stream: true
+    subprocess: true
+    loadingText: Redating...
