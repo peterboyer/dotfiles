@@ -47,7 +47,7 @@ call s:HL('Whitespace', s:Whitespace, s:_, s:_)
 call s:HL('StatusLine', s:Black, s:White, s:_)
 call s:HL('StatusLineNC', s:Black, s:DarkGrey, s:_)
 call s:HL('Modified', s:_, s:Red, s:_)
-" call s:HL('BufferAttribute', s:_, s:Red, s:_)
+call s:HL('BufferAttribute', s:DarkGrey, s:_, s:_)
 
 " Cursor
 call s:HL('Cursor', s:_, s:_, s:_)
