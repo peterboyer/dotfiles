@@ -33,7 +33,7 @@ let s:Teal = '6'
 let s:Orange = '166'
 
 let s:Cursor = '234'
-let s:Whitespace = '241'
+let s:Whitespace = '238'
 let s:Float = '237'
 
 " Base
