@@ -64,18 +64,17 @@ rsync_args=(
 	# output
 	"--itemize-changes" # output a change-summary for all updates
 
-	# exclude fs/files
-	"--exclude=lost+found"
-
 	# exclude .nosync dirs/files
 	"--exclude=*.nosync"
 
-	# exclude trashes
+	# exclude fs/files
+	"--exclude=lost+found"
 	"--exclude=/.Trashes"
 	"--exclude=/.Trash-1000"
 
 	# exclude macOS clutter
 	"--exclude=.DS_Store"
+	"--exclude=._*"
 	"--exclude=/.Spotlight-V100"
 	"--exclude=/.DocumentRevisions-V100"
 	"--exclude=/.fseventsd"
@@ -91,6 +90,7 @@ rsync_args=(
 	"--exclude=build"
 	"--exclude=node_modules"
 	"--exclude=.nx"
+	"--exclude=.next"
 	"--exclude=Pods"
 	"--exclude=venv"
 	"--exclude=*.pyc"
