@@ -90,6 +90,7 @@ rsync_args=(
 	"--exclude=dist"
 	"--exclude=build"
 	"--exclude=node_modules"
+	"--exclude=.nx"
 	"--exclude=Pods"
 	"--exclude=venv"
 	"--exclude=*.pyc"
