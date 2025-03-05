@@ -25,7 +25,7 @@ customCommands:
   - key: <c-r>
     description: "Redate"
     context: commits
-    command: git-redate {{.SelectedLocalCommit.Hash}}
+    command: git-redate {{.SelectedLocalCommit.Hash}} || true
     stream: true
     subprocess: true
     loadingText: Redating...
