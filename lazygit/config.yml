@@ -15,7 +15,7 @@ customCommands:
     stream: true
     loadingText: Pruning...
 
-  - key: <c-u>
+  - key: <c-y>
     description: "Unhook"
     context: global
     command: rm -r ./.git/hooks
