@@ -1,49 +1,29 @@
 # dotfiles
 
-- [NixOS](https://nixos.org/) (without home-manager) +
-  [dotbot](https://github.com/anishathalye/dotbot)
-- [kitty](https://sw.kovidgoyal.net/kitty/) + [zsh](https://www.zsh.org/) +
-  [neovim](https://neovim.io/) + [tmux](https://github.com/tmux/tmux)
+- [`./kitty`](./kitty) ([kitty](https://github.com/kovidgoyal/kitty))
+  - using [gruvbox](https://github.com/morhetz/gruvbox) theme
+- [`./zsh`](./zsh) ([zsh](https://www.zsh.org/))
+  - using [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) for plugins
+- [`./tmux`](./tmux) ([tmux](https://github.com/tmux/tmux))
+- [`./nvim`](./nvim) ([neovim](https://neovim.io/))
+  - using custom [monochrome](./nvim/colors/mono.vim) theme
+  - using [lazy](https://github.com/folke/lazy.nvim) for plugins
+  - using [oil](https://github.com/stevearc/oil.nvim) for file navigation/manipulation
+  - using [mason](https://github.com/williamboman/mason.nvim) for plugins' external dependencies
+  - using [telescope](https://github.com/nvim-telescope/telescope.nvim) for fuzzy search
+  - using [lspconfig](https://github.com/neovim/nvim-lspconfig) for lsp configuration
+  - using [typescript-tools](https://github.com/pmizio/typescript-tools.nvim) for advanced typescript lsp support
+  - ... see `./nvim/lua/plugins` for more!
+- [`./lazygit`](./lazygit/) ([lazygit](https://github.com/jesseduffield/lazygit))
 
-## Structure
+## OS
 
-- `/hosts/*`, NixOS + MacOS/Dariwn config.
-- `/bin`, assorted helper bash scripts.
-- `/dotbot.*`, dotfiles config.
-- `/*`, applications config.
+### `./hosts/home.fedora`
 
-## Usage
+- `./links.sh`, apply all symlinks (alias `host-links`)
+- `./update.sh`, update system and all installed packages (alias `host-update`)
+- `./packages.sh`, install all specified packages (alias `host-packages`)
 
-### `home`
+## Preview
 
-Rebuilds NixOS configuration and installs packages.
-
-```
-./hosts/_home
-```
-
-### `work`
-
-Automatically installs homebrew/oh-my-zsh/etc and then install packages.
-
-```
-./hosts/_work
-```
-
----
-
-### `--no-install`
-
-Skips installing os/packages.
-
-```
-./sync home --no-install
-```
-
-### `--no-dotfiles`
-
-Skips installing dotfiles.
-
-```
-./sync home --no-dotfiles
-```
+![preview.png](./preview.png)
