@@ -7,9 +7,6 @@ return {
 		},
 	},
 
-	-- toggle quickfix/locationlist
-	{ "milkypostman/vim-togglelist" },
-
 	-- add/change/delete surrounding brackets/quotes/tags
 	{ "tpope/vim-surround" },
 

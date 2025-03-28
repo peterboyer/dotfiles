@@ -1,5 +1,5 @@
 local keys = {
-	{ "-", ":Oil<cr>" },
+	{ "-", ":Oil<cr>", silent = true, desc = "Oil" },
 }
 
 --

@@ -251,16 +251,13 @@ local config = function()
 		for _, v in pairs(keys_buffer) do
 			vim.keymap.set("n", v[1], function()
 				print("[" .. v[1] .. "] LSP: Not Attached")
-			end)
+			end, { desc = "LSP " .. v["desc"] .. " (Not Attached)" })
 		end
 	end
 	local keymap_on_buffer = function(buffer)
 		for _, v in pairs(keys_buffer) do
-			local opts = { buffer = buffer }
-			local keyopts = v[3] or {}
-			for K, V in pairs(keyopts) do
-				opts[K] = V
-			end
+			vim.keymap.del("n", v[1])
+			local opts = { buffer = buffer, desc = "LSP " .. v["desc"] .. " (Attached)" }
 			vim.keymap.set("n", v[1], v[2], opts)
 		end
 		-- enable completion triggered by <c-x><c-o>

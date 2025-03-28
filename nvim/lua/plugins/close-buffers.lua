@@ -1,5 +1,5 @@
 local keys = {
-	{ "<leader>Q", ":Bdelete menu<cr>" },
+	{ "<leader>Q", ":Bdelete menu<cr>", silent = true, desc = "Close Buffers" },
 }
 
 return {

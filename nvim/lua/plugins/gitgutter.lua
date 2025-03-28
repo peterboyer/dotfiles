@@ -1,9 +1,9 @@
 local keys = {
-	{ "]c", ":GitGutterNextHunk<cr>" },
-	{ "[c", ":GitGutterPrevHunk<cr>" },
-	{ "<leader>yp", ":GitGutterPreviewHunk<cr>" },
-	{ "<leader>yu", ":GitGutterUndoHunk<cr>" },
-	{ "<leader>ys", ":GitGutterStageHunk<cr>" },
+	{ "]c", ":GitGutterNextHunk<cr>", silent = true, desc = "GitGutter Hunk Next" },
+	{ "[c", ":GitGutterPrevHunk<cr>", silent = true, desc = "GitGutter Hunk Prev" },
+	{ "<leader>yp", ":GitGutterPreviewHunk<cr>", silent = true, desc = "GitGutter Hunk Preview" },
+	{ "<leader>yu", ":GitGutterUndoHunk<cr>", silent = true, desc = "GitGutter Hunk Reset" },
+	{ "<leader>ys", ":GitGutterStageHunk<cr>", silent = true, desc = "GitGutter Hunk Stage" },
 }
 
 --

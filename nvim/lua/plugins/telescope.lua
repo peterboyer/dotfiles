@@ -1,18 +1,18 @@
 local keys = {
-	{ "<leader>p", ":Telescope find_files<cr>" },
-	{ "<leader>o", ":Telescope oldfiles<cr>" },
-	{ "<leader>f", ":Telescope live_grep<cr>" },
+	{ "<leader>p", ":Telescope find_files<cr>", silent = true, desc = "Telescope Find Files" },
+	{ "<leader>o", ":Telescope oldfiles<cr>", silent = true, desc = "Telescope Old Files" },
+	{ "<leader>f", ":Telescope live_grep<cr>", silent = true, desc = "Telescope Grep" },
 
 	-- vim
-	{ "<leader>b", ":Telescope buffers<cr>" },
-	{ "<leader>h", ":Telescope help_tags<cr>" },
+	{ "<leader>b", ":Telescope buffers<cr>", silent = true, desc = "Telescope Buffers" },
+	{ "<leader>h", ":Telescope help_tags<cr>", silent = true, desc = "Telescope Help" },
 
 	-- git
-	{ "<leader>g", ":Telescope git_status<cr>" },
+	{ "<leader>g", ":Telescope git_status<cr>", silent = true, desc = "Telescope Git Status" },
 
 	-- lsp
-	{ "<leader>i", ":Telescope lsp_document_symbols<cr>" },
-	{ "<leader>I", ":Telescope lsp_workspace_symbols<cr>" },
+	{ "<leader>i", ":Telescope lsp_document_symbols<cr>", silent = true, desc = "Telescope LSP Symbols (Document)" },
+	{ "<leader>I", ":Telescope lsp_workspace_symbols<cr>", silent = true, desc = "Telescope LSP Symbols (Workspace)" },
 }
 
 return {

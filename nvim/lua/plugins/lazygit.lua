@@ -1,5 +1,5 @@
 local keys = {
-	{ "<leader>lg", ":LazyGit<cr>" },
+	{ "<leader>lg", ":LazyGit<cr>", silent = true, desc = "LazyGit" },
 }
 
 return {
