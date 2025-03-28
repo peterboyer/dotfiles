@@ -256,7 +256,6 @@ local config = function()
 	end
 	local keymap_on_buffer = function(buffer)
 		for _, v in pairs(keys_buffer) do
-			vim.keymap.del("n", v[1])
 			local opts = { buffer = buffer, desc = "LSP " .. v["desc"] .. " (Attached)" }
 			vim.keymap.set("n", v[1], v[2], opts)
 		end
