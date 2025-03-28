@@ -1,12 +1,10 @@
-local keymap = function()
-	vim.keymap.set("n", "<leader>Q", ":Bdelete menu<cr>")
-end
+local keys = {
+	{ "<leader>Q", ":Bdelete menu<cr>" },
+}
 
 return {
 	{
 		"asheq/close-buffers.vim",
-		config = function()
-			keymap()
-		end,
+		keys = keys,
 	},
 }

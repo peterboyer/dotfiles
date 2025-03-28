@@ -1,7 +1,9 @@
-vim.cmd([[
-	let g:localvimrc_persistent = 1
-]])
+--
+vim.g.localvimrc_persistent = 1
+--
 
 return {
-	{ "embear/vim-localvimrc" },
+	{
+		"embear/vim-localvimrc",
+	},
 }

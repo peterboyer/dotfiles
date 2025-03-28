@@ -1,16 +1,18 @@
+local keys = {
+	{ "<leader>lg", ":LazyGit<cr>" },
+}
+
 return {
-  "kdheepak/lazygit.nvim",
-  cmd = {
-    "LazyGit",
-    "LazyGitConfig",
-    "LazyGitCurrentFile",
-    "LazyGitFilter",
-    "LazyGitFilterCurrentFile",
-  },
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
-  keys = {
-    { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-  }
+	"kdheepak/lazygit.nvim",
+	keys = keys,
+	cmd = {
+		"LazyGit",
+		"LazyGitConfig",
+		"LazyGitCurrentFile",
+		"LazyGitFilter",
+		"LazyGitFilterCurrentFile",
+	},
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+	},
 }

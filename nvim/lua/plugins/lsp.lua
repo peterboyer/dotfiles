@@ -2,23 +2,26 @@ local keys = {
 	buffer = function()
 		local map = function(fn)
 			return {
-				{ "n", "K", vim.lsp.buf.hover },
-				{ "n", "gd", vim.lsp.buf.definition },
-				{ "n", "gD", vim.lsp.buf.type_definition },
-				{ "n", "gi", vim.lsp.buf.implementation },
-				{ "n", "go", vim.lsp.buf.declaration },
-				{ "n", "gr", vim.lsp.buf.references },
-				{ "n", "gs", vim.lsp.buf.signature_help },
-				{ "n", "gn", fn.goto_next_reference },
-				{ "n", "gN", fn.goto_prev_reference },
-				{ "n", "gf", fn.format },
-				{ "n", "<leader>rn", fn.rename, { expr = true } },
-				{ "n", "<leader>RN", ":TypescriptRenameFile<cr>" },
-				{ { "n", "v" }, "<leader>ca", vim.lsp.buf.code_action },
-				{ { "n", "v" }, "<leader>cx", fn.autofix },
-				{ "n", "<leader>wa", vim.lsp.buf.add_workspace_folder },
-				{ "n", "<leader>wr", vim.lsp.buf.remove_workspace_folder },
-				{ "n", "<leader>wl", fn.list_workspace_folders },
+				-- hover
+				{ "K", vim.lsp.buf.hover, desc = "Hover" },
+				{ "<leader>k", vim.lsp.buf.signature_help, desc = "Hover Signature" },
+
+				-- goto/inspect
+				{ "gn", fn.goto_next_reference, desc = "Goto Next Symbol Reference" },
+				{ "gN", fn.goto_prev_reference, desc = "Goto Prev Symbol Reference" },
+				{ "gd", vim.lsp.buf.definition, desc = "Goto Definition" },
+				{ "gD", vim.lsp.buf.implementation, desc = "Goto Implementation" },
+				{ "gr", vim.lsp.buf.references, desc = "Goto References" },
+				{ "gt", vim.lsp.buf.type_definition, desc = "Goto Type Definition" },
+
+				-- format/renaming
+				{ "gf", fn.format, desc = "Format" },
+				{ "<leader>rn", vim.lsp.buf.rename, desc = "Rename Symbol" },
+				{ "<leader>RN", ":TSToolsRenameFile<cr>", desc = "Rename File" },
+
+				-- code actions
+				{ "<leader>ca", vim.lsp.buf.code_action, desc = "Fix" },
+				{ "<leader>cx", ":TSToolsFixAll<cr>", desc = "Fix All" },
 			}
 		end
 		return map({
@@ -29,37 +32,6 @@ local keys = {
 			goto_prev_reference = function()
 				require("illuminate").goto_prev_reference()
 				vim.cmd('execute "normal zz"')
-			end,
-			rename = function()
-				return ":IncRename " .. vim.fn.expand("<cword>")
-			end,
-			autofix = function()
-				-- pre-save to avoid outdated cycle* errors
-				vim.api.nvim_command("write")
-				-- save cursor position
-				local prevcursor = vim.api.nvim_win_get_cursor(0)
-				-- goto to first line
-				vim.api.nvim_win_set_cursor(0, { 1, 0 })
-				-- add listener for when code action is applied to the buffer
-				vim.api.nvim_create_augroup("CodeActionChange", { clear = true })
-				vim.api.nvim_create_autocmd("TextChanged", {
-					group = "CodeActionChange",
-					callback = function()
-						-- remove listener for code action change
-						vim.api.nvim_clear_autocmds({ group = "CodeActionChange" })
-						-- save changes
-						vim.api.nvim_command("write")
-					end,
-				})
-				-- run fix all auto-fixable code action
-				vim.lsp.buf.code_action({
-					filter = function(action)
-						return string.find(action.title, "auto.fixable") ~= nil
-					end,
-					apply = true,
-				})
-				-- reset cursor
-				vim.api.nvim_win_set_cursor(0, prevcursor)
 			end,
 			format = function()
 				vim.lsp.buf.format({ async = true })
@@ -72,11 +44,11 @@ local keys = {
 	diagnostic = function()
 		local map = function(fn)
 			return {
-				{ "n", "gl", vim.diagnostic.open_float },
-				{ "n", "gL", fn.toggle },
-				{ "n", "gQ", vim.diagnostic.setqflist },
-				{ "n", "[d", vim.diagnostic.goto_prev },
-				{ "n", "]d", vim.diagnostic.goto_next },
+				{ "gl", vim.diagnostic.open_float },
+				{ "gL", fn.toggle },
+				{ "gQ", vim.diagnostic.setqflist },
+				{ "[d", vim.diagnostic.goto_prev },
+				{ "]d", vim.diagnostic.goto_next },
 			}
 		end
 		return map({
@@ -198,7 +170,6 @@ local config = function()
 	local setup_opts = { capabilities = require("cmp_nvim_lsp").default_capabilities() }
 	lspconfig.lua_ls.setup(setup_opts)
 	lspconfig.eslint.setup(setup_opts)
-	lspconfig.tsserver.setup(setup_opts)
 	lspconfig.jsonls.setup(setup_opts)
 	lspconfig.html.setup(setup_opts)
 	lspconfig.tailwindcss.setup({
@@ -228,10 +199,12 @@ local config = function()
 		capabilities = setup_opts.capabilities,
 		settings = {
 			pylsp = {
-				plugins = { pycodestyle = {
-					ignore = { "W191", "W391" },
-					maxLineLength = 100,
-				} },
+				plugins = {
+					pycodestyle = {
+						ignore = { "W191", "W391" },
+						maxLineLength = 100,
+					},
+				},
 			},
 		},
 	})
@@ -253,8 +226,7 @@ local config = function()
 	end
 
 	-- addons
-	require("inc_rename").setup()
-	require("typescript").setup({ go_to_source_definition = { fallback = true } })
+	require("typescript-tools").setup({})
 	require("illuminate").configure({ providers = { "lsp" }, under_cursor = false })
 
 	-- ui
@@ -274,22 +246,22 @@ local config = function()
 	local keys_diagnostic = keys.diagnostic()
 	local keymap = function()
 		for _, v in pairs(keys_diagnostic) do
-			vim.keymap.set(v[1], v[2], v[3])
+			vim.keymap.set("n", v[1], v[2])
 		end
 		for _, v in pairs(keys_buffer) do
-			vim.keymap.set(v[1], v[2], function()
-				print("[" .. v[2] .. "] LSP: Not Attached")
+			vim.keymap.set("n", v[1], function()
+				print("[" .. v[1] .. "] LSP: Not Attached")
 			end)
 		end
 	end
 	local keymap_on_buffer = function(buffer)
 		for _, v in pairs(keys_buffer) do
 			local opts = { buffer = buffer }
-			local keyopts = v[4] or {}
+			local keyopts = v[3] or {}
 			for K, V in pairs(keyopts) do
 				opts[K] = V
 			end
-			vim.keymap.set(v[1], v[2], v[3], opts)
+			vim.keymap.set("n", v[1], v[2], opts)
 		end
 		-- enable completion triggered by <c-x><c-o>
 		vim.bo[buffer].omnifunc = "v:lua.vim.lsp.omnifunc"
@@ -315,9 +287,13 @@ return {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			-- addons
-			"smjonas/inc-rename.nvim",
-			"jose-elias-alvarez/typescript.nvim",
 			"RRethy/vim-illuminate",
+			{
+				"pmizio/typescript-tools.nvim",
+				dependencies = {
+					"nvim-lua/plenary.nvim",
+				},
+			},
 			-- cmp
 			"hrsh7th/nvim-cmp",
 			"hrsh7th/cmp-path",

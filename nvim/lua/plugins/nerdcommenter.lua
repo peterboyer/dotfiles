@@ -2,10 +2,8 @@ return {
 	{
 		"preservim/nerdcommenter",
 		config = function()
-			vim.cmd([[
-				let g:NERDSpaceDelims = 1
-				let g:NERDDefaultAlign = 'left'
-			]])
+			vim.g.NERDSpaceDelims = 1
+			vim.g.NERDDefaultAlign = "left"
 		end,
 	},
 }
