@@ -5,7 +5,7 @@ local keys = {
 
 	-- vim
 	{ "<leader>b", ":Telescope buffers<cr>", silent = true, desc = "Telescope Buffers" },
-	{ "<leader>h", ":Telescope help_tags<cr>", silent = true, desc = "Telescope Help" },
+	{ "<leader>u", ":Telescope help_tags<cr>", silent = true, desc = "Telescope Help" },
 
 	-- git
 	{ "<leader>g", ":Telescope git_status<cr>", silent = true, desc = "Telescope Git Status" },
