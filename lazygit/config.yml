@@ -2,6 +2,7 @@ notARepository: quit
 
 gui:
   mouseEvents: false
+  showFileTree: false
   showRandomTip: false
   showBottomLine: false
   showBranchCommitHash: true
