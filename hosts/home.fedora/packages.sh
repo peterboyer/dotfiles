@@ -31,6 +31,8 @@ packages=(
 		https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 		https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 
+	./packages/ngrok.sh
+
 	flatpak:com.spotify.Client
 	flatpak:rest.insomnia.Insomnia
 	flatpak:com.discordapp.Discord
