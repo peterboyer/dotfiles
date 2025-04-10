@@ -111,10 +111,12 @@ for name in "${repos[@]}"; do
 	fi
 done
 
-for name in "${keys[@]}"; do
-	echo [key] adding "$name" ...
-	sudo rpm --import $name
-done
+if [[ "${@}" =~ "--install-keys" ]]; then
+	for name in "${keys[@]}"; do
+		echo [key] adding "$name" ...
+		sudo rpm --import $name
+	done
+fi
 
 if [[ ${#packages_remove[@]} != 0 ]]; then
 	echo [packages] removing "${packages_remove[@]}" ...
