@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-magick mogrify -format jpg *.HEIC
+for f in *.HEIC; do heif-convert -q 100 "$f" "$f.jpg"; done

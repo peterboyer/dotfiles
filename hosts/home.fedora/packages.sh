@@ -46,6 +46,8 @@ packages=(
 	gimp
 	telegram-desktop
 
+	libheif
+	libheif-tools
 	libheif-freeworld
 		https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 )
