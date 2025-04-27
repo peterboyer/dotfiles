@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+read; qrencode -t ansiutf8 "$REPLY"
