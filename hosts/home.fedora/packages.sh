@@ -16,6 +16,7 @@ packages=(
 	htop
 	kitty
 	fastfetch
+	qrencode
 
 	./packages/docker.sh
 		https://download.docker.com/linux/fedora/docker-ce.repo
