@@ -1,4 +1,10 @@
 return {
+	-- Analyse code size of used plugins.
+	{
+		"dundalek/bloat.nvim",
+		cmd = "Bloat",
+	},
+
 	-- text object for current line (l)
 	{
 		"kana/vim-textobj-line",
