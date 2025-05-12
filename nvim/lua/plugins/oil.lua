@@ -20,6 +20,9 @@ return {
 				},
 				keymaps = {
 					["<C-c>"] = false,
+					["<C-q>"] = { "actions.send_to_qflist" },
+					["YY"] = { "actions.copy_entry_path" },
+					["<leader>YY"] = { "actions.copy_to_system_clipboard" },
 				},
 			})
 		end,
