@@ -43,8 +43,8 @@ vim.o.foldlevelstart = 99
 vim.o.list = true
 vim.o.listchars = table.concat({
 	"extends:»",
-	"tab:┄┄",
-	"trail:∙",
+	"tab:∙∙",
+	"trail:_",
 	-- "eol:↵",
 }, ",")
 
