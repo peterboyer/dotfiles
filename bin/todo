@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 files=($HOME/_/todo.txt)
-if [[ -e $HOME/_/todo.dates.txt ]]; then
+if [[ $1 == "dates" && -e $HOME/_/todo.dates.txt ]]; then
 	files+=($HOME/_/todo.dates.txt)
 fi
 
