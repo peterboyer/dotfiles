@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 || ${@} =~ "--help" ]]; then
+	echo
+	echo "Usage: $(basename $0) <repository>"
+	echo
+	echo "Clones an entire git repository and zip it into a .tar.gz archive."
+	echo "Output archive is named \"<YYYY-MM-DD>-<name>.tar.gz\"."
+	echo "Name is the name of repo derived from basename the repository URI."
+	echo "Date is from the latest/most-recent commit."
+	echo
+	exit 0
+fi
+
+repo_url=$1
+repo_name=$(basename ${repo_url%%.git})
+repo_dir=$repo_name
+git clone $repo_url $repo_dir
+timestamp=$(cd $repo_dir && git log -1 --date=format:"%Y-%m-%d" --format="%ad")
+archive_name="$timestamp-$repo_name.tar.gz"
+tar czf $archive_name $repo_dir
+rm -rf ./$repo_dir
+echo $archive_name
