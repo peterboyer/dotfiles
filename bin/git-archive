@@ -22,8 +22,10 @@ else
 	repo_dir=$(basename ${repo_url%%.git})
 	git clone $repo_url $repo_dir
 fi
-timestamp=$(cd $repo_dir && git log -1 --date=format:"%Y-%m-%d" --format="%ad")
-archive_name="$timestamp-$repo_dir.tar.gz"
+firstsha=$(git rev-list --max-parents=0 HEAD)
+timestamp=$(cd $repo_dir && git log $firstsha --date=format:"%Y-%m-%d" --format="%ad")
+repo_name=$(basename $repo_dir)
+archive_name="$timestamp-$repo_name.tar.gz"
 tar czf $archive_name $repo_dir
 if $repo_delete; then
 	rm -rf ./$repo_dir
