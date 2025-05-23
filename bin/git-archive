@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 if [[ -z $1 || ${@} =~ "--help" ]]; then
 	echo
@@ -13,11 +14,18 @@ if [[ -z $1 || ${@} =~ "--help" ]]; then
 fi
 
 repo_url=$1
-repo_name=$(basename ${repo_url%%.git})
-repo_dir=$repo_name
-git clone $repo_url $repo_dir
+if [[ -d $repo_url ]]; then
+	repo_delete=false
+	repo_dir=$repo_url
+else
+	repo_delete=true
+	repo_dir=$(basename ${repo_url%%.git})
+	git clone $repo_url $repo_dir
+fi
 timestamp=$(cd $repo_dir && git log -1 --date=format:"%Y-%m-%d" --format="%ad")
-archive_name="$timestamp-$repo_name.tar.gz"
+archive_name="$timestamp-$repo_dir.tar.gz"
 tar czf $archive_name $repo_dir
-rm -rf ./$repo_dir
+if $repo_delete; then
+	rm -rf ./$repo_dir
+fi
 echo $archive_name
