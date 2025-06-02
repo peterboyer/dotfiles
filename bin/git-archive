@@ -22,7 +22,7 @@ else
 	repo_dir=$(basename ${repo_url%%.git})
 	git clone $repo_url $repo_dir
 fi
-firstsha=$(git rev-list --max-parents=0 HEAD)
+firstsha=$(cd $repo_dir && git rev-list --max-parents=0 HEAD)
 timestamp=$(cd $repo_dir && git log $firstsha --date=format:"%Y-%m-%d" --format="%ad")
 repo_name=$(basename $repo_dir)
 archive_name="$timestamp-$repo_name.tar.gz"
