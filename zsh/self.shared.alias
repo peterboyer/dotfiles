@@ -3,11 +3,14 @@
 alias _="cd $HOME/_"
 alias dev="cd $HOME/_/dev"
 alias dot="cd $HOME/_/dotfiles"
-alias cfg="(cd $HOME/_/dotfiles && $EDITOR)"
+alias txt="cd $HOME/_/txt"
 
 alias l="eza -la"
-alias v="nvim"
 alias lg="lazygit"
+
+alias v="nvim"
+alias vdot="(cd $HOME/_/dotfiles && $EDITOR)"
+alias vtxt="(cd $HOME/_/txt && $EDITOR)"
 
 # nx, use local nx
 alias nx="npx nx"
