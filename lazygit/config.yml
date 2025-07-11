@@ -19,7 +19,7 @@ customCommands:
   - key: <c-6>
     description: "Unhook"
     context: global
-    command: rm -r ./.git/hooks
+    command: git config core.hooksPath /dev/null && echo Unhooked!
     stream: true
     loadingText: Unhooking...
 
