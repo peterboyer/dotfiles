@@ -51,18 +51,28 @@ rsync_args=(
 	"$source_dir/."
 	"$target_dir"
 
+	"-vv"               # very-verbose
+	"--itemize-changes" # output a change-summary for all updates
+
 	# ! DANGER
 	"--delete-after"    # receiver deletes after transfer, not during
 
 	# metadata
-	"--recursive"       # recurse into directories
-	"--links"           # copy symlinks as symlinks
+	"--archive"         # -rlptgoD
+		# -r --recursive  # recurse into directories
+		# -l --links      # copy symlinks as symlinks
+		# -p --perms      # preserve permissions
+		# -t --times      # preserve modification times
+		# -g --group      # preserve group
+		# -o --owner      # preserve owner
+		# -D              # --devices --specials
+			# --devices     # preserve device files
+			# --specials    # preserve special files
 	"--executability"   # preserve executability
-	"--times"           # preserve modification times
+	"--no-devices"      # don't: preserve device files
+	"--no-specials"     # don't: preserve device files
+	"--numeric-ids"     # don't map uid/gid values by user/group name
 	"--one-file-system" # don't cross filesystem boundaries
-
-	# output
-	"--itemize-changes" # output a change-summary for all updates
 
 	# exclude .nosync dirs/files
 	"--exclude=*.nosync"
