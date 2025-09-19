@@ -39,7 +39,7 @@ let s:Float = '237'
 " Base
 "
 call s:HL('Normal', s:_, s:_, s:_)
-call s:HL('NormalNC', s:Grey, s:Cursor, s:_)
+call s:HL('NormalNC', s:Grey, s:_, s:_)
 call s:HL('VertSplit', s:_, s:_, s:_)
 call s:HL('Whitespace', s:Whitespace, s:_, s:_)
 
