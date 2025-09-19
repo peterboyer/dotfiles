@@ -8,7 +8,7 @@ if [[ -z $1 || ${@} =~ "--help" ]]; then
 	echo "Clones an entire git repository and zip it into a .tar.gz archive."
 	echo "Output archive is named \"<YYYY-MM-DD>-<name>.tar.gz\"."
 	echo "Name is the name of repo derived from basename the repository URI."
-	echo "Date is from the latest/most-recent commit."
+	echo "Date is of the first/earliest commit."
 	echo
 	exit 0
 fi
