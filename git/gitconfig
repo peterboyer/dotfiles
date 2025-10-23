@@ -8,7 +8,7 @@
 [pull]
 	rebase = true
 [push]
-	autoSetupRemote = true
+	default = upstream
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
