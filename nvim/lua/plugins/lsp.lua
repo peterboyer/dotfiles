@@ -166,13 +166,12 @@ local config = function()
 		},
 	})
 
-	local lspconfig = require("lspconfig")
 	local setup_opts = { capabilities = require("cmp_nvim_lsp").default_capabilities() }
-	lspconfig.lua_ls.setup(setup_opts)
-	lspconfig.eslint.setup(setup_opts)
-	lspconfig.jsonls.setup(setup_opts)
-	lspconfig.html.setup(setup_opts)
-	lspconfig.tailwindcss.setup({
+	vim.lsp.config("lua_ls", setup_opts)
+	vim.lsp.config("eslint", setup_opts)
+	vim.lsp.config("jsonls", setup_opts)
+	vim.lsp.config("html", setup_opts)
+	vim.lsp.config("tailwindcss", {
 		capabilities = setup_opts.capabilities,
 		settings = {
 			-- https://github.com/tailwindlabs/tailwindcss/discussions/7554#discussioncomment-4440751
@@ -185,17 +184,17 @@ local config = function()
 			},
 		},
 	})
-	lspconfig.marksman.setup(setup_opts)
-	lspconfig.bashls.setup(setup_opts)
-	lspconfig.yamlls.setup(setup_opts)
-	lspconfig.dockerls.setup(setup_opts)
-	lspconfig.docker_compose_language_service.setup(setup_opts)
+	vim.lsp.config("marksman", setup_opts)
+	vim.lsp.config("bashls", setup_opts)
+	vim.lsp.config("yamlls", setup_opts)
+	vim.lsp.config("dockerls", setup_opts)
+	vim.lsp.config("docker_compose_language_service", setup_opts)
 
 	if vim.fn.executable("cargo") ~= 0 then
-		lspconfig.rnix.setup(setup_opts)
+		vim.lsp.config("rnix", setup_opts)
 	end
 
-	lspconfig.pylsp.setup({
+	vim.lsp.config("pylsp", {
 		capabilities = setup_opts.capabilities,
 		settings = {
 			pylsp = {
@@ -211,7 +210,7 @@ local config = function()
 
 	local quick_lint_js_bin = "./node_modules/.bin/quick-lint-js"
 	if vim.fn.executable(quick_lint_js_bin) ~= 0 then
-		lspconfig.quick_lint_js.setup({
+		vim.lsp.config("lsp", "quick_lint_js", {
 			capabilities = setup_opts.capabilities,
 			cmd = { quick_lint_js_bin, "--lsp-server" },
 			filetypes = {
@@ -226,6 +225,7 @@ local config = function()
 	end
 
 	-- addons
+	vim.lsp.enable("ts_ls", false)
 	require("typescript-tools").setup({})
 	require("illuminate").configure({ providers = { "lsp" }, under_cursor = false })
 
