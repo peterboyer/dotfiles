@@ -12,3 +12,4 @@ dotlink ~/.npmrc      ~/_/dotfiles.untracked/npm/npmrc
 dotlink ~/.yarnrc     ~/_/dotfiles.untracked/yarn/yarnrc
 
 dotlink ~/.config/ngrok/ngrok.yml ~/_/dotfiles.untracked/ngrok/ngrok.yml
+dotlink ~/.config/jiratui/config.yaml ~/_/dotfiles.untracked/jiratui/config.yaml
