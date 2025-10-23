@@ -13,20 +13,19 @@ customCommands:
     description: "Prune"
     context: localBranches
     command: git remote prune origin
-    stream: true
+    output: log
     loadingText: Pruning...
 
   - key: <c-6>
     description: "Unhook"
     context: global
     command: git config core.hooksPath /dev/null && echo Unhooked!
-    stream: true
+    output: log
     loadingText: Unhooking...
 
   - key: <c-r>
     description: "Redate"
     context: commits
     command: git-redate {{.SelectedLocalCommit.Hash}} || true
-    stream: true
-    subprocess: true
+    output: terminal
     loadingText: Redating...
