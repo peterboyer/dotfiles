@@ -10,6 +10,9 @@ vim.o.signcolumn = "yes"
 vim.o.number = true
 vim.o.relativenumber = true
 
+-- borders
+vim.o.winborder = "single"
+
 -- terminal
 vim.cmd("autocmd TermOpen * setlocal nonu nornu")
 

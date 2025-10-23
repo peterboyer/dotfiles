@@ -230,13 +230,17 @@ local config = function()
 	require("illuminate").configure({ providers = { "lsp" }, under_cursor = false })
 
 	-- ui
-	vim.diagnostic.config({ float = { border = "rounded" } })
-	vim.cmd([[
-		sign define DiagnosticSignError text=▶ texthl=DiagnosticSignError
-		sign define DiagnosticSignWarn text=▶ texthl=DiagnosticSignWarn
-		sign define DiagnosticSignInfo text=▶ texthl=DiagnosticSignInfo
-		sign define DiagnosticSignHint text=▶ texthl=DiagnosticSignHint
-	]])
+	vim.diagnostic.config({
+		float = { border = "rounded" },
+		signs = {
+			text = {
+				[vim.diagnostic.severity.ERROR] = "▶",
+				[vim.diagnostic.severity.WARN] = "▶",
+				[vim.diagnostic.severity.INFO] = "▶",
+				[vim.diagnostic.severity.HINT] = "▶",
+			},
+		},
+	})
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 	vim.lsp.handlers["textDocument/signatureHelp"] =
 		vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
