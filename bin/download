@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+yt-dlp \
+	--cookies-from-browser brave \
+	-o "%(channel)s-%(upload_date>%Y-%m-%d)s-%(title)s-%(id)s.%(ext)s" \
+	--restrict-filenames \
+	$@
